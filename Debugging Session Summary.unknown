@@ -1,0 +1,990 @@
+From: <Saved by Blink>
+Snapshot-Content-Location: https://docs.google.com/document/u/0/d/1J3xLinuH1D02OeUr-U0Tcgswn2un0A9vkrM9X1hiFW8/mobilebasic
+Subject: Debugging Session Summary
+Date: Tue, 5 Sep 2023 18:53:13 -0000
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----MultipartBoundary--4RuGBYQ3AvVcH82TLAnY0eAcNfAYRo20LIWpeqgCcd----"
+
+
+------MultipartBoundary--4RuGBYQ3AvVcH82TLAnY0eAcNfAYRo20LIWpeqgCcd----
+Content-Type: text/html
+Content-ID: <frame-720024BBEE57EE92E7792F846B246BA7@mhtml.blink>
+Content-Transfer-Encoding: binary
+Content-Location: https://docs.google.com/document/u/0/d/1J3xLinuH1D02OeUr-U0Tcgswn2un0A9vkrM9X1hiFW8/mobilebasic
+
+<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" type="text/css" href="cid:css-d261da55-d904-4597-97aa-aeb12bb58e50@mhtml.blink" /><link rel="stylesheet" type="text/css" href="cid:css-30eace6d-ea3e-4f66-90b0-51652b04d37d@mhtml.blink" /><link rel="stylesheet" type="text/css" href="cid:css-a7e71a83-c77a-4b37-9557-7dbaaa24ff53@mhtml.blink" /><title>Debugging Session Summary </title><link rel="shortcut icon" href="https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=0"><meta name="referrer" content="strict-origin-when-cross-origin"></head><body><div id="docs-ml-header-id" class="docs-ml-header"><span class="docs-ml-header-item docs-ml-header-drive-link"><div id="docs-ml-header-drive-link-aria-label" style="display:none;">Go to Drive</div><a href="https://drive.google.com/u/0?usp=docs_web" aria-labelledby="docs-ml-header-drive-link-aria-label" role="button"><div class="docs-ml-header-icon-container"><div class="docs-ml-icon docs-ml-header-icon docs-ml-arrow-back-dir"><div class="docs-ml-img-container docs-ml-img docs-ml-arrow-back-icon"></div></div></div></a></span><span class="docs-ml-header-item docs-ml-header-document-title"><div class="docs-ml-header-document-title-text">Debugging Session Summary </div></span></div><div class="app-container"><div class="doc-container"><div class="doc"><div class="doc-content" style="background-color:#ffffff;padding:21.3pt 72pt 72pt 14.2pt;max-width:509.3pt"><p style="padding:0;margin:0;color:#000000;font-size:11pt;font-family:&quot;Arial&quot;;line-height:1.15;orphans:2;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">Compilation Errors :-</span></p><ul class="lst-kix_bkxqw8e12qik-0 start" style="padding:0;margin:0"><li style="padding:0;color:#000000;font-size:11pt;line-height:1.15;margin-right:0;margin-left:36pt;font-family:&quot;Arial&quot;;margin-top:0;orphans:2;margin-bottom:0;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">Errors at the time of compilation</span></li><li style="padding:0;color:#000000;font-size:11pt;line-height:1.15;margin-right:0;margin-left:36pt;font-family:&quot;Arial&quot;;margin-top:0;orphans:2;margin-bottom:0;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">Caused by incorrect syntax</span></li></ul><p style="padding:0;margin:0;color:#000000;font-size:11pt;font-family:&quot;Arial&quot;;line-height:1.15;orphans:2;widows:2;height:11pt;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal"></span></p><p style="padding:0;margin:0;color:#000000;font-size:11pt;font-family:&quot;Arial&quot;;line-height:1.15;orphans:2;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">Common Compilation Errors :-</span></p><ul class="lst-kix_pqoexllu888m-0 start" style="padding:0;margin:0"><li style="padding:0;color:#000000;font-size:11pt;line-height:1.15;margin-right:0;margin-left:36pt;font-family:&quot;Arial&quot;;margin-top:0;orphans:2;margin-bottom:0;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">Missing semicolon (;) </span></li><li style="padding:0;color:#000000;font-size:11pt;line-height:1.15;margin-right:0;margin-left:36pt;font-family:&quot;Arial&quot;;margin-top:0;orphans:2;margin-bottom:0;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">Unbalanced parenthesis </span></li></ul><ul class="lst-kix_wa1ppfawyzb-0 start" style="padding:0;margin:0"><li style="padding:0;color:#000000;font-size:11pt;line-height:1.15;margin-right:0;margin-left:36pt;font-family:&quot;Arial&quot;;margin-top:0;orphans:2;margin-bottom:0;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">Incorrect name (typing mistake) </span></li><li style="padding:0;color:#000000;font-size:11pt;line-height:1.15;margin-right:0;margin-left:36pt;font-family:&quot;Arial&quot;;margin-top:0;orphans:2;margin-bottom:0;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">Incorrect function parameters (like max(int, long long)) </span></li></ul><p style="padding:0;margin:0;color:#000000;font-size:11pt;font-family:&quot;Arial&quot;;line-height:1.15;orphans:2;widows:2;height:11pt;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal"></span></p><p style="padding:0;margin:0;color:#000000;font-size:11pt;font-family:&quot;Arial&quot;;line-height:1.15;orphans:2;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">Runtime Errors :- </span></p><ul class="lst-kix_5g4abuyji0lc-0 start" style="padding:0;margin:0"><li style="padding:0;color:#000000;font-size:11pt;line-height:1.15;margin-right:0;margin-left:36pt;font-family:&quot;Arial&quot;;margin-top:0;orphans:2;margin-bottom:0;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">Errors at the time of execution of code</span></li><li style="padding:0;color:#000000;font-size:11pt;line-height:1.15;margin-right:0;margin-left:36pt;font-family:&quot;Arial&quot;;margin-top:0;orphans:2;margin-bottom:0;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">Cause because of unhandled exceptions</span></li></ul><p style="padding:0;margin:0;color:#000000;font-size:11pt;font-family:&quot;Arial&quot;;line-height:1.15;orphans:2;widows:2;height:11pt;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal"></span></p><p style="padding:0;margin:0;color:#000000;font-size:11pt;font-family:&quot;Arial&quot;;line-height:1.15;orphans:2;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">Common Runtime Errors :- </span></p><ul class="lst-kix_c15jbc5xu406-0 start" style="padding:0;margin:0"><li style="padding:0;color:#000000;font-size:11pt;line-height:1.15;margin-right:0;margin-left:36pt;font-family:&quot;Arial&quot;;margin-top:0;orphans:2;margin-bottom:0;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">accessing out of bounds </span></li><li style="padding:0;color:#000000;font-size:11pt;line-height:1.15;margin-right:0;margin-left:36pt;font-family:&quot;Arial&quot;;margin-top:0;orphans:2;margin-bottom:0;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">integer overflow </span></li><li style="padding:0;color:#000000;font-size:11pt;line-height:1.15;margin-right:0;margin-left:36pt;font-family:&quot;Arial&quot;;margin-top:0;orphans:2;margin-bottom:0;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">division by 0 &nbsp;</span></li></ul><p style="padding:0;margin:0;color:#000000;font-size:11pt;font-family:&quot;Arial&quot;;line-height:1.15;orphans:2;widows:2;height:11pt;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal"></span></p><p style="padding:0;margin:0;color:#000000;font-size:11pt;font-family:&quot;Arial&quot;;line-height:1.15;orphans:2;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">Time Limit Exceeded :- </span></p><ul class="lst-kix_xb6b39m9qwq3-0 start" style="padding:0;margin:0"><li style="padding:0;color:#000000;font-size:11pt;line-height:1.15;margin-right:0;margin-left:36pt;font-family:&quot;Arial&quot;;margin-top:0;orphans:2;margin-bottom:0;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">Execution of code takes more time than the time limit</span></li><li style="padding:0;color:#000000;font-size:11pt;line-height:1.15;margin-right:0;margin-left:36pt;font-family:&quot;Arial&quot;;margin-top:0;orphans:2;margin-bottom:0;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">usually because of infinite loops or inefficient algorithms.</span></li></ul><p style="padding:0;margin:0;color:#000000;font-size:11pt;font-family:&quot;Arial&quot;;line-height:1.15;orphans:2;widows:2;height:11pt;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal"></span></p><p style="padding:0;margin:0;color:#000000;font-size:11pt;font-family:&quot;Arial&quot;;line-height:1.15;orphans:2;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">Common TLE Mistakes :-</span></p><ul class="lst-kix_6iulggfgt34i-0 start" style="padding:0;margin:0"><li style="padding:0;color:#000000;font-size:11pt;line-height:1.15;margin-right:0;margin-left:36pt;font-family:&quot;Arial&quot;;margin-top:0;orphans:2;margin-bottom:0;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">reverse for loop </span></li><li style="padding:0;color:#000000;font-size:11pt;line-height:1.15;margin-right:0;margin-left:36pt;font-family:&quot;Arial&quot;;margin-top:0;orphans:2;margin-bottom:0;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">binary search </span></li><li style="padding:0;color:#000000;font-size:11pt;line-height:1.15;margin-right:0;margin-left:36pt;font-family:&quot;Arial&quot;;margin-top:0;orphans:2;margin-bottom:0;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">two pointers </span></li><li style="padding:0;color:#000000;font-size:11pt;line-height:1.15;margin-right:0;margin-left:36pt;font-family:&quot;Arial&quot;;margin-top:0;orphans:2;margin-bottom:0;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">forgetting to empty queue/stack/pq</span></li></ul><p style="padding:0;margin:0;color:#000000;font-size:11pt;font-family:&quot;Arial&quot;;line-height:1.15;orphans:2;widows:2;height:11pt;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal"></span></p><p style="padding:0;margin:0;color:#000000;font-size:11pt;font-family:&quot;Arial&quot;;line-height:1.15;orphans:2;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">Debugging Template:-</span></p><ul class="lst-kix_uue751xoz1ed-0 start" style="padding:0;margin:0"><li style="padding:0;color:#000000;font-size:11pt;line-height:1.15;margin-right:0;margin-left:36pt;font-family:&quot;Arial&quot;;margin-top:0;orphans:2;margin-bottom:0;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">Why use it</span></li><li style="padding:0;color:#000000;font-size:11pt;line-height:1.15;margin-right:0;margin-left:36pt;font-family:&quot;Arial&quot;;margin-top:0;orphans:2;margin-bottom:0;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">template link</span></li></ul><p style="padding:0;margin:0;color:#000000;font-size:11pt;font-family:&quot;Arial&quot;;line-height:1.15;orphans:2;widows:2;height:11pt;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal"></span></p><p style="padding:0;margin:0;color:#000000;font-size:11pt;font-family:&quot;Arial&quot;;line-height:1.15;orphans:2;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">Wrong Answers :-</span></p><ul class="lst-kix_4wpt2pktke4w-0 start" style="padding:0;margin:0"><li style="padding:0;color:#000000;font-size:11pt;line-height:1.15;margin-right:0;margin-left:36pt;font-family:&quot;Arial&quot;;margin-top:0;orphans:2;margin-bottom:0;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">Incorrect output</span></li><li style="padding:0;color:#000000;font-size:11pt;line-height:1.15;margin-right:0;margin-left:36pt;font-family:&quot;Arial&quot;;margin-top:0;orphans:2;margin-bottom:0;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">usually logical issue, some silly implementation mistake or missing some edge case</span></li></ul><p style="padding:0;margin:0;color:#000000;font-size:11pt;font-family:&quot;Arial&quot;;line-height:1.15;orphans:2;widows:2;height:11pt;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal"></span></p><p style="padding:0;margin:0;color:#000000;font-size:11pt;font-family:&quot;Arial&quot;;line-height:1.15;orphans:2;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">Fixing WAs :-</span></p><ul class="lst-kix_81kz38cg6ahi-0 start" style="padding:0;margin:0"><li style="padding:0;color:#000000;font-size:11pt;line-height:1.15;margin-right:0;margin-left:36pt;font-family:&quot;Arial&quot;;margin-top:0;orphans:2;margin-bottom:0;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">printing arrays and variables</span></li><li style="padding:0;color:#000000;font-size:11pt;line-height:1.15;margin-right:0;margin-left:36pt;font-family:&quot;Arial&quot;;margin-top:0;orphans:2;margin-bottom:0;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">Dry run</span></li><li style="padding:0;color:#000000;font-size:11pt;line-height:1.15;margin-right:0;margin-left:36pt;font-family:&quot;Arial&quot;;margin-top:0;orphans:2;margin-bottom:0;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">Example on DP</span></li><li style="padding:0;color:#000000;font-size:11pt;line-height:1.15;margin-right:0;margin-left:36pt;font-family:&quot;Arial&quot;;margin-top:0;orphans:2;margin-bottom:0;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">Example for Graphs</span></li></ul><p style="padding:0;margin:0;color:#000000;font-size:11pt;font-family:&quot;Arial&quot;;line-height:1.15;orphans:2;widows:2;height:11pt;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal"></span></p><p style="padding:0;margin:0;color:#000000;font-size:11pt;font-family:&quot;Arial&quot;;line-height:1.15;orphans:2;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">Finding WA Testcase :-</span></p><ul class="lst-kix_h28hzufga9xz-0 start" style="padding:0;margin:0"><li style="padding:0;color:#000000;font-size:11pt;line-height:1.15;margin-right:0;margin-left:36pt;font-family:&quot;Arial&quot;;margin-top:0;orphans:2;margin-bottom:0;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">submission‚Äôs result</span></li></ul><ul class="lst-kix_85yr3vgq54ou-0 start" style="padding:0;margin:0"><li style="padding:0;color:#000000;font-size:11pt;line-height:1.15;margin-right:0;margin-left:36pt;font-family:&quot;Arial&quot;;margin-top:0;orphans:2;margin-bottom:0;widows:2;text-align:left"><span style="-webkit-text-decoration-skip:none;color:#1155cc;font-weight:400;text-decoration:underline;text-decoration-skip-ink:none;font-size:14pt;font-family:&quot;Roboto Mono&quot;"><a href="https://www.google.com/url?q=https://www.google.com/url?q%3Dhttps://twitter.com/Ritikjainrj18/status/1557193150166454274?s%253D19%26amp;sa%3DD%26amp;source%3Deditors%26amp;ust%3D1693943586899797%26amp;usg%3DAOvVaw2GJ5BeNHZjAI9t4Le5BSfG&amp;sa=D&amp;source=docs&amp;ust=1693943586910358&amp;usg=AOvVaw2QghS79F2Vetpz7O5fKmJK" style="color:inherit;text-decoration:inherit">Ritik Jain‚Äôs Tweet</a></span></li></ul><ul class="lst-kix_x35dh0mwee6b-0 start" style="padding:0;margin:0"><li style="padding:0;color:#000000;font-size:11pt;line-height:1.15;margin-right:0;margin-left:36pt;font-family:&quot;Arial&quot;;margin-top:0;orphans:2;margin-bottom:0;widows:2;text-align:left"><span style="-webkit-text-decoration-skip:none;color:#1155cc;font-weight:400;text-decoration:underline;text-decoration-skip-ink:none;font-size:14pt;font-family:&quot;Roboto Mono&quot;"><a href="https://www.google.com/url?q=https://www.google.com/url?q%3Dhttps://www.youtube.com/watch?v%253DiYxjjMyonvk%2526ab_channel%253DCodeBeyond%26amp;sa%3DD%26amp;source%3Deditors%26amp;ust%3D1693943586900266%26amp;usg%3DAOvVaw0vr-NsdxIFfflZPH-9l6RV&amp;sa=D&amp;source=docs&amp;ust=1693943586910526&amp;usg=AOvVaw0Vo4RXggddERx4HCmuAHQ4" style="color:inherit;text-decoration:inherit">Striver</a></span></li><li style="padding:0;color:#000000;font-size:11pt;line-height:1.15;margin-right:0;margin-left:36pt;font-family:&quot;Arial&quot;;margin-top:0;orphans:2;margin-bottom:0;widows:2;text-align:left"><span style="-webkit-text-decoration-skip:none;color:#1155cc;font-weight:400;text-decoration:underline;text-decoration-skip-ink:none;font-size:14pt;font-family:&quot;Roboto Mono&quot;"><a href="https://www.google.com/url?q=https://www.google.com/url?q%3Dhttps://www.youtube.com/watch?v%253D8wBu5wBDlWY%2526ab_channel%253DKartikArora%26amp;sa%3DD%26amp;source%3Deditors%26amp;ust%3D1693943586900592%26amp;usg%3DAOvVaw3d5HqIO7n0jIxK1W_zKJyy&amp;sa=D&amp;source=docs&amp;ust=1693943586910611&amp;usg=AOvVaw1egDiz7qIeEikQfYwbW3Ar" style="color:inherit;text-decoration:inherit">Kartik Arora</a></span></li></ul><p style="padding:0;margin:0;color:#000000;font-size:11pt;font-family:&quot;Arial&quot;;line-height:1.15;orphans:2;widows:2;height:11pt;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal"></span></p><p style="padding:0;margin:0;color:#000000;font-size:11pt;font-family:&quot;Arial&quot;;line-height:1.15;orphans:2;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">What if code is still not debugged giving WA :-</span></p><ul class="lst-kix_nj5eikbny7uj-0 start" style="padding:0;margin:0"><li style="padding:0;color:#000000;font-size:11pt;line-height:1.15;margin-right:0;margin-left:36pt;font-family:&quot;Arial&quot;;margin-top:0;orphans:2;margin-bottom:0;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">Editorial </span></li><li style="padding:0;color:#000000;font-size:11pt;line-height:1.15;margin-right:0;margin-left:36pt;font-family:&quot;Arial&quot;;margin-top:0;orphans:2;margin-bottom:0;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">Other‚Äôs code </span></li><li style="padding:0;color:#000000;font-size:11pt;line-height:1.15;margin-right:0;margin-left:36pt;font-family:&quot;Arial&quot;;margin-top:0;orphans:2;margin-bottom:0;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">Coding buddies </span></li><li style="padding:0;color:#000000;font-size:11pt;line-height:1.15;margin-right:0;margin-left:36pt;font-family:&quot;Arial&quot;;margin-top:0;orphans:2;margin-bottom:0;widows:2;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal">Ask to seniors / Raise a query </span></li></ul><p style="padding:0;margin:0;color:#000000;font-size:11pt;font-family:&quot;Arial&quot;;line-height:1.15;orphans:2;widows:2;height:11pt;text-align:left"><span style="color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:14pt;font-family:&quot;Roboto Mono&quot;;font-style:normal"></span></p></div></div></div></div></body></html>
+------MultipartBoundary--4RuGBYQ3AvVcH82TLAnY0eAcNfAYRo20LIWpeqgCcd----
+Content-Type: text/css
+Content-Transfer-Encoding: binary
+Content-Location: cid:css-d261da55-d904-4597-97aa-aeb12bb58e50@mhtml.blink
+
+@charset "utf-8";
+
+html { overflow: auto; }
+
+body { margin: 0px; overflow: hidden; overflow-wrap: break-word; }
+
+.app-container { height: 100%; margin-top: 57px; overflow: auto; }
+
+.doc { padding: 20px 12px 0px; position: relative; }
+
+.doc .doc-content { margin: auto; padding: 24px 0px !important; max-width: 770px !important; }
+------MultipartBoundary--4RuGBYQ3AvVcH82TLAnY0eAcNfAYRo20LIWpeqgCcd----
+Content-Type: text/css
+Content-Transfer-Encoding: binary
+Content-Location: cid:css-30eace6d-ea3e-4f66-90b0-51652b04d37d@mhtml.blink
+
+@charset "utf-8";
+
+@import url("https://fonts.googleapis.com/css?family=Google+Sans");
+
+.docs-ml-noselect { -webkit-user-drag: none; user-select: none; }
+
+.docs-ml-promotion { z-index: 1002; }
+
+.docs-ml-header { z-index: 1; }
+
+.docs-ml-icon { direction: ltr; display: inline-block; text-align: left; overflow: hidden; position: relative; vertical-align: middle; }
+
+.docs-ml-img::before { content: url("//ssl.gstatic.com/docs/common/mobileweb_sprite1.png"); }
+
+.docs-ml-img-container { height: 156px; position: absolute; width: 36px; }
+
+.docs-ml-docs-logo-icon { left: 0px; top: -36px; }
+
+.docs-ml-sheets-logo-icon { left: 0px; top: 0px; }
+
+.docs-ml-slides-logo-icon { left: 0px; top: -96px; }
+
+.docs-ml-arrow-back-icon { left: 0px; top: -132px; }
+
+.docs-ml-edit-icon { left: 0px; top: -72px; }
+
+@media screen and (-webkit-min-device-pixel-ratio: 2) {
+  .docs-ml-img { content: url("//ssl.gstatic.com/docs/common/mobileweb_sprite1.png"); }
+  .docs-ml-img-container { height: 156px; position: absolute; width: 36px; }
+  .docs-ml-docs-logo-icon { left: 0px; top: -36px; }
+  .docs-ml-sheets-logo-icon { left: 0px; top: 0px; }
+  .docs-ml-slides-logo-icon { left: 0px; top: -96px; }
+  .docs-ml-arrow-back-icon { left: 0px; top: -132px; }
+  .docs-ml-edit-icon { left: 0px; top: -72px; }
+}
+
+.docs-ml-header { background: rgb(250, 250, 250); border-bottom: 1px solid rgb(203, 203, 203); box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 1px; box-sizing: border-box; font-family: "Google Sans", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; padding: 4px 0px; position: fixed; left: 0px; top: 0px; width: 100%; }
+
+.docs-ml-header-icon { height: 24px; opacity: 0.6; width: 24px; }
+
+.docs-ml-header-icon-container { padding: 12px; }
+
+.docs-ml-header-item { display: inline-block; vertical-align: middle; }
+
+.docs-ml-header-drive-link { padding-left: 4px; }
+
+body[dir="rtl"] .docs-ml-arrow-back-dir { transform: scaleX(-1); }
+
+.docs-ml-header-document-title { box-sizing: border-box; line-height: 24px; padding: 0px 12px; width: calc(100% - 104px); }
+
+.docs-ml-header-document-title-text { font-size: 20px; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.docs-ml-header-edit-button { float: right; padding-right: 4px; }
+
+.docs-ml-promotion { background: rgb(255, 255, 255); bottom: 0px; box-shadow: rgba(0, 0, 0, 0.4) 0px 4px 12px; font-family: Arial, Helvetica, sans-serif; left: 0px; position: fixed; width: 100%; }
+
+.docs-ml-promotion-off-screen { transform: translateY(100%); }
+
+.docs-ml-promotion-shown { transform: translateY(0px); transition: transform 333ms cubic-bezier(0.4, 0, 0.2, 1) 0s; }
+
+.docs-ml-promotion-dismissed { transform: translateY(100%); box-shadow: none; }
+
+.docs-ml-promotion-no-horizontal-scroll { overflow-x: hidden; }
+
+.docs-ml-promotion-header { display: table; padding: 24px 24px 0px; }
+
+.docs-ml-promotion-app-icon-container { display: table-cell; }
+
+.docs-ml-promotion-app-icon { height: 36px; width: 36px; }
+
+@media (min-width: 600px) {
+  .docs-ml-promotion-app-icon { transform: scale(1.33); }
+}
+
+.docs-ml-promotion-text { display: table-cell; padding-left: 20px; vertical-align: top; }
+
+.docs-ml-promotion-text-heading { color: rgba(0, 0, 0, 0.87); font-size: 16px; font-weight: 700; padding-bottom: 7px; }
+
+.docs-ml-promotion-text-body { color: rgba(0, 0, 0, 0.87); font-size: 14px; }
+
+.docs-ml-promotion-action-row { float: right; margin-top: 6px; padding: 8px 24px; }
+
+.docs-ml-promotion-action-row-desktop { margin-top: 6px; }
+
+.docs-ml-promotion-action-container { display: inline-block; height: 48px; margin: 6px 4px; vertical-align: middle; }
+
+.docs-ml-promotion-action-button { display: inline-block; font-size: 14px; font-weight: 500; padding: 9px 12px; vertical-align: middle; }
+
+.docs-ml-promotion-action-button-wrapper:focus { outline-color: rgb(214, 214, 214); }
+
+.docs-ml-promotion-action-button.docs-ml-promotion-yes-button { background-color: rgb(66, 133, 244); border-radius: 4px; color: rgb(250, 250, 250); border: 1px solid transparent; }
+
+.docs-ml-promotion-action-button.docs-ml-promotion-yes-button:active { background-color: rgb(25, 103, 210); }
+
+.docs-ml-promotion-action-button.docs-ml-promotion-no-button { background-color: rgb(250, 250, 250); color: rgb(95, 99, 104); border-radius: 4px; border: 1px solid rgb(218, 220, 224); }
+
+.docs-ml-promotion-action-button.docs-ml-promotion-no-button:active { background-color: rgb(245, 245, 245); }
+
+.docs-ml-promotion.desktop { text-align: center; }
+
+@media (orientation: portrait) {
+  .docs-ml-promotion.desktop { padding-top: 56px; padding-bottom: 80px; }
+}
+
+@media (orientation: landscape) {
+  .docs-ml-promotion.desktop { padding-top: 36px; padding-bottom: 56px; }
+}
+
+.docs-ml-promotion-heading-desktop { font-family: "Google Sans"; font-size: 18px; font-weight: 700; color: rgb(32, 33, 36); padding-top: 18px; padding-bottom: 10px; line-height: 1.5; max-width: 360px; margin: 0px auto; }
+
+@media (orientation: landscape) {
+  .docs-ml-promotion-heading-desktop { padding-top: 0px; max-width: none; }
+}
+
+.docs-ml-promotion-text-body-desktop { font-size: 14px; line-height: 1.5; color: rgb(95, 99, 104); padding-bottom: 10px; }
+
+.docs-icon.docs-ml-promotion-desktop-icon { height: 40px; width: 40px; transform: scale(2.5); transform-origin: center top; }
+
+.docs-icon-ml-promotion-icon-container-desktop { height: 100px; width: 100px; margin-left: auto; margin-right: auto; }
+
+@media (orientation: landscape) {
+  .docs-icon-ml-promotion-icon-container-desktop { display: inline-block; vertical-align: top; }
+  .docs-ml-promotion-description-desktop { display: inline-block; vertical-align: top; text-align: left; padding-left: 39px; max-width: 645px; }
+}
+
+@media (orientation: landscape) {
+  .docs-ml-promotion-action-row-desktop { margin-left: -8px; }
+}
+
+.docs-ml-promotion-action-row-desktop .docs-ml-promotion-action-container { margin: 6px 8px; font-family: "Google Sans"; }
+
+.docs-ml-promotion-action-row-desktop .docs-ml-promotion-action-button-wrapper:focus { outline: none; }
+
+.docs-ml-promotion-action-button.docs-ml-promotion-yes-button.docs-ml-promotion-app-themed { border-radius: 4px; box-shadow: none; box-sizing: border-box; font-family: "Google Sans", Roboto, RobotoDraft, Helvetica, Arial, sans-serif; font-weight: 500; font-size: 14px; height: 36px; letter-spacing: 0.25px; line-height: 16px; padding: 9px 24px 11px; background: rgb(26, 115, 232); color: rgb(255, 255, 255); border: 1px solid transparent !important; }
+
+.docs-ml-promotion-action-button.docs-ml-promotion-no-button.docs-ml-promotion-app-themed { border-radius: 4px; box-shadow: none; box-sizing: border-box; font-family: "Google Sans", Roboto, RobotoDraft, Helvetica, Arial, sans-serif; font-weight: 500; font-size: 14px; height: 36px; letter-spacing: 0.25px; line-height: 16px; padding: 9px 24px 11px; background: rgb(255, 255, 255); color: rgb(26, 115, 232); border: 1px solid rgb(218, 220, 224) !important; }
+
+.docs-ml-promotion-action-button-wrapper:focus .docs-ml-promotion-action-button.docs-ml-promotion-yes-button.docs-ml-promotion-app-themed { color: rgb(255, 255, 255); background: rgb(80, 148, 237); box-shadow: rgba(66, 133, 244, 0.15) 0px 1px 3px 1px; }
+
+.docs-ml-promotion-action-button-wrapper:focus .docs-ml-promotion-action-button.docs-ml-promotion-no-button.docs-ml-promotion-app-themed { border-radius: 4px; box-shadow: none; box-sizing: border-box; font-family: "Google Sans", Roboto, RobotoDraft, Helvetica, Arial, sans-serif; font-weight: 500; font-size: 14px; height: 36px; letter-spacing: 0.25px; line-height: 16px; padding: 9px 24px 11px; background: rgb(233, 241, 254); border: 1px solid rgb(193, 216, 251) !important; }
+------MultipartBoundary--4RuGBYQ3AvVcH82TLAnY0eAcNfAYRo20LIWpeqgCcd----
+Content-Type: text/css
+Content-Transfer-Encoding: binary
+Content-Location: https://fonts.googleapis.com/css?family=Google+Sans
+
+@charset "utf-8";
+
+@font-face { font-family: "Google Sans"; font-style: normal; font-weight: 400; src: url("https://fonts.gstatic.com/s/googlesans/v58/4Ua_rENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RFD48TE63OOYKtrwEIJl1pynAESo4b4o.woff2") format("woff2"); unicode-range: U+308, U+530-58F, U+2010, U+2024, U+25CC, U+FB13-FB17; }
+
+@font-face { font-family: "Google Sans"; font-style: normal; font-weight: 400; src: url("https://fonts.gstatic.com/s/googlesans/v58/4Ua_rENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RFD48TE63OOYKtrwEIJl3pynAESo4b4o.woff2") format("woff2"); unicode-range: U+964-965, U+980-9FE, U+1CF7, U+1CFA, U+200C-200D, U+20B9, U+25CC; }
+
+@font-face { font-family: "Google Sans"; font-style: normal; font-weight: 400; src: url("https://fonts.gstatic.com/s/googlesans/v58/4Ua_rENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RFD48TE63OOYKtrwEIJlopynAESo4b4o.woff2") format("woff2"); unicode-range: U+460-52F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F; }
+
+@font-face { font-family: "Google Sans"; font-style: normal; font-weight: 400; src: url("https://fonts.gstatic.com/s/googlesans/v58/4Ua_rENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RFD48TE63OOYKtrwEIJlhpynAESo4b4o.woff2") format("woff2"); unicode-range: U+301, U+400-45F, U+490-491, U+4B0-4B1, U+2116; }
+
+@font-face { font-family: "Google Sans"; font-style: normal; font-weight: 400; src: url("https://fonts.gstatic.com/s/googlesans/v58/4Ua_rENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RFD48TE63OOYKtrwEIJlkpynAESo4b4o.woff2") format("woff2"); unicode-range: U+900-97F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FF; }
+
+@font-face { font-family: "Google Sans"; font-style: normal; font-weight: 400; src: url("https://fonts.gstatic.com/s/googlesans/v58/4Ua_rENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RFD48TE63OOYKtrwEIJl0pynAESo4b4o.woff2") format("woff2"); unicode-range: U+1200-1399, U+2D80-2DDE, U+AB01-AB2E, U+1E7E0-1E7E6, U+1E7E8-1E7EB, U+1E7ED-1E7EE, U+1E7F0-1E7FE; }
+
+@font-face { font-family: "Google Sans"; font-style: normal; font-weight: 400; src: url("https://fonts.gstatic.com/s/googlesans/v58/4Ua_rENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RFD48TE63OOYKtrwEIJl6pynAESo4b4o.woff2") format("woff2"); unicode-range: U+589, U+10A0-10FF, U+1C90-1CBA, U+1CBD-1CBF, U+2D00-2D2F; }
+
+@font-face { font-family: "Google Sans"; font-style: normal; font-weight: 400; src: url("https://fonts.gstatic.com/s/googlesans/v58/4Ua_rENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RFD48TE63OOYKtrwEIJlmpynAESo4b4o.woff2") format("woff2"); unicode-range: U+370-3FF; }
+
+@font-face { font-family: "Google Sans"; font-style: normal; font-weight: 400; src: url("https://fonts.gstatic.com/s/googlesans/v58/4Ua_rENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RFD48TE63OOYKtrwEIJl-pynAESo4b4o.woff2") format("woff2"); unicode-range: U+964-965, U+A80-AFF, U+200C-200D, U+20B9, U+25CC, U+A830-A839; }
+
+@font-face { font-family: "Google Sans"; font-style: normal; font-weight: 400; src: url("https://fonts.gstatic.com/s/googlesans/v58/4Ua_rENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RFD48TE63OOYKtrwEIJlGpynAESo4b4o.woff2") format("woff2"); unicode-range: U+964-965, U+A01-A76, U+200C-200D, U+20B9, U+25CC, U+262C, U+A830-A839; }
+
+@font-face { font-family: "Google Sans"; font-style: normal; font-weight: 400; src: url("https://fonts.gstatic.com/s/googlesans/v58/4Ua_rENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RFD48TE63OOYKtrwEIJlnpynAESo4b4o.woff2") format("woff2"); unicode-range: U+590-5FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
+
+@font-face { font-family: "Google Sans"; font-style: normal; font-weight: 400; src: url("https://fonts.gstatic.com/s/googlesans/v58/4Ua_rENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RFD48TE63OOYKtrwEIJlupynAESo4b4o.woff2") format("woff2"); unicode-range: U+1780-17FF, U+19E0-19FF, U+200C, U+25CC; }
+
+@font-face { font-family: "Google Sans"; font-style: normal; font-weight: 400; src: url("https://fonts.gstatic.com/s/googlesans/v58/4Ua_rENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RFD48TE63OOYKtrwEIJlspynAESo4b4o.woff2") format("woff2"); unicode-range: U+E81-EDF, U+25CC; }
+
+@font-face { font-family: "Google Sans"; font-style: normal; font-weight: 400; src: url("https://fonts.gstatic.com/s/googlesans/v58/4Ua_rENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RFD48TE63OOYKtrwEIJl8pynAESo4b4o.woff2") format("woff2"); unicode-range: U+964-965, U+B01-B77, U+200C-200D, U+20B9, U+25CC; }
+
+@font-face { font-family: "Google Sans"; font-style: normal; font-weight: 400; src: url("https://fonts.gstatic.com/s/googlesans/v58/4Ua_rENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RFD48TE63OOYKtrwEIJl4pynAESo4b4o.woff2") format("woff2"); unicode-range: U+964-965, U+D81-DF4, U+200C-200D, U+25CC, U+111E1-111F4; }
+
+@font-face { font-family: "Google Sans"; font-style: normal; font-weight: 400; src: url("https://fonts.gstatic.com/s/googlesans/v58/4Ua_rENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RFD48TE63OOYKtrwEIJlzpynAESo4b4o.woff2") format("woff2"); unicode-range: U+964-965, U+B82-BFA, U+200C-200D, U+20B9, U+25CC; }
+
+@font-face { font-family: "Google Sans"; font-style: normal; font-weight: 400; src: url("https://fonts.gstatic.com/s/googlesans/v58/4Ua_rENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RFD48TE63OOYKtrwEIJl5pynAESo4b4o.woff2") format("woff2"); unicode-range: U+951-952, U+964-965, U+C00-C7F, U+1CDA, U+200C-200D, U+25CC; }
+
+@font-face { font-family: "Google Sans"; font-style: normal; font-weight: 400; src: url("https://fonts.gstatic.com/s/googlesans/v58/4Ua_rENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RFD48TE63OOYKtrwEIJlxpynAESo4b4o.woff2") format("woff2"); unicode-range: U+E01-E5B, U+200C-200D, U+25CC; }
+
+@font-face { font-family: "Google Sans"; font-style: normal; font-weight: 400; src: url("https://fonts.gstatic.com/s/googlesans/v58/4Ua_rENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RFD48TE63OOYKtrwEIJlqpynAESo4b4o.woff2") format("woff2"); unicode-range: U+102-103, U+110-111, U+128-129, U+168-169, U+1A0-1A1, U+1AF-1B0, U+300-301, U+303-304, U+308-309, U+323, U+329, U+1EA0-1EF9, U+20AB; }
+
+@font-face { font-family: "Google Sans"; font-style: normal; font-weight: 400; src: url("https://fonts.gstatic.com/s/googlesans/v58/4Ua_rENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RFD48TE63OOYKtrwEIJlrpynAESo4b4o.woff2") format("woff2"); unicode-range: U+100-2AF, U+304, U+308, U+329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: "Google Sans"; font-style: normal; font-weight: 400; src: url("https://fonts.gstatic.com/s/googlesans/v58/4Ua_rENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RFD48TE63OOYKtrwEIJllpynAESo4.woff2") format("woff2"); unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+------MultipartBoundary--4RuGBYQ3AvVcH82TLAnY0eAcNfAYRo20LIWpeqgCcd----
+Content-Type: image/png
+Content-Transfer-Encoding: binary
+Content-Location: https://ssl.gstatic.com/docs/common/mobileweb_sprite1.png
+
+âPNG
+
+   IHDR   $   ú   ô	Ä  	UIDAThﬁÌ[[lW˛ŒôŸõ«nù∏8Ik'm\ö*V“EBj∏51/T¢5⁄P•†ZÂ&—áJ·	Ñ*cÇh§ ‹ÄÄBõÚ¬Â)I+îìÊ!†ÜÑXNH”brÒ:ÔÆwÊ¸<ÏmvvŒÃ9«ìx#ˆè6û=s˚Êˇ˛ˇ?Á|{h2ca;á~ˇΩ˛i7◊GBTèDTŸvI‘∂ßzﬁ∆ˆèl ≈
+hÛÔæΩ„b~f Ñ“Ωâ*[•∂
+>*>ªzÀÖ€¶ªzû,Ë‚≤Û3?0u˙≤∂%K/›ö=±sl,  ùÔòXGf—™‰⁄éÍÇí"™ÅÒ“‘∑UË
+≤L*›üπ∑˝∞(9 œ?/ò(áëœ•…db}€ΩÌáTAq(‹¿& c~≥ˆ@ÚûÃ∏
+(Æ$LáDÉ«“©Ù:ª?slxt4eHY˝'L];ˇòöé©tzMÁ∆Œ…Ìc;•û≤#)Û˘ ä>b¿¡s«{SSËL.#Ç®T<∆@†ÂóS˘c Ó“$ÿTæ±À	«ù)Ï9∞ú0*e,•öOk¥=DíDAiÔ?ñ3àÃb‡é'_	 OåP&˜^`–W⁄XÈ?—nÅf0«[◊ò> 2†P_"cÅÂ‡T¸dà"©$ç`i6' WjîE≈íF≠	V*4Æ†  ‡ì+7I˚æ œÓ;Ûf˝ı,òRlﬂxL´◊ﬂwÊMœ√ï=f13 dt˝b‚ ˆûzΩ˙˝ÖM€ ﬂ©Í°Ì}b˚Í-ç`"@õ2 ò)Êq.w©JQ¡- ﬁôΩX=Ór1/c‘aOÚÃ⁄≠xfÌ÷ÜˆÔ
+x Ωû≠”èUÏÁßbÔƒ¡Í˛ë˚ü¯˙¯Xıº'Wo¡}ÜfÂºÎPÂb3≈\=~ *«»kULi_±·˛mÓﬂ÷pÏIe≤Îå=$∑Ωß‡•S5 ~∏È ÄØçˇ¨zÃÁ≤ÃS0McHˆ§^ ‡°Ï‹Ï≈Z&:9≠	¡¸([ª√k∑5¥ü|¯«°±8Ø¥ó=ÀÆ˛I¯$;©=®e?:˛áHoFy≈,ÀF≤XQcC°7 aóñNÉÑ#≤Q3ZøGH:ß£˙È9—%m@	ÿ√äƒ¶™è8ÙU#¡™˚'èı⁄ñ’KÇòN‡{≈´∫vF¬±01ÛïﬂúFÀÆá∆¯¸ØÛ˝”≥N,PcºT^ñ>z_€˛°Õ<^çÒKªØÓ»òGcÙ§5yõÍ€â›g_∏”IˆÚ¯4∆È9f¶1·÷≈|ÈY˚⁄â±±…¯4FFÛ”ó,N≠¢ï›GuA)jåUX°õ…d˝º˜ˆ√:†î´∫õí∫8A$lkΩµÍ∂C™†¢5∆ 0‘'Ö µSˆ [Ÿ=Æä+	Ñ√ç≠âtbù≥bŸ±——ìfcPg%„˚˛ØwÊì°-ì\c≠Ìô‹‚)m¡*
+¿Ò÷È"Œ˝Á<⁄”%i™∫è1 l˘ïB Dc™1ñµ(‚ﬁÀ/¬ôÛ3s˘íbÊŒôâ∆4 „ C≤£≈kW!úBUÙde•6Vçú‚—√ $∑£ò∑ ú9•iæ˙òö¬ÎMX\Ÿ©\∆AN1BaÛ©>ï˛ŸO¶ \'¥;2£LVá(\ïÂv" ]LeÉŸ6 \ƒñeø| ’ÍıávÛ∆$`ñ©`’hØΩ≈’ Ç)Ã…ÙgÆºzÑEN©2’Ëˇå≥ÏW_V£¨nh∑ß∆ÿh˚ép…~`·µ*û,#ºrDvÏN¬jU,b√ÀO-a‚—-≠ß∂S‘T?õ¢®ÎÃ+®%ˆ ﬂòqw2Øíù˘Ú”—Yˆ»ãñ<÷#jëe\˝(‹É±Pˆ€ TºbC§1ˇBD¨P1§<É&Õ è∏x»‹ûeUßGçcH∂‡¿@cd≈¬p√Õ	c#ê†‘g≈93çÒ#;≥Ω∞ù^K@Kct$„ ¨π‘ƒÎﬂø••1∂¨©Ì Æi0yOÜÔZh@œî§ëÖÚÃ„ÂÌÁ}Ä..M.Ä'|†f|ÏFÇÙ≈å‘s∆ÍÒMìÃÇ–¥ÌfìkÅi0[o&0ø—È›T`–l` Û–B'ö
+LÀZfb°S‰¸·¡~ß8›«XÌ'7"œÍlÔ∂[S÷⁄“ﬁœ7èƒªˆ„ÍÅı;ò3µßA6 ˇØ˘ıÌÇÄƒ˚øx·ﬂgWÙ‹5¯l|k?X·øFk?H <≥tÈÌwº{‚@».⁄Ä`Qg§∫bÈdÁ™ÅMÏ®.(]#·£%@ëËm©TˇÜ¨√ì† ˘¡DÆpÙy*±æÎÉâC™û‚—AA`¢÷À¯ËKÅÅ˚Ÿ∏äß∏ê0A+>Ö”p^[:πnŸ∆‚±?éßb†,
+LÌ/c@·“±¿+&3ã÷lﬁíû<0∂]Í)·úÇøKhd œˇ¶ŒVWmI7+Ìc\,øª˚≤˛⁄)êê¨ï<d[.“Ù6f≥NÆ¥•≤‚ì	ÁXc‡!˘M£⁄‚ O$∫ÄπÀÄ[`uûa/+{ÉBºVæ)+ıKÈBÒAôJBÜ˝<Eˇµ€néPJ>„Á›ÆP*?Z/0«p≈πu|‘æ¨≤UB)Å]˘+ê˝Kç∆î 8s„Úƒ›?¨åZó+r`áÔ¨ªûe√M≤‘∂2ÍCû©ˇy∏|MfS&9—ΩÊÃÑüi/¨%⁄ù≥fPó'ΩªÏÏ«’Ω¬µÚ[=ﬂå»¬X≤Ã?VÚ/$ 5Íc•,àb1ùØáÍﬁHàÍB¬ˆSÃÔó»øˆEΩª°ÿ+5@Ô{
+Ë˛4(‰≤:Ω¶]©<«€A…vùìî„RcƒX˛àº˙,T‰"˙ª*5?˛9P˚µæLFÿÃ!≠…Äe,˚Xˆçx#ÚÃ—ıf(∂iíuæ—uÈ:dô˙@No¶.6≤°Ûµ¿yv-u5à‰BÌáS‡√7§± ∫E√˜À≤Ø¶zÙÇ≈≥ˆÉÑ+l`‚ñœ‡tK+lYÀ$ˆùÚßi¿Ä"Ä{ö	Ãßö	Ã#-00è6ßô¿ò~Êe7ây)jÅjÅ˙ u›:W[  o∑Fb-kV˚ù`ac%`    IENDÆB`Ç
+------MultipartBoundary--4RuGBYQ3AvVcH82TLAnY0eAcNfAYRo20LIWpeqgCcd----
+Content-Type: text/css
+Content-Transfer-Encoding: binary
+Content-Location: cid:css-a7e71a83-c77a-4b37-9557-7dbaaa24ff53@mhtml.blink
+
+@charset "utf-8";
+
+@import url("https://themes.googleusercontent.com/fonts/css?kit=XGMkxXUZTA64h2imyzu79g");
+
+.lst-kix_85yr3vgq54ou-5 > li::before { content: "‚ñ†  "; }
+
+ul.lst-kix_tixua3t6zjbr-5 { list-style-type: none; }
+
+ul.lst-kix_tixua3t6zjbr-6 { list-style-type: none; }
+
+ul.lst-kix_tixua3t6zjbr-3 { list-style-type: none; }
+
+ul.lst-kix_tixua3t6zjbr-4 { list-style-type: none; }
+
+.lst-kix_85yr3vgq54ou-4 > li::before { content: "‚óã  "; }
+
+.lst-kix_85yr3vgq54ou-8 > li::before { content: "‚ñ†  "; }
+
+ul.lst-kix_tixua3t6zjbr-7 { list-style-type: none; }
+
+ul.lst-kix_tixua3t6zjbr-8 { list-style-type: none; }
+
+.lst-kix_85yr3vgq54ou-1 > li::before { content: "‚óã  "; }
+
+.lst-kix_85yr3vgq54ou-2 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_h28hzufga9xz-0 > li::before { content: "‚óè  "; }
+
+ul.lst-kix_tixua3t6zjbr-1 { list-style-type: none; }
+
+.lst-kix_85yr3vgq54ou-3 > li::before { content: "‚óè  "; }
+
+ul.lst-kix_tixua3t6zjbr-2 { list-style-type: none; }
+
+.lst-kix_h28hzufga9xz-1 > li::before { content: "‚óã  "; }
+
+.lst-kix_h28hzufga9xz-2 > li::before { content: "‚ñ†  "; }
+
+ul.lst-kix_tixua3t6zjbr-0 { list-style-type: none; }
+
+.lst-kix_81kz38cg6ahi-6 > li::before { content: "‚óè  "; }
+
+.lst-kix_h28hzufga9xz-3 > li::before { content: "‚óè  "; }
+
+.lst-kix_h28hzufga9xz-4 > li::before { content: "‚óã  "; }
+
+.lst-kix_81kz38cg6ahi-5 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_81kz38cg6ahi-7 > li::before { content: "‚óã  "; }
+
+.lst-kix_85yr3vgq54ou-0 > li::before { content: "‚óè  "; }
+
+.lst-kix_h28hzufga9xz-7 > li::before { content: "‚óã  "; }
+
+.lst-kix_81kz38cg6ahi-8 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_h28hzufga9xz-5 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_h28hzufga9xz-6 > li::before { content: "‚óè  "; }
+
+.lst-kix_6iulggfgt34i-1 > li::before { content: "‚óã  "; }
+
+.lst-kix_6iulggfgt34i-0 > li::before { content: "‚óè  "; }
+
+.lst-kix_pqoexllu888m-7 > li::before { content: "‚óã  "; }
+
+.lst-kix_pqoexllu888m-8 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_85yr3vgq54ou-7 > li::before { content: "‚óã  "; }
+
+.lst-kix_85yr3vgq54ou-6 > li::before { content: "‚óè  "; }
+
+.lst-kix_6b27td6ofda9-1 > li::before { content: "‚óã  "; }
+
+.lst-kix_6b27td6ofda9-2 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_6b27td6ofda9-3 > li::before { content: "‚óè  "; }
+
+.lst-kix_6b27td6ofda9-5 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_q580kd4b05s1-8 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_6b27td6ofda9-4 > li::before { content: "‚óã  "; }
+
+ul.lst-kix_81kz38cg6ahi-7 { list-style-type: none; }
+
+.lst-kix_q580kd4b05s1-7 > li::before { content: "‚óã  "; }
+
+ul.lst-kix_81kz38cg6ahi-6 { list-style-type: none; }
+
+ul.lst-kix_81kz38cg6ahi-5 { list-style-type: none; }
+
+ul.lst-kix_81kz38cg6ahi-4 { list-style-type: none; }
+
+.lst-kix_6b27td6ofda9-7 > li::before { content: "‚óã  "; }
+
+.lst-kix_nj5eikbny7uj-3 > li::before { content: "‚óè  "; }
+
+.lst-kix_q580kd4b05s1-6 > li::before { content: "‚óè  "; }
+
+ul.lst-kix_81kz38cg6ahi-8 { list-style-type: none; }
+
+.lst-kix_6b27td6ofda9-6 > li::before { content: "‚óè  "; }
+
+.lst-kix_q580kd4b05s1-3 > li::before { content: "‚óè  "; }
+
+.lst-kix_nj5eikbny7uj-4 > li::before { content: "‚óã  "; }
+
+.lst-kix_nj5eikbny7uj-5 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_q580kd4b05s1-5 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_nj5eikbny7uj-6 > li::before { content: "‚óè  "; }
+
+.lst-kix_q580kd4b05s1-4 > li::before { content: "‚óã  "; }
+
+.lst-kix_6b27td6ofda9-8 > li::before { content: "‚ñ†  "; }
+
+ul.lst-kix_c15jbc5xu406-0 { list-style-type: none; }
+
+.lst-kix_2rnpmwleri5l-0 > li::before { content: "‚óè  "; }
+
+.lst-kix_2rnpmwleri5l-2 > li::before { content: "‚ñ†  "; }
+
+ul.lst-kix_c15jbc5xu406-4 { list-style-type: none; }
+
+ul.lst-kix_c15jbc5xu406-3 { list-style-type: none; }
+
+ul.lst-kix_c15jbc5xu406-2 { list-style-type: none; }
+
+.lst-kix_q580kd4b05s1-2 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_2rnpmwleri5l-1 > li::before { content: "‚óã  "; }
+
+.lst-kix_2rnpmwleri5l-5 > li::before { content: "‚ñ†  "; }
+
+ul.lst-kix_c15jbc5xu406-1 { list-style-type: none; }
+
+ul.lst-kix_6b27td6ofda9-1 { list-style-type: none; }
+
+ul.lst-kix_4wpt2pktke4w-5 { list-style-type: none; }
+
+ul.lst-kix_6b27td6ofda9-2 { list-style-type: none; }
+
+ul.lst-kix_4wpt2pktke4w-4 { list-style-type: none; }
+
+.lst-kix_h28hzufga9xz-8 > li::before { content: "‚ñ†  "; }
+
+ul.lst-kix_6b27td6ofda9-3 { list-style-type: none; }
+
+ul.lst-kix_4wpt2pktke4w-3 { list-style-type: none; }
+
+.lst-kix_2rnpmwleri5l-4 > li::before { content: "‚óã  "; }
+
+ul.lst-kix_6b27td6ofda9-4 { list-style-type: none; }
+
+ul.lst-kix_4wpt2pktke4w-2 { list-style-type: none; }
+
+ul.lst-kix_6b27td6ofda9-5 { list-style-type: none; }
+
+ul.lst-kix_4wpt2pktke4w-1 { list-style-type: none; }
+
+.lst-kix_q580kd4b05s1-1 > li::before { content: "‚óã  "; }
+
+.lst-kix_nj5eikbny7uj-2 > li::before { content: "‚ñ†  "; }
+
+ul.lst-kix_6b27td6ofda9-6 { list-style-type: none; }
+
+ul.lst-kix_4wpt2pktke4w-0 { list-style-type: none; }
+
+ul.lst-kix_6b27td6ofda9-7 { list-style-type: none; }
+
+.lst-kix_q580kd4b05s1-0 > li::before { content: "‚óè  "; }
+
+.lst-kix_2rnpmwleri5l-3 > li::before { content: "‚óè  "; }
+
+ul.lst-kix_6b27td6ofda9-8 { list-style-type: none; }
+
+.lst-kix_nj5eikbny7uj-0 > li::before { content: "‚óè  "; }
+
+.lst-kix_nj5eikbny7uj-1 > li::before { content: "‚óã  "; }
+
+.lst-kix_2rnpmwleri5l-8 > li::before { content: "‚ñ†  "; }
+
+ul.lst-kix_4wpt2pktke4w-8 { list-style-type: none; }
+
+ul.lst-kix_4wpt2pktke4w-7 { list-style-type: none; }
+
+ul.lst-kix_6b27td6ofda9-0 { list-style-type: none; }
+
+ul.lst-kix_4wpt2pktke4w-6 { list-style-type: none; }
+
+ul.lst-kix_c15jbc5xu406-8 { list-style-type: none; }
+
+ul.lst-kix_c15jbc5xu406-7 { list-style-type: none; }
+
+ul.lst-kix_c15jbc5xu406-6 { list-style-type: none; }
+
+.lst-kix_2rnpmwleri5l-6 > li::before { content: "‚óè  "; }
+
+ul.lst-kix_c15jbc5xu406-5 { list-style-type: none; }
+
+.lst-kix_2rnpmwleri5l-7 > li::before { content: "‚óã  "; }
+
+.lst-kix_tixua3t6zjbr-7 > li::before { content: "‚óã  "; }
+
+.lst-kix_c15jbc5xu406-2 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_grfsnkhc5whs-1 > li::before { content: "‚óã  "; }
+
+.lst-kix_tixua3t6zjbr-3 > li::before { content: "‚óè  "; }
+
+.lst-kix_tixua3t6zjbr-1 > li::before { content: "‚óã  "; }
+
+.lst-kix_tixua3t6zjbr-5 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_c15jbc5xu406-0 > li::before { content: "‚óè  "; }
+
+.lst-kix_grfsnkhc5whs-7 > li::before { content: "‚óã  "; }
+
+.lst-kix_nj5eikbny7uj-7 > li::before { content: "‚óã  "; }
+
+ul.lst-kix_nj5eikbny7uj-2 { list-style-type: none; }
+
+ul.lst-kix_nj5eikbny7uj-3 { list-style-type: none; }
+
+ul.lst-kix_nj5eikbny7uj-0 { list-style-type: none; }
+
+ul.lst-kix_nj5eikbny7uj-1 { list-style-type: none; }
+
+ul.lst-kix_nj5eikbny7uj-6 { list-style-type: none; }
+
+ul.lst-kix_nj5eikbny7uj-7 { list-style-type: none; }
+
+ul.lst-kix_nj5eikbny7uj-4 { list-style-type: none; }
+
+ul.lst-kix_nj5eikbny7uj-5 { list-style-type: none; }
+
+.lst-kix_grfsnkhc5whs-3 > li::before { content: "‚óè  "; }
+
+ul.lst-kix_nj5eikbny7uj-8 { list-style-type: none; }
+
+.lst-kix_grfsnkhc5whs-5 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_x35dh0mwee6b-8 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_wa1ppfawyzb-3 > li::before { content: "‚óè  "; }
+
+.lst-kix_bkxqw8e12qik-3 > li::before { content: "‚óè  "; }
+
+.lst-kix_bkxqw8e12qik-5 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_wa1ppfawyzb-1 > li::before { content: "‚óã  "; }
+
+.lst-kix_wa1ppfawyzb-5 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_4wpt2pktke4w-0 > li::before { content: "‚óè  "; }
+
+.lst-kix_uue751xoz1ed-1 > li::before { content: "‚óã  "; }
+
+.lst-kix_uue751xoz1ed-5 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_pqoexllu888m-5 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_x35dh0mwee6b-6 > li::before { content: "‚óè  "; }
+
+.lst-kix_bkxqw8e12qik-7 > li::before { content: "‚óã  "; }
+
+.lst-kix_uue751xoz1ed-7 > li::before { content: "‚óã  "; }
+
+.lst-kix_6iulggfgt34i-3 > li::before { content: "‚óè  "; }
+
+.lst-kix_pqoexllu888m-1 > li::before { content: "‚óã  "; }
+
+.lst-kix_pqoexllu888m-3 > li::before { content: "‚óè  "; }
+
+.lst-kix_x35dh0mwee6b-2 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_x35dh0mwee6b-4 > li::before { content: "‚óã  "; }
+
+.lst-kix_6iulggfgt34i-7 > li::before { content: "‚óã  "; }
+
+.lst-kix_x35dh0mwee6b-0 > li::before { content: "‚óè  "; }
+
+.lst-kix_6iulggfgt34i-5 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_uue751xoz1ed-3 > li::before { content: "‚óè  "; }
+
+ul.lst-kix_l7r01hrshv34-3 { list-style-type: none; }
+
+ul.lst-kix_l7r01hrshv34-4 { list-style-type: none; }
+
+ul.lst-kix_l7r01hrshv34-1 { list-style-type: none; }
+
+ul.lst-kix_5g4abuyji0lc-8 { list-style-type: none; }
+
+ul.lst-kix_l7r01hrshv34-2 { list-style-type: none; }
+
+ul.lst-kix_wa1ppfawyzb-0 { list-style-type: none; }
+
+ul.lst-kix_l7r01hrshv34-7 { list-style-type: none; }
+
+ul.lst-kix_wa1ppfawyzb-1 { list-style-type: none; }
+
+ul.lst-kix_l7r01hrshv34-8 { list-style-type: none; }
+
+ul.lst-kix_wa1ppfawyzb-2 { list-style-type: none; }
+
+ul.lst-kix_l7r01hrshv34-5 { list-style-type: none; }
+
+ul.lst-kix_wa1ppfawyzb-3 { list-style-type: none; }
+
+ul.lst-kix_x35dh0mwee6b-0 { list-style-type: none; }
+
+ul.lst-kix_l7r01hrshv34-6 { list-style-type: none; }
+
+ul.lst-kix_wa1ppfawyzb-4 { list-style-type: none; }
+
+ul.lst-kix_wa1ppfawyzb-5 { list-style-type: none; }
+
+ul.lst-kix_x35dh0mwee6b-2 { list-style-type: none; }
+
+ul.lst-kix_5g4abuyji0lc-2 { list-style-type: none; }
+
+ul.lst-kix_wa1ppfawyzb-6 { list-style-type: none; }
+
+ul.lst-kix_x35dh0mwee6b-1 { list-style-type: none; }
+
+ul.lst-kix_5g4abuyji0lc-3 { list-style-type: none; }
+
+ul.lst-kix_wa1ppfawyzb-7 { list-style-type: none; }
+
+ul.lst-kix_x35dh0mwee6b-4 { list-style-type: none; }
+
+ul.lst-kix_5g4abuyji0lc-0 { list-style-type: none; }
+
+ul.lst-kix_wa1ppfawyzb-8 { list-style-type: none; }
+
+ul.lst-kix_x35dh0mwee6b-3 { list-style-type: none; }
+
+ul.lst-kix_5g4abuyji0lc-1 { list-style-type: none; }
+
+.lst-kix_5g4abuyji0lc-7 > li::before { content: "‚óã  "; }
+
+ul.lst-kix_x35dh0mwee6b-6 { list-style-type: none; }
+
+.lst-kix_81kz38cg6ahi-4 > li::before { content: "‚óã  "; }
+
+ul.lst-kix_5g4abuyji0lc-6 { list-style-type: none; }
+
+ul.lst-kix_x35dh0mwee6b-5 { list-style-type: none; }
+
+ul.lst-kix_5g4abuyji0lc-7 { list-style-type: none; }
+
+ul.lst-kix_x35dh0mwee6b-8 { list-style-type: none; }
+
+ul.lst-kix_5g4abuyji0lc-4 { list-style-type: none; }
+
+ul.lst-kix_x35dh0mwee6b-7 { list-style-type: none; }
+
+ul.lst-kix_5g4abuyji0lc-5 { list-style-type: none; }
+
+ul.lst-kix_q580kd4b05s1-5 { list-style-type: none; }
+
+ul.lst-kix_q580kd4b05s1-6 { list-style-type: none; }
+
+ul.lst-kix_q580kd4b05s1-3 { list-style-type: none; }
+
+.lst-kix_5g4abuyji0lc-1 > li::before { content: "‚óã  "; }
+
+.lst-kix_5g4abuyji0lc-3 > li::before { content: "‚óè  "; }
+
+ul.lst-kix_q580kd4b05s1-4 { list-style-type: none; }
+
+ul.lst-kix_q580kd4b05s1-7 { list-style-type: none; }
+
+ul.lst-kix_q580kd4b05s1-8 { list-style-type: none; }
+
+.lst-kix_wa1ppfawyzb-7 > li::before { content: "‚óã  "; }
+
+.lst-kix_81kz38cg6ahi-2 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_bkxqw8e12qik-1 > li::before { content: "‚óã  "; }
+
+.lst-kix_5g4abuyji0lc-5 > li::before { content: "‚ñ†  "; }
+
+ul.lst-kix_q580kd4b05s1-1 { list-style-type: none; }
+
+ul.lst-kix_l7r01hrshv34-0 { list-style-type: none; }
+
+.lst-kix_81kz38cg6ahi-0 > li::before { content: "‚óè  "; }
+
+ul.lst-kix_q580kd4b05s1-2 { list-style-type: none; }
+
+ul.lst-kix_q580kd4b05s1-0 { list-style-type: none; }
+
+ul.lst-kix_grfsnkhc5whs-0 { list-style-type: none; }
+
+ul.lst-kix_grfsnkhc5whs-1 { list-style-type: none; }
+
+ul.lst-kix_grfsnkhc5whs-2 { list-style-type: none; }
+
+ul.lst-kix_grfsnkhc5whs-3 { list-style-type: none; }
+
+.lst-kix_5g4abuyji0lc-0 > li::before { content: "‚óè  "; }
+
+ul.lst-kix_85yr3vgq54ou-4 { list-style-type: none; }
+
+ul.lst-kix_85yr3vgq54ou-3 { list-style-type: none; }
+
+ul.lst-kix_85yr3vgq54ou-2 { list-style-type: none; }
+
+ul.lst-kix_85yr3vgq54ou-1 { list-style-type: none; }
+
+.lst-kix_l7r01hrshv34-0 > li::before { content: "‚óè  "; }
+
+ul.lst-kix_85yr3vgq54ou-8 { list-style-type: none; }
+
+ul.lst-kix_85yr3vgq54ou-7 { list-style-type: none; }
+
+.lst-kix_l7r01hrshv34-1 > li::before { content: "‚óã  "; }
+
+ul.lst-kix_85yr3vgq54ou-6 { list-style-type: none; }
+
+ul.lst-kix_85yr3vgq54ou-5 { list-style-type: none; }
+
+.lst-kix_l7r01hrshv34-2 > li::before { content: "‚ñ†  "; }
+
+ul.lst-kix_85yr3vgq54ou-0 { list-style-type: none; }
+
+.lst-kix_l7r01hrshv34-3 > li::before { content: "‚óè  "; }
+
+.lst-kix_l7r01hrshv34-6 > li::before { content: "‚óè  "; }
+
+.lst-kix_l7r01hrshv34-4 > li::before { content: "‚óã  "; }
+
+.lst-kix_l7r01hrshv34-8 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_l7r01hrshv34-5 > li::before { content: "‚ñ†  "; }
+
+ul.lst-kix_xb6b39m9qwq3-3 { list-style-type: none; }
+
+ul.lst-kix_xb6b39m9qwq3-4 { list-style-type: none; }
+
+ul.lst-kix_xb6b39m9qwq3-1 { list-style-type: none; }
+
+ul.lst-kix_xb6b39m9qwq3-2 { list-style-type: none; }
+
+ul.lst-kix_xb6b39m9qwq3-7 { list-style-type: none; }
+
+ul.lst-kix_bkxqw8e12qik-0 { list-style-type: none; }
+
+ul.lst-kix_xb6b39m9qwq3-8 { list-style-type: none; }
+
+.lst-kix_l7r01hrshv34-7 > li::before { content: "‚óã  "; }
+
+ul.lst-kix_xb6b39m9qwq3-5 { list-style-type: none; }
+
+ul.lst-kix_xb6b39m9qwq3-6 { list-style-type: none; }
+
+ul.lst-kix_bkxqw8e12qik-4 { list-style-type: none; }
+
+ul.lst-kix_bkxqw8e12qik-3 { list-style-type: none; }
+
+ul.lst-kix_2rnpmwleri5l-0 { list-style-type: none; }
+
+ul.lst-kix_bkxqw8e12qik-2 { list-style-type: none; }
+
+.lst-kix_uue751xoz1ed-8 > li::before { content: "‚ñ†  "; }
+
+ul.lst-kix_2rnpmwleri5l-1 { list-style-type: none; }
+
+ul.lst-kix_bkxqw8e12qik-1 { list-style-type: none; }
+
+ul.lst-kix_2rnpmwleri5l-2 { list-style-type: none; }
+
+ul.lst-kix_bkxqw8e12qik-8 { list-style-type: none; }
+
+ul.lst-kix_2rnpmwleri5l-3 { list-style-type: none; }
+
+ul.lst-kix_xb6b39m9qwq3-0 { list-style-type: none; }
+
+ul.lst-kix_bkxqw8e12qik-7 { list-style-type: none; }
+
+.lst-kix_4wpt2pktke4w-4 > li::before { content: "‚óã  "; }
+
+ul.lst-kix_2rnpmwleri5l-4 { list-style-type: none; }
+
+ul.lst-kix_bkxqw8e12qik-6 { list-style-type: none; }
+
+ul.lst-kix_2rnpmwleri5l-5 { list-style-type: none; }
+
+ul.lst-kix_bkxqw8e12qik-5 { list-style-type: none; }
+
+ul.lst-kix_2rnpmwleri5l-6 { list-style-type: none; }
+
+ul.lst-kix_2rnpmwleri5l-7 { list-style-type: none; }
+
+.lst-kix_4wpt2pktke4w-2 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_4wpt2pktke4w-3 > li::before { content: "‚óè  "; }
+
+ul.lst-kix_2rnpmwleri5l-8 { list-style-type: none; }
+
+.lst-kix_4wpt2pktke4w-1 > li::before { content: "‚óã  "; }
+
+.lst-kix_xb6b39m9qwq3-0 > li::before { content: "‚óè  "; }
+
+.lst-kix_xb6b39m9qwq3-1 > li::before { content: "‚óã  "; }
+
+.lst-kix_xb6b39m9qwq3-2 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_4wpt2pktke4w-5 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_xb6b39m9qwq3-3 > li::before { content: "‚óè  "; }
+
+.lst-kix_xb6b39m9qwq3-4 > li::before { content: "‚óã  "; }
+
+.lst-kix_4wpt2pktke4w-6 > li::before { content: "‚óè  "; }
+
+.lst-kix_4wpt2pktke4w-7 > li::before { content: "‚óã  "; }
+
+.lst-kix_4wpt2pktke4w-8 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_xb6b39m9qwq3-7 > li::before { content: "‚óã  "; }
+
+.lst-kix_xb6b39m9qwq3-5 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_xb6b39m9qwq3-6 > li::before { content: "‚óè  "; }
+
+.lst-kix_c15jbc5xu406-4 > li::before { content: "‚óã  "; }
+
+.lst-kix_c15jbc5xu406-5 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_c15jbc5xu406-7 > li::before { content: "‚óã  "; }
+
+.lst-kix_c15jbc5xu406-6 > li::before { content: "‚óè  "; }
+
+.lst-kix_c15jbc5xu406-8 > li::before { content: "‚ñ†  "; }
+
+ul.lst-kix_pqoexllu888m-3 { list-style-type: none; }
+
+ul.lst-kix_pqoexllu888m-2 { list-style-type: none; }
+
+.lst-kix_tixua3t6zjbr-8 > li::before { content: "‚ñ†  "; }
+
+ul.lst-kix_pqoexllu888m-1 { list-style-type: none; }
+
+ul.lst-kix_pqoexllu888m-0 { list-style-type: none; }
+
+ul.lst-kix_pqoexllu888m-7 { list-style-type: none; }
+
+.lst-kix_c15jbc5xu406-3 > li::before { content: "‚óè  "; }
+
+ul.lst-kix_pqoexllu888m-6 { list-style-type: none; }
+
+.lst-kix_tixua3t6zjbr-6 > li::before { content: "‚óè  "; }
+
+ul.lst-kix_pqoexllu888m-5 { list-style-type: none; }
+
+ul.lst-kix_pqoexllu888m-4 { list-style-type: none; }
+
+.lst-kix_c15jbc5xu406-1 > li::before { content: "‚óã  "; }
+
+.lst-kix_tixua3t6zjbr-4 > li::before { content: "‚óã  "; }
+
+ul.lst-kix_pqoexllu888m-8 { list-style-type: none; }
+
+ul.lst-kix_uue751xoz1ed-8 { list-style-type: none; }
+
+ul.lst-kix_uue751xoz1ed-7 { list-style-type: none; }
+
+.lst-kix_grfsnkhc5whs-0 > li::before { content: "‚óè  "; }
+
+ul.lst-kix_uue751xoz1ed-6 { list-style-type: none; }
+
+.lst-kix_tixua3t6zjbr-2 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_nj5eikbny7uj-8 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_grfsnkhc5whs-8 > li::before { content: "‚ñ†  "; }
+
+ul.lst-kix_uue751xoz1ed-5 { list-style-type: none; }
+
+ul.lst-kix_uue751xoz1ed-4 { list-style-type: none; }
+
+ul.lst-kix_uue751xoz1ed-3 { list-style-type: none; }
+
+.lst-kix_xb6b39m9qwq3-8 > li::before { content: "‚ñ†  "; }
+
+ul.lst-kix_uue751xoz1ed-2 { list-style-type: none; }
+
+ul.lst-kix_81kz38cg6ahi-3 { list-style-type: none; }
+
+ul.lst-kix_uue751xoz1ed-1 { list-style-type: none; }
+
+ul.lst-kix_81kz38cg6ahi-2 { list-style-type: none; }
+
+ul.lst-kix_uue751xoz1ed-0 { list-style-type: none; }
+
+ul.lst-kix_81kz38cg6ahi-1 { list-style-type: none; }
+
+.lst-kix_grfsnkhc5whs-2 > li::before { content: "‚ñ†  "; }
+
+ul.lst-kix_81kz38cg6ahi-0 { list-style-type: none; }
+
+.lst-kix_grfsnkhc5whs-4 > li::before { content: "‚óã  "; }
+
+ul.lst-kix_6iulggfgt34i-5 { list-style-type: none; }
+
+ul.lst-kix_6iulggfgt34i-4 { list-style-type: none; }
+
+ul.lst-kix_6iulggfgt34i-3 { list-style-type: none; }
+
+ul.lst-kix_6iulggfgt34i-2 { list-style-type: none; }
+
+ul.lst-kix_6iulggfgt34i-8 { list-style-type: none; }
+
+ul.lst-kix_6iulggfgt34i-7 { list-style-type: none; }
+
+.lst-kix_grfsnkhc5whs-6 > li::before { content: "‚óè  "; }
+
+ul.lst-kix_6iulggfgt34i-6 { list-style-type: none; }
+
+.lst-kix_6b27td6ofda9-0 > li::before { content: "‚óè  "; }
+
+.lst-kix_uue751xoz1ed-2 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_wa1ppfawyzb-4 > li::before { content: "‚óã  "; }
+
+ul.lst-kix_6iulggfgt34i-1 { list-style-type: none; }
+
+ul.lst-kix_6iulggfgt34i-0 { list-style-type: none; }
+
+.lst-kix_6iulggfgt34i-8 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_bkxqw8e12qik-4 > li::before { content: "‚óã  "; }
+
+.lst-kix_bkxqw8e12qik-8 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_pqoexllu888m-6 > li::before { content: "‚óè  "; }
+
+.lst-kix_x35dh0mwee6b-7 > li::before { content: "‚óã  "; }
+
+.lst-kix_uue751xoz1ed-6 > li::before { content: "‚óè  "; }
+
+.lst-kix_pqoexllu888m-4 > li::before { content: "‚óã  "; }
+
+.lst-kix_x35dh0mwee6b-5 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_uue751xoz1ed-0 > li::before { content: "‚óè  "; }
+
+.lst-kix_wa1ppfawyzb-2 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_bkxqw8e12qik-6 > li::before { content: "‚óè  "; }
+
+.lst-kix_pqoexllu888m-2 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_x35dh0mwee6b-3 > li::before { content: "‚óè  "; }
+
+.lst-kix_6iulggfgt34i-2 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_6iulggfgt34i-4 > li::before { content: "‚óã  "; }
+
+.lst-kix_wa1ppfawyzb-0 > li::before { content: "‚óè  "; }
+
+.lst-kix_6iulggfgt34i-6 > li::before { content: "‚óè  "; }
+
+.lst-kix_pqoexllu888m-0 > li::before { content: "‚óè  "; }
+
+.lst-kix_x35dh0mwee6b-1 > li::before { content: "‚óã  "; }
+
+.lst-kix_uue751xoz1ed-4 > li::before { content: "‚óã  "; }
+
+.lst-kix_5g4abuyji0lc-6 > li::before { content: "‚óè  "; }
+
+ul.lst-kix_h28hzufga9xz-1 { list-style-type: none; }
+
+.lst-kix_81kz38cg6ahi-3 > li::before { content: "‚óè  "; }
+
+.lst-kix_tixua3t6zjbr-0 > li::before { content: "‚óè  "; }
+
+ul.lst-kix_h28hzufga9xz-2 { list-style-type: none; }
+
+ul.lst-kix_h28hzufga9xz-3 { list-style-type: none; }
+
+ul.lst-kix_h28hzufga9xz-4 { list-style-type: none; }
+
+ul.lst-kix_h28hzufga9xz-5 { list-style-type: none; }
+
+ul.lst-kix_h28hzufga9xz-6 { list-style-type: none; }
+
+ul.lst-kix_h28hzufga9xz-7 { list-style-type: none; }
+
+.lst-kix_5g4abuyji0lc-8 > li::before { content: "‚ñ†  "; }
+
+ul.lst-kix_h28hzufga9xz-8 { list-style-type: none; }
+
+ul.lst-kix_grfsnkhc5whs-8 { list-style-type: none; }
+
+ul.lst-kix_grfsnkhc5whs-4 { list-style-type: none; }
+
+ul.lst-kix_grfsnkhc5whs-5 { list-style-type: none; }
+
+ul.lst-kix_grfsnkhc5whs-6 { list-style-type: none; }
+
+ul.lst-kix_grfsnkhc5whs-7 { list-style-type: none; }
+
+.lst-kix_bkxqw8e12qik-0 > li::before { content: "‚óè  "; }
+
+.lst-kix_5g4abuyji0lc-2 > li::before { content: "‚ñ†  "; }
+
+ul.lst-kix_h28hzufga9xz-0 { list-style-type: none; }
+
+.lst-kix_wa1ppfawyzb-8 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_wa1ppfawyzb-6 > li::before { content: "‚óè  "; }
+
+.lst-kix_81kz38cg6ahi-1 > li::before { content: "‚óã  "; }
+
+.lst-kix_bkxqw8e12qik-2 > li::before { content: "‚ñ†  "; }
+
+.lst-kix_5g4abuyji0lc-4 > li::before { content: "‚óã  "; }
+------MultipartBoundary--4RuGBYQ3AvVcH82TLAnY0eAcNfAYRo20LIWpeqgCcd----
+Content-Type: text/css
+Content-Transfer-Encoding: binary
+Content-Location: https://themes.googleusercontent.com/fonts/css?kit=XGMkxXUZTA64h2imyzu79g
+
+@charset "utf-8";
+
+@font-face { font-family: "Roboto Mono"; font-style: normal; font-weight: 400; src: url("https://fonts.gstatic.com/s/robotomono/v22/L0xuDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vq_SeW4AJ68SLwt.woff2") format("woff2"); unicode-range: U+460-52F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F; }
+
+@font-face { font-family: "Roboto Mono"; font-style: normal; font-weight: 400; src: url("https://fonts.gstatic.com/s/robotomono/v22/L0xuDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vq_QOW4AJ68SLwt.woff2") format("woff2"); unicode-range: U+301, U+400-45F, U+490-491, U+4B0-4B1, U+2116; }
+
+@font-face { font-family: "Roboto Mono"; font-style: normal; font-weight: 400; src: url("https://fonts.gstatic.com/s/robotomono/v22/L0xuDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vq_R-W4AJ68SLwt.woff2") format("woff2"); unicode-range: U+370-3FF; }
+
+@font-face { font-family: "Roboto Mono"; font-style: normal; font-weight: 400; src: url("https://fonts.gstatic.com/s/robotomono/v22/L0xuDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vq_S-W4AJ68SLwt.woff2") format("woff2"); unicode-range: U+102-103, U+110-111, U+128-129, U+168-169, U+1A0-1A1, U+1AF-1B0, U+300-301, U+303-304, U+308-309, U+323, U+329, U+1EA0-1EF9, U+20AB; }
+
+@font-face { font-family: "Roboto Mono"; font-style: normal; font-weight: 400; src: url("https://fonts.gstatic.com/s/robotomono/v22/L0xuDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vq_SuW4AJ68SLwt.woff2") format("woff2"); unicode-range: U+100-2AF, U+304, U+308, U+329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: "Roboto Mono"; font-style: normal; font-weight: 400; src: url("https://fonts.gstatic.com/s/robotomono/v22/L0xuDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vq_ROW4AJ68SA.woff2") format("woff2"); unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+------MultipartBoundary--4RuGBYQ3AvVcH82TLAnY0eAcNfAYRo20LIWpeqgCcd------

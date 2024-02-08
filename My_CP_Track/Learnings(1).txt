@@ -1,0 +1,57 @@
+/*---------------------------- GENERAL ---------------------------- */
+
+⭐ is_sorted() -> checks only non_decresing arr[ ]
+
+⭐ some pattern in a string may not be present at its first occurence, 
+	it may happen that it is present after its first occurence....
+
+	so while finding pattern, we must search the pattern in the entire string
+
+	https://codeforces.com/problemset/problem/1553/B
+	-> compare your 2 submissions.  
+
+
+/*----------------------------------------------------------------- */
+
+/*---------------------------- TRICKS ----------------------------- */
+
+⭐ If some operation is to be done in the array both from [0 -> n - 1] and [n - 1 -> 0]
+	1. write code for [0 -> n - 1]: store in  ans1[]
+	2. reverse the array
+	3. copy code for [n - 1 -> 0], make changes to store the ans2[].
+	4. reverse the ans2[]
+
+Eg:
+
+void solve()
+{
+    int n; cin >> n;
+    vll v(n), pre(n), suff(n);
+    cin >> v;
+
+    f(i, 0, n - 1) {
+        if(i == 0)  pre[i] = v[i];
+        else pre[i] = pre[i - 1] + v[i];
+    }
+
+    reverse(all(v));  // trick
+    
+    f(i, 0, n - 1) {
+        if(i == 0)  suff[i] = v[i];
+        else suff[i] = suff[i - 1] + v[i];
+    }
+
+    reverse(all(suff));
+
+    cout << pre << suff;
+}
+
+	Use case : calculation of both prefix and suffix sum of arr[ ]	
+	See this: https://codeforces.com/contest/1922/submission/242253830
+
+⭐
+
+
+
+
+

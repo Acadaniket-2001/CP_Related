@@ -1,0 +1,50 @@
+⭐ Target Div2(B or C) : 
+	if in a string we can think do rearrangement , finding the freq. or sorting the 
+	string mostly works..
+
+	if in an array if some opration is given such that for opr. on a[i] opr. on all
+	a[j] : j < i have to be done......answerr lies in brute forcing operation
+	or each a[i] for all i: [0 ,n - 1]. 
+
+⭐ In problems related to sorting of vectors 
+	=> Keeping track of the inversion indexes helps... 
+
+⭐ General : 
+	1️⃣ if solution is made but giving WA in higher order tc(s)
+		try debug()
+		try finding edgecases
+		See others solution
+
+⭐ To solve problem of type which says whether we can do something or not .....
+	Make some assumptions and try proving whether we can achieve the goal or 	not....    like mathematical proofs -> PMI	
+
+⭐ Constructive_Problems : 
+	Mostly try drawing the testcases and find the patterns
+
+⭐ Operations type Questions :
+	Operations waale qn mei kuch obsv similar taarike se mil jaati hai
+	Jaise sirf ek operation karne se solve ho sakta hai kya...
+	Ya agar dono operations karenge to konse order mei karna chahiye...
+
+⭐ In Formula based questions : 
+	Always try formula for smaller i/p(s) before submitting.
+
+⭐ In Array partition problems:
+        Pattern:     
+	Waise to observation hi hai, lekin ek chhota sa pattern 
+	hota hai kuch qns mei ki intervals ki size 1,2 ya maybe 3 tak limit krne 	se solve ho jayega
+	
+	Approach:    
+	Try thinking of how the solution will look like...
+	and make observations out of the expected solution.. -> Greedy
+		     
+	
+
+
+
+
+
+
+
+
+

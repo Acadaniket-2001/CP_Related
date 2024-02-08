@@ -1,0 +1,195 @@
+LEARNINGS :- 
+
+/*-------------------------------DEBUGGING LESSONS--------------------------------*/
+
+⭐ Using cerr << n << endl;  ---->   dbg(n) 
+	Will unecessarily increase T.C. of code as it will be executed along with 	code unlike dbg() which gets ignored at runtime.
+
+⭐ Use Commenting of lines to find the error line.
+
+⭐ Debugger usage : 
+	Eg:	1.dbg(lo)  ----->  lo 1
+		2. dbg(lo, mid, hi)  ----->  lo, mid, hi 1, 5, 9
+		3. debug(loop, lo, mid, hi)  ----->  loop -> 1, 5, 9
+
+⭐ For debugging array
+	int arr[5] = {1, 2, 3, 4, 5};
+	debug(array, arr, 3)  ---->  array -> [ 1, 2, 3 ]
+
+⭐ To debug() each testcases : 
+	int main() {
+		int _t = 1; 
+		cin >> _t;
+		f(i, 1, _t) {
+			debug(Testcase, i);
+			solve();
+			crndl;
+		}
+	}
+
+⭐ Array out of bound access : 
+	Leetcode : AddressSanitizer Error
+	Codeforces / VSCode / Sublime Text : Shows No Error
+
+⭐ int x = INT_MAX; x++;
+	Leetcode : IntegerOverFlow Error
+	Codeforces / VSCode / Sublime Text : Returns -1, on error 😡
+
+⭐ For TLE in Bin_Search :
+
+	> Use cnt : 
+		int cnt = 100;
+		while(hi - lo > 1){
+
+		   😍   if(cnt-- < 0)	break;   // loop will not continue >100 times 
+
+			int mid = (hi + lo) / 2;
+			pred(mid) ? (lo = mid) : (hi = mid);
+		}
+		
+	
+	> print -> lo, hi, mid, ans; ----> Use debug(...)
+ 
+⭐ INT_MAX ~> 2e9 ; LLONG_MAX ~> 9e18
+
+⭐ a[i] -> a.at(i)
+	 
+⭐ DP codes can be debugged by printing the entire DP table.
+	(⚠️ only if writing iterative DP)
+	Eg: See Debugging Session by Raghav Goel (Part 2) : 1:07:06 or (Snapshot)
+
+⭐ For Debugging Graphs 
+	Eg: See Debugging Session by Raghav Goel (Part 2) : 1:11:24 or (Snapshot)
+
+/*---------------------------------------------------------------------------------*/
+
+
+/*-----------------------------STL TRICKS------------------------------*/
+
+MULTISET (Uses):-
+⭐ In order to maintain sorted order of elements with updates use 
+	set / multiset
+
+⭐ To prevent writing custom comparator() in a pair of vector, store the data in a 2D vector of n rows, 2 columns 
+(1st col. will have data deciding the sorting) -> 
+
+sort(a.begin(), a.end())     ---> vector<vector<int>> a(n, vector<int>(2));
+
+⭐ If we want ans(variable) to be 0 or positive, write as below:
+	ans = max(0, some fun());
+   Similarly, for ans to be 0 or neg.
+	ans = min(0, sime fun());
+
+⭐ 2 nos. are of same parity -> sum even   =>   (n1 + n2) % 2 == 0
+
+   2 nos. are of different parity -> sum odd   =>   (n1 + n2) % 2 == 1 
+
+
+/*----------------------------------------------------------------------*/
+
+/*-----------------------------BIT_HACKS--------------------------------*/
+
+	
+⭐ var = 1;
+   f(i, 0, n - 1)
+	var &= (expr. that decides value of var for the curr i/p);
+   
+   Once (expr becomes 0) var becomes 0;
+
+⭐ var = 0;
+   f(i, 0, n - 1)
+	var |= (expr. that decides value of var for the curr i/p);
+   
+   Once (expr becomes 1) var becomes 1;
+
+
+/*----------------------------------------------------------------------*/
+
+/*-----------------------------DP_LEARNINGS-----------------------------*/
+
+⭐ 😡🤬 -> Wrong  --> ll poss1 = a[i] + mx_pt(i + 1, --k, max(bmax, b[i]));
+
+   😊😊 -> Correct -->	ll poss1 = a[i] + mx_pt(i + 1, k - 1, max(bmax, b[i]));
+
+/*----------------------------------------------------------------------*/
+
+
+/*----------------------------NUMBER_THEORY-----------------------------*/
+
+⭐ if a number is divisible by n consecutive numbers, it is atleast n!
+	Eg: if n is divisible by 2, 3, 4, 5, 6 then n >= 5!
+		why -> n = x.(2.3.4.5.6) = x(2.3.4.5) = x.(5!)
+
+/*----------------------------------------------------------------------*/
+
+
+
+-2. Upper_bound of number of divisors of number n = O( n^(1/3) )   ----> just a heuristic (not mathematically related)
+	Read this : https://codeforces.com/blog/entry/14463#comments
+
+-1. 0 1 2 3 4 5 6 7 8 9
+    _ _ _ _ _ _ _ _ _ _
+	i         j
+
+    NOE left from i to end = find index after the last element -> idx - i
+    eg. -> NOE i<->end = (10) - 2 = 8
+
+
+
+0️⃣. string s += a[i + 1] + a[i] ;    --->   gives unwanted result
+	do : 	s += a[i + 1] ; 
+		s += a[i] ; 
+
+1. binary_search() returns bool
+
+2. int lower_bound(a, a+n, val)    --------->> has no error
+
+3. lower_bound( ) returns the iterator to the first index of the target (if the element is present)
+
+4. To get the index of letters i.e. a -> 1; b -> 2 .......
+	do:   int x = c - a + 1     -->> gives x = 3(as index of c is 3)
+
+5.  23:59  =  (2 * 600) + (3 * 60) + (5 * 10) + (9 * 1) .....in minutes  =  1439
+	1439  =  x   -->   (x /  600) % 3 = 2
+				 (x / 60) % 10  = 3
+				 (x / 10) % 6  = 5
+				 (x / 1) % 10  = 9
+
+	||y the idea can be extended for 23: 59: 59
+
+
+6. ((1/1) + (1/2) + (1/3) + ... + (1/n)) ~~ O(Log(n))
+	
+
+7. To make an array with consecutive hills and valleys:-
+	sort(vector)
+	put smaller elements at even indexes and remaining at odd indexes(for getting 	highest probability of getting to an answer)
+
+8. In primitive datatypes comparator function is needed like in :
+	vector<int>
+	vector<student>     (student class has primitive data members)
+	vector<pair<int, int>>
+	
+	In associative containers comparator class/structure is needed like in :
+	sets, maps, sorting, priority_queue, etc.
+
+	NB:- In priority_queue highest priority element is present at last in the 	container.  By default, the container is sorted in ascending order in STL.
+	This explains why the default priority_queue is a max_heap.
+	
+
+9. Priority Queue takes 3 parameters to be defined.
+	priority_queue <datatype,  vector<datatype>, ClassComparator> pq;
+
+	Eg :  priority_queue <int>  pq;                 ----->  default max heap
+
+		priority_queue < int, vector<int>, greater<int> > pq;   ----> minheap
+
+		priority_queue <student , vector<student> , ClassComparator> pq;
+
+	⚠️ In class ClassComparator  --> must make bool operator().... to public: ..
+
+(for point 7, 8) :-    https://youtu.be/-xyju56LLMI
+
+10. Priority Queue (though it is a binary heap) can have duplicate values of       	parameter on which priority is
+    	defined.
+
