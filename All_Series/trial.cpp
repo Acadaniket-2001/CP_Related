@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+// #ifndef ONLINE_JUDGE       // uncomment to use debugger
+// #include "algo/debug.h"
+// #else
+// #define dbg(...) ;
+// #define debug(...) ;
+// #define crndl ;
+// #endif
+
+#define endl "\n"
+#define int long long
+
+/*
+THINGS TO KEEP IN MIND BEFORE SUBMITTTING
+
+* beware of loops like for(i=0; i<v.size()-x; i++) 
+            ---> gives runtime error,if v.size() < x 
+
+* Always Check Which MOD it is Asking For
+* Unique function return iterator Then We can resize the container
+* Look for Possible Edge Cases
+* int overflows, array bounds, etc.
+* https://oeis.org/ Sequence Related Problem
+* a+b=a|b+a&b
+* a+b=a^b+2*(a&b)
+
+1.  Try and prove ur solution, do not rely on intuition.
+2.  Never over-optimise.
+3.  Don't stick to 1 problem for long.
+4.  Check other's solutions, especially those rated above you.
+5.  Be humble, don't be fixated on your ideas.
+* DO NOT GET STUCK ON ONE APPROACH
+* DO NOT GET STUCK ON ONE APPROACH
+* DO NOT GET STUCK ON ONE APPROACH
+
+// cout<<setprecision(10)<<fixed<<ans<<endl; for double
+*/
+
+signed main()
+{
+    cout << "GIthub Trial\n";
+    return 0;
+}
