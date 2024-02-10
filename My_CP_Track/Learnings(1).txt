@@ -15,6 +15,17 @@
 
 /*---------------------------- TRICKS ----------------------------- */
 
+⭐ Given any integer x
+    we can see that its LSB is a divisor of x
+	Like in decimal 259000 is divisible by 1000(10^3)
+	lly, in binary 1100100 is divisible by 100
+		       (100)                   (2^2)
+               
+   Like in decimal 13 % 10 = 3            i.e. we get last digit
+	lly, in binary (1101) % (10) = 1  i.e. we get last bit
+			13    %  2   = 1
+
+
 ⭐ If some operation is to be done in the array both from [0 -> n - 1] and [n - 1 -> 0]
 	1. write code for [0 -> n - 1]: store in  ans1[]
 	2. reverse the array
@@ -48,10 +59,5 @@ void solve()
 
 	Use case : calculation of both prefix and suffix sum of arr[ ]	
 	See this: https://codeforces.com/contest/1922/submission/242253830
-
-⭐
-
-
-
 
 
