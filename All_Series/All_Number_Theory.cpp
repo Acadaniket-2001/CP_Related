@@ -179,13 +179,14 @@ vll seg_sieve(ll a, ll b) {
 // pre_computation -> O(N.log(log(N) ) )
 // O(Q.log(N))
 // ⚠️ Must call SPF() in main() before using fastPrineFact()..
-vector<ll> spf(1e6 + 1);
+const int N = 1e6 + 10;
+vector<ll> spf(N);
 void SPF() {
-    f(i, 2, sz(spf) - 1)    spf[i] = i;
+    f(i, 2, N - 1)    spf[i] = i;
 
-    f(i, 2, sz(spf) - 1) {
+    f(i, 2, N - 1) {
         if(spf[i] == i) {
-            for(ll j = 2*i; j <= sz(spf) - 1; j += i)
+            for(ll j = 2*i; j < N; j += i)
                 if(spf[j] == j) spf[j] = i;
         }
     }
