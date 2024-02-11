@@ -424,7 +424,7 @@ int main() {
 }
 ---------------------------------------------------------------------------------*/
 
-// /* Problem : Stack using 2 Queues-------------------------------------------------
+/* Problem : Stack using 2 Queues-------------------------------------------------
 
 //    Idea :  One Queue will always be empty in the implementation.
 //            Always push the element in the non_empty Queue and 
@@ -444,4 +444,139 @@ int main() {
     return 0;
 }
 
-// */
+*/
+
+// Expression Evaluation -------------------------------------------------------------
+
+/* Infix evaluation ------------------------------------------------------------------
+
+int precedence(char ch) {
+    if(ch == '+')   return 1;
+    else if(ch == '-')   return 1;
+    else if(ch == '*')   return 2;
+    else   return 2;
+}
+
+int res(int v1, int v2, char operation) {
+    if(operation == '+')    return (v1 + v2);
+    else if (operation == '-')  return (v1 - v2);
+    else if (operation == '*')  return (v1 * v2);
+    else    return (v1 / v2);
+}
+
+int main() {
+    
+    string s; cin >> s;
+
+    stack<int> num;
+    stack<char> opr;
+
+    f(i, 0, sz(s) - 1) {
+        if(isdigit(s[i])) {    // s[i] -> operand
+            num.push(s[i] - '0');
+        }
+        
+        else if (s[i] == '(')   opr.push(s[i]);
+        
+        else if (s[i] == ')') {
+            while(opr.size() and  opr.top() != '(') {
+                char operation = opr.top();
+                opr.pop();
+                int v2 = num.top();
+                num.pop();
+                int v1 = num.top();
+                num.pop();
+                num.push(res(v1, v2, operation));
+            }
+            opr.pop();
+        }
+        
+        else {    // s[i] -> operator
+            while(opr.size() and opr.top() != '(' and precedence(opr.top()) >= precedence(s[i])) {
+                char operation = opr.top();
+                opr.pop();
+                int v2 = num.top();
+                num.pop();
+                int v1 = num.top();
+                num.pop();
+                num.push(res(v1, v2, operation));
+            }
+            opr.push(s[i]);
+        }   
+    }
+
+    while(opr.size()) {
+        char operation = opr.top();
+        opr.pop();
+        int v2 = num.top();
+        num.pop();
+        int v1 = num.top();
+        num.pop();
+        num.push(res(v1, v2, operation));
+    }
+    cout << num.top() << endl;
+    return 0;
+}
+-----------------------------------------------------------------------------------*/
+
+// /* Infix conversion ------------------------------------------------------------------
+
+int precedence(char ch) {
+    if(ch == '+')   return 1;
+    else if(ch == '-')  return 1;
+    else if(ch == '*')  return 2;
+    else return 2;
+}
+
+void perform_opr(stack<string> &pre, stack<string> &post, stack<char> &opr) {
+    char operation = opr.top(); opr.pop();
+                
+    string b = pre.top(); pre.pop();        // ⚠️ beware of order
+    string a = pre.top(); pre.pop();
+    string res = operation + a + b;
+    pre.push(res);
+
+    b = post.top(); post.pop();      // ⚠️ beware of order
+    a = post.top(); post.pop();
+    res = a + b + operation;
+    post.push(res);
+}
+
+int main() {
+
+    string s; cin >> s;
+    stack<string> pre, post;
+    stack<char> opr;
+
+    f(i, 0, sz(s) - 1) {
+        if(s[i] == '(') {
+            opr.push(s[i]);
+        }
+        else if(s[i] == ')') {
+            while(opr.size() and opr.top() != '(') {
+                perform_opr(pre, post, opr);
+            }
+            opr.pop();
+        }
+        else if(s[i] == '+' or s[i] == '-' or s[i] == '*' or s[i] == '/') {
+            while(opr.size() and opr.top() != '(' and precedence(opr.top()) >= precedence(s[i])) {
+                perform_opr(pre, post, opr);
+            }
+            opr.push(s[i]);
+        }
+        else {
+            pre.push(string(1, s[i]));
+            post.push(string(1, s[i]));
+        }
+    }
+    while(opr.size()) {
+        perform_opr(pre, post, opr);    
+    }
+    cout << "Prefix -> " << pre.top() << endl;
+    cout << "Postfix -> " << post.top() << endl;
+    return 0;
+}
+
+
+
+
