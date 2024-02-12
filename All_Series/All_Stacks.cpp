@@ -448,7 +448,9 @@ int main() {
 
 // Expression Evaluation ---------------------------------------------------------------
 
-/* Infix evaluation ------------------------------------------------------------------
+/* Infix Evaluation -------------------------------------------------------------------
+
+// ⭐ Feasible for humans but not for m/c => Use 2 stacks
 
 int precedence(char ch) {
     if(ch == '+')   return 1;
@@ -519,7 +521,9 @@ int main() {
 }
 -----------------------------------------------------------------------------------*/
 
-/* Infix conversion ------------------------------------------------------------------
+/* Infix Conversion -------------------------------------------------------------------
+
+// ⭐ Feasible for humans but not for m/c => Use 2 stacks
 
 int precedence(char ch) {
     if(ch == '+')   return 1;
@@ -579,5 +583,146 @@ int main() {
 
 -----------------------------------------------------------------------------------*/
 
-// /* 
+/* Prefix Evaluation-------------------------------------------------------------------
+
+// ⭐ Scan from R -> L
+
+void perform_opr(stack<int> &val, char ch) {
+    int a = val.top(); val.pop();
+    int b = val.top(); val.pop();
+
+    if(ch == '+')   val.push(a + b);
+    else if(ch == '-')   val.push(a - b);
+    else if(ch == '*')   val.push(a * b);
+    else   val.push(a / b);
+}
+
+int main() {
+
+    string s; cin >> s;
+
+    stack<int> val;
+    stack<string> in, post;
+
+    rf(i, sz(s) - 1, 0) {
+        if(isdigit(s[i]))   val.push(s[i] - '0');
+        else    perform_opr(val, s[i]);
+    }
+
+    cout << "Value -> " << val.top() << endl;
+    return 0;
+}
+
+---------------------------------------------------------------------------------------*/
+
+/* Prefix Conversion ------------------------------------------------------------------
+
+// ⭐ Scan from R -> L
+
+void perform_opr(stack<string> &in, stack<string> &post, char ch) {
+    string a = in.top(); in.pop();
+    string b = in.top(); in.pop();
+    string res = a + ch + b;
+    in.push(res);
+    
+    a = post.top(); post.pop();
+    b = post.top(); post.pop();
+    res = a + b + ch;
+    post.push(res);
+}
+
+int main() {
+
+    string s; cin >> s;
+
+    stack<string> in, post;
+
+    rf(i, sz(s) - 1, 0) {
+        if(isdigit(s[i])) {
+            in.push(string(1, s[i]));
+            post.push(string(1, s[i]));
+        }
+        else {
+            perform_opr(in, post, s[i]);
+        }
+    }
+
+    cout << "Infix -> " << in.top() << endl;
+    cout << "Postfix -> " << post.top() << endl;
+    return 0;
+}
+
+----------------------------------------------------------------------------------------*/
+
+/* Postfix Evaluation -----------------------------------------------------------------
+
+// ⭐ Scan from L -> R
+
+void perform_opr(stack<int> &val, char ch) {
+    int b = val.top(); val.pop();
+    int a = val.top(); val.pop();
+
+    if(ch == '+')   val.push(a + b);
+    else if(ch == '-')   val.push(a - b);
+    else if(ch == '*')   val.push(a * b);
+    else   val.push(a / b);
+}
+
+int main() {
+
+    string s; cin >> s;
+    stack<int> val;
+
+    f(i, 0, sz(s) - 1) {
+        if(isdigit(s[i])) {
+            val.push(s[i] - '0');
+        }
+        else {
+            perform_opr(val, s[i]);
+        }
+    }
+    
+    cout << val.top() << endl;
+    return 0;
+}
+
+-------------------------------------------------------------------------------------*/
+
+/* Postfix Conversion -----------------------------------------------------------------
+
+// ⭐ Scan from L -> R
+
+void perform_opr(stack<string> &in, stack<string> &pre, char ch) {
+    string b = in.top(); in.pop();
+    string a = in.top(); in.pop();
+    string res = a + ch + b;
+    in.push(res);
+
+    b = pre.top(); pre.pop();
+    a = pre.top(); pre.pop();
+    res = ch + a + b;
+    pre.push(res);
+}
+
+int main() {
+
+    string s; cin >> s;
+    stack<string> in, pre;
+
+    f(i, 0, sz(s) - 1) {
+        if(isdigit(s[i])) {
+            in.push(string(1, s[i]));
+            pre.push(string(1, s[i]));
+        }
+        else {
+            perform_opr(in, pre, s[i]);
+        }
+    }
+    
+    cout << "Infix -> " << in.top() << endl;
+    cout << "Prefix -> " << pre.top() << endl;
+    return 0;
+}
+
+-------------------------------------------------------------------------------------*/
 
