@@ -1,0 +1,23 @@
+{
+	"": {
+		"prefix": "ganit",
+		"body": [
+		  "",
+		  "long long POW(long long a,long long b){return (long long)(pow(a,b)+0.5);}",
+		  "long long gcd(long long a,long long b){return __gcd(a,b);}",
+		  "long long lcm(long long a,long long b){return (a*b)/__gcd(a,b);}",
+		  "long long Ceil(long long a,long long b){return (a+b-1)/b;}",
+		  "long long Sqrt(long long x){ long long y=sqrt(x)+5;while(y*y>x)y--;return y;}",
+		  "long long sq(long long x){return (1ll*x*x);}",
+		  "// to get custom MOD(m), modify MOD",
+		  "ll mod_add(ll a, ll b) { return ((a % MOD) + (b % MOD)) % MOD; }",
+		  "ll mod_sub(ll a, ll b) { return ((a % MOD) - (b % MOD) + MOD) % MOD; }",
+		  "ll mod_mul(ll a, ll b) { return ((a % MOD) * (b % MOD)) % MOD; }",
+		  "ll mod_expo(ll a, ll n) { ll res = 1; while(n) { if(n % 2)   res = mod_mul(res, a), n--; else a  = mod_mul(a, a), n /= 2; } return res; }",
+		  "ll mod_inv(ll a) { return mod_expo(a, MOD - 2); }   //MOD must be prime ; (a, MOD) -> coprime",
+		  "ll mod_div(ll a, ll b) { return mod_mul(a, mod_inv(b)); }",
+		  ""
+		],
+		"description": ""
+	  }
+}
