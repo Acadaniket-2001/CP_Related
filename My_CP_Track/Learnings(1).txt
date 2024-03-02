@@ -10,6 +10,12 @@
 	https://codeforces.com/problemset/problem/1553/B
 	-> compare your 2 submissions.  
 
+⭐ Given vll v(n):
+	accumulate(all(v), 0);    -> Error😡😡😡
+	accumulate(all(v), 0LL);  -> 😊😊😊
+
+
+
 
 /*----------------------------------------------------------------- */
 
