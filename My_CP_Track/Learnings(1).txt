@@ -15,6 +15,11 @@
 	accumulate(all(v), 0LL);  -> 😊😊😊
 
 
+⭐        i :  0 1 2 3 4   5 6 7 8 9 10...
+      i % 5 :  0 1 2 3 4   0 1 2 3 4 0...
+
+      n-i-1 :  ...10   9 8 7 6 5   4 3 2 1 0
+(n-i-1) % 5 :  ...0    4 3 2 1 0   4 3 2 1 0
 
 
 /*----------------------------------------------------------------- */
@@ -65,5 +70,7 @@ void solve()
 
 	Use case : calculation of both prefix and suffix sum of arr[ ]	
 	See this: https://codeforces.com/contest/1922/submission/242253830
+
+
 
 
