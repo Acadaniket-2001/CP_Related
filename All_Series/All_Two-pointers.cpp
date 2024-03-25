@@ -309,11 +309,32 @@ int main()
 
 ------------------------------------------------------------------------*/
 
-/*------------------------------------------------------------------------
+// /*------------------------------------------------------------------------
 
 // Given an array of a[] of length 'n'.
 // Print the maximum sum subarray.
 // Kadane's algorithm
+
+void solve2()
+{
+    ll n; cin >> n;
+    vll v(n); cin >> v;
+
+    // variation 2 : subarray can be empty
+    ll mx = 0, curr = 0, hi = -1, lo = 0, ansl, ansr;
+    f(i, 0, n - 1) {
+        curr += v[i];
+        curr = max(0LL, curr);
+        if(curr == 0)   lo = i + 1 ,hi = lo - 1;
+        else hi = i;
+
+        mx = max(mx, curr);
+        if(mx == curr)  ansl = lo, ansr = hi;
+    }
+
+    cout << mx << " " << ansl << " " << ansr << endl;
+    f(i, ansl, ansr)    cout << v[i] << " \n"[i == ansr];
+}
 
 void solve1() {                         // train method -> pepcod..      
 
@@ -322,7 +343,7 @@ void solve1() {                         // train method -> pepcod..
     for(auto &x : v)    cin >> x;
     
 
-    ll sum = 0, mx = 0;
+    ll sum = 0, mx = 0;                 // sum = INT_MIN; if subarray can't be empty
     ll l = 0, r = 0, ansl = 0, ansr = 0;
     for(int i = 0; i < n; i++) {
         
@@ -363,12 +384,13 @@ int main()
     cin >> t;
     while(t--) {
         // solve();
-        solve1();
+        // solve1();
+        solve2();
     }
     return 0;
 }
 
-------------------------------------------------------------------------*/
+// ------------------------------------------------------------------------*/
 
 /*------------------------------------------------------------------------
 
