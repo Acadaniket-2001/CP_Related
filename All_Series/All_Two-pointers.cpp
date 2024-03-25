@@ -315,13 +315,14 @@ int main()
 // Print the maximum sum subarray.
 // Kadane's algorithm
 
-void solve2()
+void solve2()        // USACO
 {
     ll n; cin >> n;
     vll v(n); cin >> v;
 
     // variation 2 : subarray can be empty
-    ll mx = 0, curr = 0, hi = -1, lo = 0, ansl, ansr;
+    ll mx = 0, curr = 0, hi = -1, lo = 0, ansl, ansr;        // curr is used to maintain the mx subarraysum of a subarray ending at index i
+                                                             // mx is used to maintain the mx subarray sum of a subarray ending at or before i
     f(i, 0, n - 1) {
         curr += v[i];
         curr = max(0LL, curr);
@@ -332,8 +333,8 @@ void solve2()
         if(mx == curr)  ansl = lo, ansr = hi;
     }
 
-    cout << mx << " " << ansl << " " << ansr << endl;
-    f(i, ansl, ansr)    cout << v[i] << " \n"[i == ansr];
+    cout << mx << endl;
+    cout << ansl << " " << ansr << endl;
 }
 
 void solve1() {                         // train method -> pepcod..      
