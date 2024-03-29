@@ -63,6 +63,10 @@ ll mod_div(ll a, ll b) { return mod_mul(a, mod_inv(b)); }
 
 //-------------------------------------------------------------------------------------------------
 
+// Problems: https://codeforces.com/contest/279/problem/B   
+//           USACO: Silver/two pointers  -> See Submissions on CF to see different styles
+
+
 /*------------------------------Merge_Sort------------------------------*/
 
 // /*------------------------------------------------------------------------
