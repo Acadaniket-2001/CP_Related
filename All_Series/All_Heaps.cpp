@@ -215,9 +215,10 @@ int main() {
 
 -------------------------------------------------------------------------------------*/
 
-// /*----------------------------Applicative Problems------------------------------------
+/*--------------------------⭐Applicative Problems⭐--------------------------------*/
 
-// Joining Ropes -> See CB video for question
+/*--------------------------Joining Ropes--------------------------------------------
+//  -> See CB video for question
 
 int main() {
 
@@ -242,3 +243,90 @@ int main() {
     return 0;
 }
 
+------------------------------------------------------------------------------------*/
+
+/*--------------------------Median in a running stream------------------------------
+
+int main() {
+
+    priority_queue<int> left;
+    priority_queue<int, vector<int>, greater<int>> right;
+
+    while(1) {
+        int x; cin >> x;
+        
+        if(x == -1) break;
+
+        if(sz(left) + sz(right) == 0) {
+            left.push(x);
+            cout << x << " ";
+            continue;
+        }
+
+        if(sz(left) < sz(right)) {
+            if(x <= left.top()) {
+                left.push(x);
+                cout << (left.top() + right.top()) / 2.0 << " ";
+            }
+            else {
+                left.push(right.top());
+                right.pop();
+                right.push(x);
+                cout << (left.top() + right.top()) / 2.0 << " ";
+            }
+        }
+        else if(sz(left) == sz(right)) {
+            if(x <= left.top()) {
+                left.push(x);
+                cout << left.top() << " ";
+            }
+            else {
+                right.push(x);
+                cout << right.top() << " ";
+            }
+        }
+        else {
+            if(x <= left.top()) {
+                right.push(left.top());
+                left.pop();
+                left.push(x);
+                cout << (left.top() + right.top()) / 2.0 << " ";
+            }
+            else {
+                right.push(x);
+                cout << (left.top() + right.top()) / 2.0 << " ";
+            }
+        }
+    }
+}
+
+------------------------------------------------------------------------------*/
+
+class comp {
+    public:
+        bool operator()(const pair<int, int> &p1, const pair<int, int> &p2) {
+            return (p1.ff >= p2.ff);
+        }
+};
+
+int  main() {
+    
+    int n, k; cin >> n >> k;
+    vector<vector<int>> v(k, vector<int>(n, 0));
+    f(i, 0, k - 1)  cin >> v[i];
+    
+    priority_queue<pair<int, int>, vector<pair<int, int>>, comp> pq;    // {val, IDX}
+
+    vector<int> idx(k, 0);
+    f(i, 0, k - 1) {
+        pq.push({v[i][0], i});
+    }
+
+    while(!pq.empty()) {
+        auto t = pq.top(); pq.pop();
+        cout << t.ff << " ";
+        if(idx[t.ss] + 1 < v[t.ss].size())  idx[t.ss]++, pq.push({v[t.ss][idx[t.ss]], t.ss}); 
+    }
+    
+    return 0;
+}
