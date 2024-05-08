@@ -52,6 +52,18 @@ long long Sqrt(long long x){ long long y=sqrt(x)+5;while(y*y>x)y--;return y;}
 long long sq(long long x){return (1ll*x*x);}
 /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
+/*
+Uses:
+    1. we want only kth smallest or biggest element after every update
+        -> sorting after every insertion is complex
+        -> maintain priority_queue
+
+    2. kth order statistice we use PQ.
+
+    3.
+
+*/
+
 /*----------------------------Heap Insertion and Deletion----------------------------
 
 // ⭐ Implemented min-heap is 1-based indexed
@@ -215,6 +227,7 @@ int main() {
 
 -------------------------------------------------------------------------------------*/
 
+
 /*--------------------------⭐Applicative Problems⭐--------------------------------*/
 
 /*--------------------------Joining Ropes--------------------------------------------
@@ -302,6 +315,11 @@ int main() {
 
 ------------------------------------------------------------------------------*/
 
+/*--------------------------Merge K sorted Arrays -----------------------------------
+
+// simple merging all sorting -> O(NK.log(NK))
+// using pq -> O(NK.log(k))
+
 class comp {
     public:
         bool operator()(const pair<int, int> &p1, const pair<int, int> &p2) {
@@ -327,6 +345,38 @@ int  main() {
         cout << t.ff << " ";
         if(idx[t.ss] + 1 < v[t.ss].size())  idx[t.ss]++, pq.push({v[t.ss][idx[t.ss]], t.ss}); 
     }
-    
+
     return 0;
 }
+
+--------------------------------------------------------------------------------------*/
+
+/*----------Find Kth samllest elemment in row and column wise sorted matrix----------
+
+int main() {
+    
+    int n, m, k; cin >> n >> m >> k;
+    vvl v(n, vll(m, 0));
+    f(i, 0, n - 1)  cin >> v[i];
+
+    priority_queue<ll, vector<ll>, greater<ll>> pq;
+
+    f(j, 0, n - 1) {
+        int row = 0, col = j;
+        while(col >= 0 and row < n) {
+            pq.push(v[row][col]);
+            row++, col--;
+        }
+        if(pq.size() >= k) break;
+    }
+
+    if(pq.size() >= k) {
+        f(i, 0, k - 2)  pq.pop();
+        cout << pq.top();
+    }
+
+    return 0;
+}
+
+-----------------------------------------------------------------------------------*/
+
