@@ -395,7 +395,6 @@ int main() {
     int q, k; cin >> q >> k;
 
     priority_queue<int> l;
-    priority_queue<int, vector<int>, greater<int>> r;
 
     auto dist = [](int x, int y) {
         return (x*x) + (y*y);
@@ -408,18 +407,13 @@ int main() {
             int x, y; cin >> x >> y;
             int d = dist(x, y);
 
-            if(sz(l) < k)
+            if(sz(l) < k) {
                 l.push(d);
-            
-            else if(sz(l) == k) {
+            }
+            else if (sz(l) == k) {
                 if(d < l.top()) {
-                    r.push(l.top());
                     l.pop();
                     l.push(d);
-                    // cout << l.top() << endl;
-                }
-                else {
-                    r.push(d);
                     // cout << l.top() << endl;
                 }
             }
@@ -434,7 +428,4 @@ int main() {
 }
 
 ------------------------------------------------------------------------------*/
-
-
-
 
