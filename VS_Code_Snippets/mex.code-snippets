@@ -1,0 +1,17 @@
+{
+	"": {
+		"prefix": "mex_code",
+		"body": [
+		  "ll mex (const vll &v) {",
+		  "    set<int> st(all(v));",
+		  "    int i = 0;",
+		  "    while(sz(st) and *st.begin() == i) {",
+		  "        st.erase(st.begin());",
+		  "        i++;",
+		  "    }",
+		  "    return i;",
+		  "}; "
+		],
+		"description": ""
+	  }
+}

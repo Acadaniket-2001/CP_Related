@@ -380,3 +380,19 @@ int main() {
 
 -----------------------------------------------------------------------------------*/
 
+int main() {
+
+    fastio();
+    #ifndef ONLINE_JUDGE
+        freopen("C:/1_My_Data/CP_codes/io/Error.txt", "w", stderr);
+        // freopen("io/Input.txt", "r", stdin);
+        // freopen("io/Output.txt", "w", stdout);
+    #endif
+
+
+    int n, k; cin >> n >> k;
+    vll v(n); cin >> v;
+    debug(data, n, k, v)
+
+    return 0;
+}

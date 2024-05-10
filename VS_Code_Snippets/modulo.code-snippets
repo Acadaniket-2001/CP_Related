@@ -1,0 +1,35 @@
+{
+	"": {
+		"prefix": "modulo",
+		"body": [
+		  "// to get custom modulo m, pass new modulo as argument",
+		  "ll madd(ll a, ll b, ll M = P) {",
+		  "    return (a%M + b%M) % M;",
+		  "}",
+		  "ll msub(ll a, ll b, ll M = P) {",
+		  "    return (((a%M - b%M) % M) + M) % M;",
+		  "}",
+		  "ll mmul(ll a, ll b, ll M = P) {",
+		  "    return ((a % M) * (b % M)) % M;",
+		  "}",
+		  "ll mpow(ll base, ll exp, ll M = P) {",
+		  "    ll res = 1;",
+		  "    while (exp) {",
+		  "    if (exp % 2 == 1){",
+		  "        res = (res * base) % M;",
+		  "    }",
+		  "    exp >>= 1;",
+		  "    base = (base * base) % M;",
+		  "    }",
+		  "    return res;",
+		  "}",
+		  "ll minv(ll base, ll M = P) { // M must be prime ; (base, M) -> coprime",
+		  "    return mpow(base, M - 2);",
+		  "}",
+		  "ll mdiv(ll a, ll b) {",
+		  "    return mmul(a, minv(b));",
+		  "}"
+		],
+		"description": ""
+	  }
+}

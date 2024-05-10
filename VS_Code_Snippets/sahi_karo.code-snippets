@@ -2,15 +2,13 @@
 	"": {
 		"prefix": "sahi_karo",
 		"body": [
-		  "",
 		  "#ifndef ONLINE_JUDGE      ",
-		  "#include \"algo/debug.h\"",
+		  "#include <algo/debug.h>",
 		  "#else",
 		  "#define dbg(...) ;",
 		  "#define debug(...) ;",
 		  "#define crndl ;",
-		  "#endif",
-		  ""
+		  "#endif"
 		],
 		"description": ""
 	  }
