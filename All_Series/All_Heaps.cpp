@@ -380,6 +380,8 @@ int main() {
 
 -----------------------------------------------------------------------------------*/
 
+/*--------------------------Hostel Visit (CB)----------------------------------------
+
 int main() {
 
     fastio();
@@ -390,9 +392,49 @@ int main() {
     #endif
 
 
-    int n, k; cin >> n >> k;
-    vll v(n); cin >> v;
-    debug(data, n, k, v)
+    int q, k; cin >> q >> k;
+
+    priority_queue<int> l;
+    priority_queue<int, vector<int>, greater<int>> r;
+
+    auto dist = [](int x, int y) {
+        return (x*x) + (y*y);
+    };
+
+    while(q--) {
+        int t; cin >> t;
+        if(t == 1) {
+
+            int x, y; cin >> x >> y;
+            int d = dist(x, y);
+
+            if(sz(l) < k)
+                l.push(d);
+            
+            else if(sz(l) == k) {
+                if(d < l.top()) {
+                    r.push(l.top());
+                    l.pop();
+                    l.push(d);
+                    // cout << l.top() << endl;
+                }
+                else {
+                    r.push(d);
+                    // cout << l.top() << endl;
+                }
+            }
+        }
+
+        else {
+            cout << l.top() << endl;
+        }
+    }
 
     return 0;
 }
+
+------------------------------------------------------------------------------*/
+
+
+
+
