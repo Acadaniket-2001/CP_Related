@@ -103,6 +103,7 @@ int height(node * root) {
     return max(hl, hr) + 1;
 }
 
+// recursive method
 void level_order(node * root) {
     if(root == NULL)
         return;
@@ -112,12 +113,15 @@ void level_order(node * root) {
 
 
 }
+// BFS method
+
 
 int main() {
     
     node * root = build();
     print(root);
     cerr << "height: " << height(root);
+    level_order(node *root);
     
     return 0;
 }
