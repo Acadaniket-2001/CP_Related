@@ -60,6 +60,40 @@ long long sq(long long x){return (1ll*x*x);}
 7. ⭐ Think math
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
+// TIPs:
+//      1. whenever trying to access a node, must check that it is not null     
+//          E.g.: 
+//                 if(node) cout << root -> data;
+// 
+//      2. When some parameter is to be calc. using parameter of Lsubtree and Rsubtree use bottom-up approach 
+//         Post_order traversal.
+//
+//      3. 
+//
+//---------------------------------------------------------------------------------
+//         3       lvl = 1
+//        / \
+//       /   \
+//      4     5    lvl = 2
+//       \   /
+//        6 1      lvl = 3 = height of tree
+//
+//  3 4 -1 6 -1 -1 5 1 -1 -1 -1
+//
+//---------------------------------------------------------------------------------
+//            
+//         8
+//        / \
+//       /   \
+//      10    3
+//     / \     \
+//    /   \     \
+//   1     6     14
+//        / \    /
+//       9   7  13
+//
+// 8 10 1 -1 -1 6 9 -1 -1 7 -1 -1 3 -1 14 13 -1 -1 -1
+       
 class node {
 public:
     int data;
@@ -72,7 +106,6 @@ public:
         right = NULL;
     }
 };
-
 node* build() {
     int d; cin >> d;
 
@@ -85,7 +118,8 @@ node* build() {
         N -> right = build();
     }
 }
-//Preorder
+
+// Preorder    // print inorder and postorder
 void print(node * root) {
     if(root == NULL)    return;
 
@@ -93,7 +127,6 @@ void print(node * root) {
     print(root -> left);
     print(root -> right);
 }
-// print inorder and postorder
 
 int height(node * root) {
     if(root == NULL)    return 0;
@@ -103,25 +136,202 @@ int height(node * root) {
     return max(hl, hr) + 1;
 }
 
-// recursive method
-void level_order(node * root) {
+// recursive method -> O(N^2)
+void level_order(node * root, int h) {
     if(root == NULL)
         return;
-    
-    node * r = root -> right;
 
+    if(h == 1 and root != NULL)  {
+        cout << root -> data << " ";
+        re;
+    }
 
-
+    level_order(root -> left, h - 1);
+    level_order(root -> right, h - 1);
 }
-// BFS method
+// BFS method -> O(N)
+// o/p: in one line
+void level_order_BFS(node * root) {
 
+    queue<node *> q;
+    q.push(root);
+
+    while(sz(q)) {
+        auto x = q.front(); q.pop();
+        
+        if(!x)  continue;
+        cout << x -> data << " ";
+        q.push(x->left);
+        q.push(x->right);
+    }
+}
+// o/p: level wise -> one line has only one line
+void BFS(node * root) {
+    queue<node *> q;
+    q.push(root), q.push(NULL);          // NULL: is pushed as a marker of end of a lvl, and not the NULL node, see line: 157
+
+    while(!(q.size() == 1 and q.front() == NULL)) {
+        auto x = q.front(); q.pop();
+        if(x) {
+            cout << x -> data << " ";
+            if(x -> left)   q.push(x->left);
+            if(x -> right)  q.push(x->right);
+        }
+        else {   // x = NULL  => all elem. of prev hv been entered in q. so, push a newline marker.
+            cout << endl;
+            q.push(NULL);
+        }
+    }
+}
+
+int count_nodes(node * root) {
+    if(root == NULL)    return 0;
+    return count_nodes(root -> left) + count_nodes(root -> right) + 1;
+}
+
+int sum_nodes(node * root) {
+    if(root == NULL)    return 0;
+    return sum_nodes(root -> left) + sum_nodes(root -> right) + root -> data;
+}
+
+// O(N^2)
+int diameter(node * root) {
+
+    if(root == NULL)    return 0;
+
+    int mx = INT_MIN;
+    // case 1
+    if(root -> left)    mx = max(mx, diameter(root -> left));
+    // case 2
+    if(root -> right)    mx = max(mx, diameter(root -> right)); 
+    // case 3
+    mx = max(mx, height(root -> left) + height(root -> right));
+    return mx;
+} 
+// O(N) --> since, left -> right -> root ===> post-order trav. / ⭐Bottom-up traversal
+pair<int, int> diameterOpt(node * root) {    // {ht , dia}
+    
+    if(root == NULL)    return {0, 0};
+
+    pair<int, int> LsubTree = {0, 0}, RsubTree = {0, 0};
+    LsubTree = diameterOpt(root -> left);                                            // Left
+    RsubTree = diameterOpt(root -> right);                                           // right
+
+    int ht_Tree = max(LsubTree.ff, RsubTree.ff) + 1;                                 // root
+    int dia_Tree = max(LsubTree.ff + RsubTree.ff, max(LsubTree.ss, RsubTree.ss));    // root
+    return {ht_Tree, dia_Tree};
+}
+
+// Replace each node with the sum of all of its descendents
+int sum_replace(node * root) {
+    if(root == NULL)    return 0;
+
+    if(root -> left == NULL and root -> right == NULL)  return root -> data;
+
+    int Lsum = 0, Rsum = 0; 
+    if(root -> left)    Lsum = sum_replace(root -> left);
+    if(root -> right)    Rsum = sum_replace(root -> right);
+
+    int temp = root -> data;
+    root -> data = Lsum + Rsum;
+    return root -> data + temp;
+}
+
+//---------------------------------AVL Tree---------------------------------------
+
+// Do Bottom_up to avoid calc. height of each subtree....
+pair<bool, int> check_AVL(node * root) {    // {bool, height}
+    if(!root)   return {1, 0};
+
+    pair<bool, int> L = {1, 0}, R = {1, 0};
+
+    if(root -> left)    L = check_AVL(root -> left);
+    if(root -> right)    R = check_AVL(root -> right);
+
+    bool bal = (abs(L.ss - R.ss) <= 1 and L.ff and R.ff);   // Imp
+    return {bal, max(L.ss, R.ss) + 1};
+} 
+
+// Idea: select v[mid] as root elem.
+//       and call build() on [0, mid - 1] and [mid + 1, n] recursively...
+node * build_AVL(const vector<ll> &v, int s, int e) {
+    
+    if(s > e)   return NULL;
+
+    // if(s == e) {               // poses error in even sized vectore
+    //     node * t = new node(v[e]);
+    //     return t;
+    // }
+
+    int mid = (s + e) / 2;
+    node * t = new node(v[mid]);
+    t -> left = build_AVL(v, s, mid - 1);
+    t -> right = build_AVL(v, mid + 1, e);
+
+    return t;
+}
+
+node * build_pre_and_in(const vll & pre, const vll &in, int sp, int ep, int si, int ei) {
+
+    if(sp > ep) return NULL;
+
+    node * t = new node(pre[sp]);
+
+    int root;
+    f(i, si, ei) {
+        if(in[i] == pre[sp]) {
+            root = i;
+            break;
+        }
+    }
+
+    t -> left = build_pre_and_in(pre, in, sp + 1, sp + (root-si) - 1, si, root - 1);
+    t -> right = build_pre_and_in(pre, in, sp + (root-si), ep, root + 1, ei);
+
+    return t;
+}
 
 int main() {
     
-    node * root = build();
-    print(root);
-    cerr << "height: " << height(root);
-    level_order(node *root);
-    
+    // node * root = build();
+
+    // int h = height(root);
+    // cerr << "Height: " << h << endl;
+
+
+    // printing all levels
+    // f(i, 1, h)    level_order(root, i), ln;
+    // level_order_BFS(root);
+    // BFS(root);
+
+
+    // cerr << "# Nodes " << count_nodes(root) << endl;
+    // cerr << "# Sum_Nodes " << sum_nodes(root) << endl;
+
+
+    // cerr << "Diameter: " << diameter(root) << endl;
+    // cerr << "Diameter: " << diameterOpt(root).ss << endl;
+
+
+    // sum_replace(root);
+    // BFS(root);
+
+    //---------------------------------------------------------------
+
+    // cerr << (check_AVL(root).ff ? "AVL" : "Not AVL") << endl;
+
+
+    // int n; cin >> n;
+    // vll v(n); cin >> v;
+    // node * root = build_AVL(v, 0, n - 1);
+    // BFS(root);
+
+
+    int n; cin >> n;
+    vll pre(n), in(n); cin >> pre >> in;
+
+    node * root = build_pre_and_in(pre, in, 0, n - 1, 0, n - 1);
+    BFS(root);
+
     return 0;
 }
