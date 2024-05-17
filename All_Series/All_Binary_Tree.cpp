@@ -92,7 +92,7 @@ long long sq(long long x){return (1ll*x*x);}
 //        / \    /
 //       9   7  13
 //
-// 8 10 1 -1 -1 6 9 -1 -1 7 -1 -1 3 -1 14 13 -1 -1 -1
+//  8 10 1 -1 -1 6 9 -1 -1 7 -1 -1 3 -1 14 13 -1 -1 -1
        
 class node {
 public:
@@ -285,15 +285,57 @@ node * build_pre_and_in(const vll & pre, const vll &in, int sp, int ep, int si, 
         }
     }
 
-    t -> left = build_pre_and_in(pre, in, sp + 1, sp + (root-si) - 1, si, root - 1);
-    t -> right = build_pre_and_in(pre, in, sp + (root-si), ep, root + 1, ei);
-
+    t -> left = build_pre_and_in(pre, in, sp+1, (sp+1) + (root-si) - 1, si, root - 1);
+    t -> right = build_pre_and_in(pre, in, (sp+1) + (root-si), ep, root + 1, ei);
     return t;
+}
+
+//----------------------------------End of AVL-------------------------------------
+
+// Use ideas of BFS
+void print_right_view(node * root) {
+
+    if(!root)   return;
+
+    queue<node *> q;
+    q.push(root);
+    q.push(NULL);  // marker
+
+    while(!(sz(q) == 1 and q.front() == NULL)) {
+        auto x = q.front(); q.pop();
+
+        if(x == NULL) {
+            q.push(NULL);
+            continue;
+        }
+
+        if(x -> left)    q.push(x -> left);
+        if(x -> right)    q.push(x -> right);
+
+        if(sz(q) and q.front() == NULL) cout << x -> data << " ";
+    } 
+}
+
+void print_right_view2(node * root) {
+
+    if(!root)   return;
+
+    queue<pair<node *, int>> q;   // {node, lvl}
+    q.push({root, 0});
+
+    while(!q.empty()) {
+        auto x = q.front(); q.pop();
+        
+        if(x.ff -> left)    q.push({x.ff -> left, x.ss + 1});   
+        if(x.ff -> right)    q.push({x.ff -> right, x.ss + 1});
+
+        if((sz(q) and q.front().ss != x.ss) or (sz(q) == 0))  cout << x.ff -> data << " ";   // ⭐Imp
+    }
 }
 
 int main() {
     
-    // node * root = build();
+    node * root = build();
 
     // int h = height(root);
     // cerr << "Height: " << h << endl;
@@ -327,11 +369,17 @@ int main() {
     // BFS(root);
 
 
-    int n; cin >> n;
-    vll pre(n), in(n); cin >> pre >> in;
+    // int n; cin >> n;
+    // vll pre(n), in(n); cin >> pre >> in;
+    // node * root = build_pre_and_in(pre, in, 0, n - 1, 0, n - 1);
+    // BFS(root);
 
-    node * root = build_pre_and_in(pre, in, 0, n - 1, 0, n - 1);
-    BFS(root);
+
+    // print_right_view(root);     // M1
+    // print_right_view2(root);     // M2
+
 
     return 0;
 }
+
+

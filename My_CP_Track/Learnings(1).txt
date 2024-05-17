@@ -1,12 +1,37 @@
 /*---------------------------- LANDMINES ---------------------------- */
 
+⭐Always use dummy getline() b/w cin and getline() to take te i/p(s) correctly
+
+I/p:
+2
+Vivek Gupta
+Shubham Patil
+
+O/p:
+Hi Shubham Patil !
+Hi Vivek Gupta !
+
+void solve()
+{
+    int n; 
+    cin >> n;                                  // cin usage
+    vector<string> v(n);
+
+    string tmp; getline(cin, tmp);             // dummy getline() usage to remove '\n' from i/p buffer due to prev. usage of cin
+
+    f(i, 0, n - 1)  getline(cin, v[i]);        // getline() usage
+    rf(i, n - 1, 0) cout << "Hi " << v[i] << " !\n";
+}
+
+
+⭐
 1/3 = 0.3333333
 1/3×3 = 1
 But 0.3333333×3= 0.9999999
 
 To get most accurate result.. end mein division krna chahiye.
 
-⭐ https://codeforces.com/contest/1971/problem/E
+➡️https://codeforces.com/contest/1971/problem/E
 
 
 /*---------------------------- GENERAL ---------------------------- */
