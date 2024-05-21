@@ -1,5 +1,15 @@
 /*---------------------------- LANDMINES ---------------------------- */
 
+⭐ To check whether a key is present in map.
+    Always use:
+        if(mp.find(x) == mp.end())  
+            ...
+    
+    Beware while using:    // as this method inserts the key mp[x] = 0 in map and can cause TLE if while(mp.size()) {} is used
+        if(mp[x])
+            ...
+
+
 ⭐Always use dummy getline() b/w cin and getline() to take te i/p(s) correctly
 
 I/p:

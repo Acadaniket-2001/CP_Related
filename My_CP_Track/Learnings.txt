@@ -66,6 +66,25 @@ LEARNINGS :-
 
 /*-----------------------------STL TRICKS------------------------------*/
 
+⭐always check when not sure if 'it' can be derefenced
+
+Problem:
+	We get three type of queries
+	1. New number x is added 
+	2. Find the number <= x             -> use auto it = upper_bound(x); it--;   and not lower_bound(x) -> as it makes code complex
+	3. Find the number >= x             -> use auto it = lower _bound(s);
+	
+	Extra:
+	   Find the number < x              -> use auto it = lower_bound(x); it--;
+	   Find the number > x              -> use auto it = upper_bound(s);
+	
+
+	Which data structure to use?
+
+    // set => Yes
+    // multiset ?     -> not needed as we don't need to support delete operations or maintain count of elem.
+    // vector ?       -> takes t.c. of O(N) for each operation
+
 MULTISET (Uses):-
 ⭐ In order to maintain sorted order of elements with updates use 
 	set / multiset
