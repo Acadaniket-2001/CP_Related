@@ -63,7 +63,7 @@ long long sq(long long x){return (1ll*x*x);}
 // TIPs:
 //      1. whenever trying to access a node, must check that it is not null     
 //          E.g.: 
-//                 if(node) cout << root -> data;
+//                 if(root) cout << root -> data;
 // 
 //      2. When some parameter is to be calc. using parameter of Lsubtree and Rsubtree use bottom-up approach 
 //         Post_order traversal.
@@ -150,7 +150,7 @@ void level_order(node * root, int h) {
     level_order(root -> right, h - 1);
 }
 // BFS method -> O(N)
-// o/p: in one line
+// o/p: Nodes of all levels in one line
 void level_order_BFS(node * root) {
 
     queue<node *> q;
@@ -165,7 +165,7 @@ void level_order_BFS(node * root) {
         q.push(x->right);
     }
 }
-// o/p: level wise -> one line has only one line
+// o/p: level wise -> one line has only one level of nodes
 void BFS(node * root) {
     queue<node *> q;
     q.push(root), q.push(NULL);          // NULL: is pushed as a marker of end of a lvl, and not the NULL node, see line: 157
@@ -333,6 +333,51 @@ void print_right_view2(node * root) {
     }
 }
 
+void print_at_lvl(node * root, int k) {
+    if(root == NULL)
+        re;
+
+    if(k == 0) {
+        cout << root -> data << " ";
+        re;
+    }
+
+    if(root -> left)    print_at_lvl(root -> left, k - 1);
+    if(root -> right)    print_at_lvl(root -> right, k - 1);
+}
+int print_at_dist_K(node * root, node * target, int k) {
+    if(!root)   return -1;
+
+    if(root == target) {
+        print_at_lvl(root, k);
+        return 1;
+    }
+
+    if(root -> left) {
+        int target_dist = print_at_dist_K(root -> left, target, k);
+        if(target_dist == -1)
+            return -1;
+        else {
+            if(target_dist == k)    cout << root -> data << " ";
+            else if(k - target_dist - 1 >= 0)     print_at_lvl(root -> right, k - target_dist - 1);
+        } 
+        return target_dist + 1;
+    }
+
+    if(root -> right) {
+        int target_dist = print_at_dist_K(root -> right, target, k);
+        if(target_dist == -1)
+            return -1;
+        else {
+            if(target_dist == k)    cout << root -> data << " ";
+            else if(k - target_dist - 1 >= 0)    print_at_lvl(root -> left, k - target_dist - 1);
+        } 
+        return target_dist + 1;
+    }
+    
+    return -1;
+}
+
 int main() {
     
     node * root = build();
@@ -377,6 +422,11 @@ int main() {
 
     // print_right_view(root);     // M1
     // print_right_view2(root);     // M2
+
+
+    // node * target = root -> left -> left;
+    // int dist = 2;
+    // print_at_dist_K(root, target, 1);
 
 
     return 0;
