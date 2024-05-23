@@ -345,6 +345,7 @@ void print_at_lvl(node * root, int k) {
     if(root -> left)    print_at_lvl(root -> left, k - 1);
     if(root -> right)    print_at_lvl(root -> right, k - 1);
 }
+// we can traverse upwards by using return values of recursion
 int print_at_dist_K(node * root, node * target, int k) {
     if(!root)   return -1;
 
@@ -404,7 +405,6 @@ int main() {
     // BFS(root);
 
     //---------------------------------------------------------------
-
     // cerr << (check_AVL(root).ff ? "AVL" : "Not AVL") << endl;
 
 
@@ -418,6 +418,7 @@ int main() {
     // vll pre(n), in(n); cin >> pre >> in;
     // node * root = build_pre_and_in(pre, in, 0, n - 1, 0, n - 1);
     // BFS(root);
+    //---------------------------------------------------------------
 
 
     // print_right_view(root);     // M1
