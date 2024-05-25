@@ -59,7 +59,7 @@ Steps to solve a graph problem:
 
 ⭐ Maze is a Graph such that adjacent(reachable) elements of maze have an edge b/w them.
 
-⭐ In multi_source type probelms, mostly problem is solved by creating a pseudo src node
+⭐ In multi_source type probelms, mostly problem is solved by creating a pseudo src node.
 
 -------------------------------------------------------------------------------------*/
 
