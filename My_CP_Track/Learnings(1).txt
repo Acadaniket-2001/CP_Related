@@ -1,5 +1,12 @@
 /*---------------------------- LANDMINES ---------------------------- */
 
+⭐ endl; forces to flush the output buffer (even if its not filled) and printsits content.
+    using '\n' -> prevent flushing before the buffer is not filled, and saves time.... can prevent TLE 
+    in programs which has to print a lot.
+
+    ➡️ See ICPSC Week 3: Day 15, 3rd lecture, time 23:00
+
+
 ⭐ To check whether a key is present in map.
     Always use:
         if(mp.find(x) == mp.end())  
@@ -46,6 +53,14 @@ To get most accurate result.. end mein division krna chahiye.
 
 /*---------------------------- GENERAL ---------------------------- */
 
+⭐ next_permutation(all(v)) -> gives the next permutation of vector, if it exists and returns 1-> true
+                               else return 0;
+
+    Eg: 
+        int arr[] = {3, 2, 1};
+        cout << next_permutation(arr, arr + 3);      // o/p: 0  as next_permutation() of arr is not possible
+                                                     // but the arr[] changes to {1, 2, 3} 
+
 ⭐ is_sorted() -> checks only non_decresing arr[ ]
 
 ⭐ some pattern in a string may not be present at its first occurence, 
@@ -71,6 +86,9 @@ To get most accurate result.. end mein division krna chahiye.
 /*----------------------------------------------------------------- */
 
 /*---------------------------- TRICKS ----------------------------- */
+
+⭐ priority_queue == multiset
+        (mst) can be used in place of (pq) with some extra functionality
 
 ⭐ Given any integer x
     we can see that its LSB is a divisor of x
