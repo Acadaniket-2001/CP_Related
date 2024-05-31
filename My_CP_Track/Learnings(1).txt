@@ -87,6 +87,12 @@ To get most accurate result.. end mein division krna chahiye.
 
 /*---------------------------- TRICKS ----------------------------- */
 
+⭐ Deque can be traversed like vector;
+    Eg:
+        for(int i = 0; i < dq.size(); i++) {
+            cout << dq[i] << " \n"[i == n - 1];    //👍👍😊
+         }
+
 ⭐ priority_queue == multiset
         (mst) can be used in place of (pq) with some extra functionality
 
