@@ -53,6 +53,10 @@ To get most accurate result.. end mein division krna chahiye.
 
 /*---------------------------- GENERAL ---------------------------- */
 
+⭐ stable_sort(all(v));
+        same as sort() but it sorts the vector in same order as input,if the sorting comparator encounters
+        same values for a and b (a, b are values passed to comparator).
+
 ⭐ next_permutation(all(v)) -> gives the next permutation of vector, if it exists and returns 1-> true
                                else return 0;
 
