@@ -379,6 +379,27 @@ int print_at_dist_K(node * root, node * target, int k) {
     return -1;
 }
 
+// Assumption: All nodes are unique and nodes 'a' and 'b' exist. 
+// TO DO once again
+node * LCA(node * root, int a, int b) {
+    if(!root)   return root;
+
+    if(root -> data == a or root -> data == b)  return root;
+
+    node * Lcheck = NULL;
+    node * Rcheck = NULL;
+    if(root -> left)    Lcheck = LCA(root -> left, a, b);
+    if(root -> right)   Rcheck = LCA(root -> right, a, b);
+
+    if(Lcheck != NULL and Rcheck != NULL)
+        return root;
+    
+    if(Lcheck != NULL) 
+        return Lcheck;
+    
+    return Rcheck;
+}
+
 int main() {
     
     node * root = build();
@@ -429,6 +450,10 @@ int main() {
     // int dist = 2;
     // print_at_dist_K(root, target, 1);
 
+
+    int a, b; cin >> a >> b;
+    node * ans = LCA(root, a, b);
+    if(ans) cout << ans -> data << endl;
 
     return 0;
 }

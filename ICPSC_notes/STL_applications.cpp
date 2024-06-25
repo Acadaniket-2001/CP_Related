@@ -60,7 +60,7 @@ long long sq(long long x){return (1ll*x*x);}
     
     Day 24: Balanced parenthesis -> depth concept ->    (this code and notes made in class)
     
-    Day 25: (⭐Window Maintainance, sliding window) -> ⭐monotone_deque usage ->   (read website, this code, class notes)
+    Day 25: (⭐Window Maintainance, sliding window) -> ⭐monotone_deque usage ->   (read website, this code)
     
     Day 26: ⭐counting subarrays with sum=X in O(nlogn), Game thoery proving game ideas (in short) ->   (this note for sum=X Ques.; notes made in class)
     
@@ -199,22 +199,26 @@ int main() {
         if(i)   v[i] += v[i - 1];
     }
 
+    ll cnt = 0;
     map<int, vector<int>> mp;
-    mp[0];
-    f(j, 0, n - 1) {
-        
-        mp[v[j] - x].pb(j);
-        mp[v[j]];
-    }
+    
+    mp[0].pb(-1);                   // To handle l = 0, assuming 0 is present at (-1)th idx in pre[]
+    f(r, 0, n - 1) {
 
-    for(auto e: mp)
-        cout << e.ff << " : " << e.ss; 
+        cnt += mp[v[r] - x].size();
+
+        for(auto l: mp[v[r] - x])
+            cout << l + 1 << " : " << r << endl;          // (l+1) -> pre[r] - pre[l - 1] = X => pre[r] - X = pre[[l - 1]
+                                                          // we will get pair (l - 1, r) for prefix sum => subarray: (l, r)
+        mp[v[r]].pb(r);
+    }   
+
+    cout << cnt << endl;
+
+    dbg(v);
+    dbg(mp);
 
     return 0;
 }
-
-
-
-
 
 //   ⭐Count and print subarrays wit sum = X--------------------------------*/
