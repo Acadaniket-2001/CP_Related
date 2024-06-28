@@ -202,14 +202,6 @@ void solve3() {
         }
     }
     for(auto e: sum) cout << e.ff << " -> " << e.ss << endl; 
-
-
-
-
-}
-
-void brute() {
-
 }
 
 // JUST ONE MISTAKE, AND YOU ARE HAHAHAHHHHHHHHHHAAAAAAAAAAAAAAA!!!
@@ -229,6 +221,5 @@ int main()
     // solve1();
     // solve2();
     solve3();
-    brute();
     return 0;
 }
