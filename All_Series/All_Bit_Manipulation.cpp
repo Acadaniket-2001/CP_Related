@@ -53,15 +53,9 @@ long long lcm(long long a,long long b){return (a*b)/__gcd(a,b);}
 long long Ceil(long long a,long long b){return (a+b-1)/b;}
 long long Sqrt(long long x){ long long y=sqrt(x)+5;while(y*y>x)y--;return y;}
 long long sq(long long x){return (1ll*x*x);}
-/*-------------------> Current Level <----------------------
-2. Think all possibilities
-3. Think greedy
-4. Think sortings
-5. Think constructive algorithms
-1. ⭐ Think brute force
-6. ⭐ Think implementation
-7. ⭐ Think math
------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------> Gy@@n ki baatein <----------------------
+⭐ See ICPSC notes 
+--------------------------------------------------------------*/
 
 // Given [L, R]: find the OR(a[i]), AND(a[i]) for all L <= i <= R
 void solve()
@@ -197,7 +191,7 @@ void solve3() {
             if(mask & (1 << bit)) {
                 int remMask = mask - (1 << bit);
                 sum[mask] = sum[remMask] + v[bit];
-                break;                      // -> se  example above for break;
+                break;                      // -> see  example above for break;
             }
         }
     }
