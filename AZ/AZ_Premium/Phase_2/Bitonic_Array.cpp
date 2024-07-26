@@ -65,22 +65,59 @@ long long sq(long long x){return (1ll*x*x);}
 
 void solve()
 {
-    int n; cin >> n;
+    int n, q; cin >> n >> q;
     vector<int> v(n); cin >> v;
 
-    int lo = 0, hi = n - 1, ans = 0;    // default doesn't matter for this check()
+    int lo = 0, hi = n - 1, ans = 0;
+
+    auto check = [&](int mid){
+        if(mid + 1 == n)    return true;
+        return v[mid] > v[mid + 1];
+    };
+
     while(lo <= hi) {
         int mid = lo + (hi - lo) / 2;
-        if(v[mid] <= v[n - 1]) {
-            ans = mid;
-            hi = mid - 1;
-        }
-        else {
+        if(check(mid))
+            ans = mid, hi = mid - 1;
+        else
             lo = mid + 1;
+    }
+
+    int pk = ans;
+
+    while(q--) {
+        int x; cin >> x;
+        if(v[pk] == x) {
+            cout << pk + 1 << endl;
+            continue;
+        }
+        
+        lo = 0, hi = pk - 1, ans = -1;
+        while(lo <= hi) {
+            int mid = lo + (hi - lo) / 2;
+            if(v[mid] == x) {
+                cout << mid + 1 << " ";
+                break;
+            }
+            if(v[mid] > x)
+                hi = mid - 1;
+            else
+                lo = mid + 1;
+        }
+
+        lo = pk + 1, hi = n - 1, ans = -1;
+        while(lo <= hi) {
+            int mid = lo + (hi - lo) / 2;
+            if(v[mid] == x) {
+                cout << mid + 1 << " " << endl;
+                break;
+            }
+            if(v[mid] < x)
+                hi = mid - 1;
+            else
+                lo = mid + 1;
         }
     }
-    
-    cout << ans << endl;
 }
 
 // JUST ONE MISTAKE, AND YOU ARE HAHAHAHHHHHHHHHHAAAAAAAAAAAAAAA!!!
