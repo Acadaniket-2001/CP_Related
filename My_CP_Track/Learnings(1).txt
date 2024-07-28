@@ -16,6 +16,10 @@
         if(mp[x])
             ...
 
+⭐ for(auto e: mp) {
+    e.second--;         // 😡 makes no change in map, saale '&' bhool gya
+    mp[e.first]--       // 😊 makes changes in map, even if '&' is not used, becoz mp[x] return reference to the element
+}
 
 ⭐Always use dummy getline() b/w cin and getline() to take te i/p(s) correctly
 
