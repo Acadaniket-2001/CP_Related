@@ -65,22 +65,9 @@ long long sq(long long x){return (1ll*x*x);}
 
 void solve()
 {
-    ll n; cin >> n;
-    vll v(n); cin >> v;
-
-    vll ans;
-    stack<ll> st;
-    rf(i, n - 1, 0) {
-        while(!st.empty() and v[st.top()] <= v[i]) st.pop();
-        if(st.empty())
-            ans.pb(n);
-        else
-            ans.pb(st.top());
-        st.push(i);
-    }
-    
-    reverse(all(ans));
-    cout << ans;
+    ll x = max(15, (rand() % 11) + 10);
+    ll y = min(15, (rand() % 11) + 10);
+    cout << y << endl;
 }
 
 // JUST ONE MISTAKE, AND YOU ARE HAHAHAHHHHHHHHHHAAAAAAAAAAAAAAA!!!
