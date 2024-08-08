@@ -64,19 +64,25 @@ long long sq(long long x){return (1ll*x*x);}
 ⭐ B -> Bit Manipulation
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
+// Application_1 : Counting various bits ppty using contribution ideas 
+
 // finding kth 1 in oo binary string: s = 0 1 10 11 100 101 110 111 1000 1001 1010 1011 1100 .......
 // version 1: Q <= 10; k <= 10^5
 // version 2: Q <= 10^5; k <= 10^5
-string getbinstr(int n) {
-    string ans = "";
-    if(n == 0)  return "0";
-    while(n) {
-        ans += (n % 2 ? '1' : '0');
-        n >>= 1;
-    }
-    reverse(all(ans));
-    return ans;
-}
+// version 3: Q <= 10^5; k <= 10^9 or above...
+
+
+// Version 1 and 2
+// string getbinstr(int n) {
+//     string ans = "";
+//     if(n == 0)  return "0";
+//     while(n) {
+//         ans += (n % 2 ? '1' : '0');
+//         n >>= 1;
+//     }
+//     reverse(all(ans));
+//     return ans;
+// }
 
 // int main()
 // {
@@ -107,6 +113,18 @@ string getbinstr(int n) {
 
 
 // version 3: Q <= 10^5; k <= 10^9
+string getbinstr(int n) {
+    string ans = "";
+    if(n == 0)  return "0";
+    while(n) {
+        ans += (n % 2 ? '1' : '0');
+        n >>= 1;
+    }
+    reverse(all(ans));
+    return ans;
+}
+
+
 ll getpos(ll num, ll k) {
     // ll msb = 63 - __builtin_clzll(num);
     // ll i = msb;
@@ -118,7 +136,6 @@ ll getpos(ll num, ll k) {
     //     }
     //     i--;
     // }
-
 
     string s = getbinstr(num);
     ll cnt1 = 0;
@@ -156,10 +173,25 @@ ll find_num_with_kth_one(int k) {
 }
 
 ll cnt_bits_till(ll x) {
-    ll bits_req = (ll)__lg(x) + 1;
-    ll cnt = 0;
-    f(i, 0, bits_req - 1) {
-        cnt += max(0LL, x + 1 - (1 << i));
+    // ll bits_req = (ll)__lg(x) + 1;
+    // ll cnt = 0;
+    // f(i, 0, bits_req - 1) {
+    //     cnt += max(0LL, x + 1 - (1 << i));        // cnt += contribution of ith bit
+    // }
+    // return cnt + 1;
+
+    ll cnt = 0, num = 1, len = 1;
+    while(num <= x) {
+        ll same_len_till = num * 2 - 1;
+        if(same_len_till <= x) {
+            cnt += len*(same_len_till - num + 1);
+            num = same_len_till + 1;
+            len++;
+        }
+        else {
+            cnt += len * (x - num + 1);
+            break;
+        }
     }
     return cnt + 1;
 }
@@ -174,8 +206,9 @@ int main() {
         ll one_before_num = find_one_till_num(num - 1);
         ll req_1_in_num = k - one_before_num;
         ll pos_of_req_1_in_num = getpos(num, req_1_in_num);
-        ll ans = cnt_bits_till(num - 1) - 1 + pos_of_req_1_in_num;
-        cout << ans << endl; 
+        ll ans = cnt_bits_till(num - 1) + pos_of_req_1_in_num - 1;
+        // cout << ans << endl;
+        cout << cnt_bits_till(4) << endl;    
     }
 
     return 0;
