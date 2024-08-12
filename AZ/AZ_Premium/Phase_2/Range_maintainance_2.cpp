@@ -75,34 +75,102 @@ long long sq(long long x){return (1ll*x*x);}
 // Notes:  For #(e) : e < x     -->   LB(x);
 // Notes:  For #(e) : e <= x    -->   UB(x);
 
+/*-------------------------------------------------------------*/
+
+// T ---> whenever we need to update some stuff in set ->  first remove the things not reqd. and then add the new stuff
+// Easy Version : All L, R, X, Y are distinct
+// Dicey Version : All L, R, X, Y are not distinct   // Hacker-Cup
+
 struct range_maintainance {
     set<pair<int, int>> st;
 
     void fill_range(int l, int r) {
-        auto it = st.upper_bound({l, 1e9});
-        if(it != st.end()) {
-            it--;
-            l = min(l, it -> ff);
+        auto it = st.upper_bound({l, 1e9});      // Y not {l, 0}
+        if(it != st.begin()) {
+            it--;                                // finding the seg. which starts just before L
+            if(it -> ss >= l) {                  // if the got seg. merges with the seg(l, r), merge with l and r     
+                l = it -> ff;
+                r = max(r, it -> ss);            // ⭐
+                st.erase(it);
+            }
         }
         
-        it = st.upper_bound({r, 0});
+        it = st.upper_bound({r, 1e9});
         if(it != st.begin()) {
-            it--;
-            if(it -> ff >= l) {
-                r = max(r, it -> ss);
+            it--;                                // finding the seg. which starts just before R
+            if(it -> ss >= r) {                  // if the got seg. merges with the seg(l, r), merge with l and r
+                l = min(l, it -> ff);            // ⭐
+                r = it -> ss;
+                st.erase(it);
             }
         }
 
-        while(1) {
-            it = st.lower_bound({l, 0});
-            if(it != st.end() and it -> ff <= r)
+        while(1) {                            // removing the seg(s) b/w new l and r
+            it = st.upper_bound({l, 1e9});
+            if(it != st.end() and it -> ss <= r)
                 st.erase(it);
+            else
+                break;
         }
         st.insert({l, r});
     }
 
     void clear_range(int l, int r) {
+        auto it = st.upper_bound({l, 1e9});
+        if(it != st.begin()) {
+            it--;
+            if(it -> ss >= l) {
+                if(it -> ss <= r) {
+                    int lo1 = it -> ff;
+                    int hi1 = l;
+                    st.erase(it);
+                    st.insert({lo1, hi1});
+                }
+                else {
+                    int lo1 = it -> ff;
+                    int hi1 = l;
 
+                    int lo2 = r;
+                    int  hi2 = it -> ss;
+                    st.erase(it);
+                    st.insert({lo1, hi1});
+                    st.insert({lo2, hi2});
+                    return;
+                }
+            }
+        }
+
+        it = st.upper_bound({r, 1e9});
+        if(it != st.begin()) {
+            it--;
+            if(it -> ss >= r) {
+                if(it -> ff >= l) {
+                    int lo1 = r;
+                    int hi1 = it -> ss;
+                    st.erase(it);
+                    st.insert({lo1, hi1});
+                }
+                // else {             // already would have been handled in prev if(..)
+                //     int lo1 = r;
+                //     int hi1 = it -> ss;
+
+                //     int lo2 = it -> ff;
+                //     int  hi2 = l;
+                //     st.erase(it);
+                //     st.insert({lo1, hi1});
+                //     st.insert({lo2, hi2});
+                //     return;
+                // }
+            }
+        }
+
+        while(1) {
+            auto it = st.upper_bound({l, 1e9});
+            if(it != st.end() and it -> ss <= r)
+                st.erase(it);
+            else 
+                break;
+        }
     }
 
     bool check_point(int x) {
@@ -116,7 +184,8 @@ struct range_maintainance {
     }
 
     bool check_range_any(int l, int r) {
-        auto it = st.lower_bound({l, 0});           // try {l, 1e9}   -> should give error
+        // auto it = st.lower_bound({l, 0});           // try {l, 1e9}   -> should give error
+        auto it = st.upper_bound({l, 1e9});
         if(it != st.end()) {
             if(it -> ff <= r)
                 return 1;
@@ -163,15 +232,15 @@ int main() {
         }
         else if(t == 3) {
             int x; cin >> x;
-            bg.check_point(x);
+            cout << bg.check_point(x) << endl;
         }
         else if(t == 4) {
             int l, r; cin >> l >> r;
-            bg.check_range_any(l, r);
+            cout << bg.check_range_any(l, r) << endl;
         }
         else {
             int l, r; cin >> l >> r;
-            bg.check_range_all(l, r);
+            cout << bg.check_range_all(l, r) << endl;
         }
         bg.printer();
     }
