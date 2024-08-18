@@ -1,6 +1,6 @@
-/*---------------------------- LANDMINES ---------------------------- */
+/*---------------------------- LANDMINES ----------------------------*/
 
-⭐ endl; forces to flush the output buffer (even if its not filled) and printsits content.
+⭐ endl; forces to flush the output buffer (even if its not filled) and prints its content.
     using '\n' -> prevent flushing before the buffer is not filled, and saves time.... can prevent TLE 
     in programs which has to print a lot.
 
@@ -21,7 +21,7 @@
     mp[e.first]--       // 😊 makes changes in map, even if '&' is not used, becoz mp[x] return reference to the element
 }
 
-⭐Always use dummy getline() b/w cin and getline() to take te i/p(s) correctly
+⭐Always use dummy getline() b/w cin and getline() to take the i/p(s) correctly
 
 I/p:
 2
@@ -41,7 +41,7 @@ void solve()
     string tmp; getline(cin, tmp);             // dummy getline() usage to remove '\n' from i/p buffer due to prev. usage of cin
 
     f(i, 0, n - 1)  getline(cin, v[i]);        // getline() usage
-    rf(i, n - 1, 0) cout << "Hi " << v[i] << " !\n";
+    rf(i, n - 1, 0) cout << "Hi " << v[i] << "\n";
 }
 
 
