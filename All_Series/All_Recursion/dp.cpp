@@ -2967,11 +2967,8 @@ signed main() {
 // -------------------------------------------------------------------------------------*/
 
 // setup debugger
-// read debug session (TLE)
-
 
 // codeforces playing in casino
 // codeforces see Dora and search code (stack learning)
-// learn handling characters
 // prod kadane's algo
 

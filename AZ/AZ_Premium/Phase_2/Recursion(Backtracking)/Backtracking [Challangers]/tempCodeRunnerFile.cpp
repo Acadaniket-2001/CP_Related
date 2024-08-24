@@ -1,0 +1,1 @@
+is_beyond_last_placed(r, c
