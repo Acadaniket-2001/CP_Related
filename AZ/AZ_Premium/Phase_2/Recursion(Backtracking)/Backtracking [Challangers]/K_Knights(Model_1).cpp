@@ -85,20 +85,12 @@ bool is_beyond_last_placed(int r, int c) {
 
 int rec(int level) {
     if(level == k) {
-        // f(i, 0, n - 1) {
-        //     f(j, 0, n - 1) {
-        //         if(pos.find({i, j}) != pos.end())   cout << "K ";
-        //         else cout << ". ";
-        //     }
-        //     ln;
-        // }
-        // ln;
         return 1;
     }
 
     // choices: O(N^2)
     int cnt = 0;
-    f(r, 0, n - 1) {
+    f(r, last.ff, n - 1) {
         f(c, 0, n - 1) {
             if(can_place(r, c) and is_beyond_last_placed(r, c)) {
                 pos.insert({r, c});
@@ -122,19 +114,17 @@ void solve()
     cout << rec(0) << endl;
 }
 
-// JUST ONE MISTAKE, AND YOU ARE HAHAHAHHHHHHHHHHAAAAAAAAAAAAAAA!!!
-/* Wo sare problems karo jo lage ki ho jayega but nhi ho pata */
+void trick() {
+    // if k = 2.    a(n) = (n - 1)*(n + 4)*(n^2 - 3*n + 4)/2.   --> OEIS  ----> can be used for stress testing codes
+    int N, K; cin >> N >> K;
+    cout << (N - 1)*(N + 4)*(N*N - 3*N + 4)/2 << endl;       
+}
 
 int main()
 {
     fastio();
-    #ifndef ONLINE_JUDGE
-        freopen("io/Error.txt", "w", stderr);
-        // freopen("io/Input.txt", "r", stdin);
-        // freopen("io/Output.txt", "w", stdout);
-    #endif
-
-    // int _t; cin >> _t; while(_t--)
+    int _t; cin >> _t; while(_t--)
     solve();
+    // trick();
     return 0;
 }
