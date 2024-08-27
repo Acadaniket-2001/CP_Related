@@ -167,7 +167,10 @@ void rec(int level) {
 void solve()
 {
     f(i, 0, 12) log2arr[1 << i] = i;     // [1, 12] -> becoz only mask is of 10bit size only
+
+    cout << "Enter 4 or 9 for solving 2x2 or 3x3 sudoku : \n";
     cin >> n;
+    cout << "Enter the sudoku with 0 as blank spaces : \n";
 
     board.assign(n, vector<int>(n, 0));
     rowtaken.resize(n, 0);

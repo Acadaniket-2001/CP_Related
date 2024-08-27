@@ -94,8 +94,8 @@ long long sq(long long x){return (1ll*x*x);}
 
 // Problem : https://atcoder.jp/contests/abc326/tasks/abc326_d
 
-// Must see Vivek Bhaiya's solution ---> He beautifully used a string as a bitmask...
-//                                  ---> for bitmask version of the Vivek Bhaiya's solution (see) commented code after main
+// Must see Vivek Bhaiya's solution ---> He beautifully used a string as a bitmask... (see Notes)
+//                                  ---> for bitmask version of the Vivek Bhaiya's solution (see commented code after main())
 
 int n;
 string r, c;
@@ -147,6 +147,7 @@ bool is_valid() {
     return 1;
 }
 
+//❤️❤️😍😍💀💀
 int makemove(string& str) {
     ans.pb(str);
     int prev_rmask = rmask;
