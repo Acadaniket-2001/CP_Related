@@ -64,81 +64,45 @@ long long sq(long long x){return (1ll*x*x);}
 ⭐ B -> Bit Manipulation
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-int n;
-int cur;
-int p2, p3, p5;
-
-int max_power(int x) {
-    int ans = 0;
-    int temp = 1;
-    while(temp * x <= n)    temp *= x, ans++;
-    return ans;
-}
-
-int pow(int a, int b) {
-    int ans = 1;
-    f(i, 1, b)  ans *= a;
-    return ans;
-}
-
-set<int> all_sol;
-
-void rec(int level) {
-
-    debug(lvl, level);
-    debug(cur, cur);
-    debug(all_sol, all_sol);
-
-    if(level == 3) {
-        all_sol.insert(cur);
-        re;
-    }
-
-    if(level == 0) {
-        f(two, 0, p2) {
-            int mul = pow(2, two);
-            if(cur * mul <= n) {
-                cur *= mul;
-                rec(level + 1);
-                cur /= mul;
-            }
-        }
-    }
-    else if(level == 1) {
-        f(three, 0, p3) {
-            int mul = pow(3, three);
-            if(cur * mul <= n) {
-                cur *= mul;
-                rec(level + 1);
-                cur /= mul;
-            }
-        }
-    }
-    else if(level == 2) {
-        f(five, 0, p5) {
-            int mul = pow(5, five);
-            if(cur * mul <= n) {
-                cur *= mul;
-                rec(level + 1);
-                cur /= mul;
-            }
-        }
-    }
-}
-
-void solve()
+void brute()
 {
-    cin >> n;
-    p2 = max_power(2);
-    p3 = max_power(3);
-    p5 = max_power(5);
+    int n; cin >> n;
+    vector<int> v(n);   cin >> v;
+    set<int> st;
 
-    debug(, p2, p3, p5);
+    f(i, 0, n - 1) {
+        int andd = 0;
+        f(j, i, n - 1) {
+            if(j == i)  andd = v[j];
+            else    andd |= v[j];
+            
+            st.insert(andd);
+        }
+    }
 
-    cur = 1;
-    rec(0);
+    for(auto e: st)
+        cout << e << " ";
+    cout << endl;
+}
 
-    for(auto e: all_sol)
+void solve1() {
+    int n, k; cin >> n >> k;
+    vector<int> v(n);   cin >> v;
+
+    set<int> all, cur, prev;
+    for(int i = n - 1; i >= 0; i--) {
+        for(auto e: prev) {
+            cur.insert(e | v[i]);
+        }
+        cur.insert(v[i]);
+        all.insert(cur.begin(), cur.end());
+        
+        prev = cur;
+        cur.clear();
+    }   
+
+    // set all has all distinct subarray OR of v[ ]  
+    for(auto e: all)  
         cout << e << " ";
 }
 
@@ -148,13 +112,14 @@ void solve()
 int main()
 {
     fastio();
-    // #ifndef ONLINE_JUDGE
-    //     freopen("io/Error.txt", "w", stderr);
-    //     // freopen("io/Input.txt", "r", stdin);
-    //     // freopen("io/Output.txt", "w", stdout);
-    // #endif
+    #ifndef ONLINE_JUDGE
+        freopen("io/Error.txt", "w", stderr);
+        // freopen("io/Input.txt", "r", stdin);
+        // freopen("io/Output.txt", "w", stdout);
+    #endif
 
     // int _t; cin >> _t; while(_t--)
-    solve();
+    brute();
+    solve1();
     return 0;
 }

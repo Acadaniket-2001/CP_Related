@@ -64,82 +64,26 @@ long long sq(long long x){return (1ll*x*x);}
 ⭐ B -> Bit Manipulation
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-int n;
-int cur;
-int p2, p3, p5;
-
-int max_power(int x) {
-    int ans = 0;
-    int temp = 1;
-    while(temp * x <= n)    temp *= x, ans++;
-    return ans;
-}
-
-int pow(int a, int b) {
-    int ans = 1;
-    f(i, 1, b)  ans *= a;
-    return ans;
-}
-
-set<int> all_sol;
-
-void rec(int level) {
-
-    debug(lvl, level);
-    debug(cur, cur);
-    debug(all_sol, all_sol);
-
-    if(level == 3) {
-        all_sol.insert(cur);
-        re;
-    }
-
-    if(level == 0) {
-        f(two, 0, p2) {
-            int mul = pow(2, two);
-            if(cur * mul <= n) {
-                cur *= mul;
-                rec(level + 1);
-                cur /= mul;
-            }
-        }
-    }
-    else if(level == 1) {
-        f(three, 0, p3) {
-            int mul = pow(3, three);
-            if(cur * mul <= n) {
-                cur *= mul;
-                rec(level + 1);
-                cur /= mul;
-            }
-        }
-    }
-    else if(level == 2) {
-        f(five, 0, p5) {
-            int mul = pow(5, five);
-            if(cur * mul <= n) {
-                cur *= mul;
-                rec(level + 1);
-                cur /= mul;
-            }
-        }
-    }
-}
-
 void solve()
 {
-    cin >> n;
-    p2 = max_power(2);
-    p3 = max_power(3);
-    p5 = max_power(5);
+    int n; cin >> n;
+    vector<int> v(n); cin >> v;
 
-    debug(, p2, p3, p5);
+    map<int, int> prev;
+    for(int i = n - 1; i >= 0; i--) {
+        map<int, int> cur;
+        for(auto e: prev) {
+            cur[e.ff & v[i]] = max(i, prev[e.ff & v[i]]);
+        }
+        cur[v[i]] = max(prev[v[i]], i);
+        prev = cur;
 
-    cur = 1;
-    rec(0);
-
-    for(auto e: all_sol)
-        cout << e << " ";
+        cout << "Index: " << i << endl;
+        for(auto e: cur) {
+            cout << e.ff << " " << e.ss << endl;
+        }
+        cout << endl;
+    }
 }
 
 // JUST ONE MISTAKE, AND YOU ARE HAHAHAHHHHHHHHHHAAAAAAAAAAAAAAA!!!
@@ -148,11 +92,11 @@ void solve()
 int main()
 {
     fastio();
-    // #ifndef ONLINE_JUDGE
-    //     freopen("io/Error.txt", "w", stderr);
-    //     // freopen("io/Input.txt", "r", stdin);
-    //     // freopen("io/Output.txt", "w", stdout);
-    // #endif
+    #ifndef ONLINE_JUDGE
+        freopen("io/Error.txt", "w", stderr);
+        // freopen("io/Input.txt", "r", stdin);
+        // freopen("io/Output.txt", "w", stdout);
+    #endif
 
     // int _t; cin >> _t; while(_t--)
     solve();

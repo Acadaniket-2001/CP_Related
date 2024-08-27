@@ -1,0 +1,11 @@
+Time: 38 : 51 
+https://www.youtube.com/watch?v=tgasB9F1qHI
+Problem : https://leetcode.com/problems/find-subarray-with-bitwise-or-closest-to-k/
+Hints : Problem1.cpp / See notes 
+
+
+Problem: https://leetcode.com/problems/number-of-subarrays-with-and-value-of-k/
+Solution: Problem2.cpp 
+
+
+Generic Problem: Application_6
