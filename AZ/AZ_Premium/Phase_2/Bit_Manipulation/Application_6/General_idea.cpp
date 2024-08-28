@@ -151,4 +151,5 @@ int main()
 }
 
 
-// Further: Same trick applies for __Gcd() of subarray as there are only log(n) possible gcd() in an arrays... may be]
+// Further: Same trick applies for __Gcd() of subarray as there are only log(n) possible factors of n ... [may be]
+//          In fact anything that decreases in log(n) values ... same trick applies
