@@ -66,15 +66,15 @@ long long sq(long long x){return (1ll*x*x);}
 
 void solve()
 {
-    int n, k; cin >> n >> k;
-    vector<int> v(n);   cin >> v;
+    ll n, k; cin >> n >> k;
+    vector<ll> v(n);   cin >> v;
 
-    map<int, int> prev, tot;
-    for(int i = n - 1; i >= 0; i--) {
-        map<int, int> cur;
+    map<ll, ll> prev, tot;
+    for(ll i = n - 1; i >= 0; i--) {
+        map<ll, ll> cur;
         cur[v[i]]++;
         for(auto e: prev) {
-            cur[e.first & v[i]] += e.second;
+            cur[e.first & v[i]] += e.second;  // Extrapolation wala part ⭐⭐
         }
         for(auto e: cur) {
             tot[e.first] += e.second;
@@ -85,6 +85,8 @@ void solve()
         prev = cur;
     }
     cout << tot[k] << endl;     // Leetcode solution ends here.
+
+
 
     // harder version: Find summation (AND v[i, j])^2.   
     ll ans = 0;

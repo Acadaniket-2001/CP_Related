@@ -1,11 +1,14 @@
+// Mast IDEA hai but needs to be revised: --------------------------------------------------
+
 Time: 38 : 51 
 https://www.youtube.com/watch?v=tgasB9F1qHI
 Problem : https://leetcode.com/problems/find-subarray-with-bitwise-or-closest-to-k/
 Hints : Problem1.cpp / See notes 
 
 
-Problem: https://leetcode.com/problems/number-of-subarrays-with-and-value-of-k/
-Solution: Problem2.cpp 
+Time: 29 : 00
+https://www.youtube.com/watch?v=00_mppSarq0
+Problem: https://leetcode.com/problems/number-of-subarrays-with-and-value-of-k/   
+Solution method 1: Problem2.cpp 
+Solution method 2: (Generic idea): General_idea.cpp / See One_Note -> Bit_App_6_General_Idea
 
-
-Generic Problem: Application_6

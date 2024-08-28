@@ -64,41 +64,91 @@ long long sq(long long x){return (1ll*x*x);}
 ⭐ B -> Bit Manipulation
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
+// Problem: For each index print the ranges which have the same AND value along with the corresponding AND value.
+// Formally: In v[ ] for each idx i: find the all [L, R] such that AND(a[i] & a[i+1]...a[x]) for all x in [L, R] is same
+
+// i/p:
+// 5
+// 7 1 3 6 2
+
+//o/p foramat: 
+// Starting at Index i
+// L1    R1   AND(a[i] & a[i+1] & a[i+2] & ... & a[x] : x in [L1, R1])
+// L2    R2   AND(a[i] & a[i+1] & a[i+2] & ... & a[x] : x in [L2, R2])
+//  ...
+//--------------------------
+
+// o/p:
+// Starting at Index 4
+// 4 4 2
+
+// Starting at Index 3
+// 3 3 6
+// 4 4 2
+
+// Starting at Index 2
+// 2 2 3
+// 3 4 2
+
+// Starting at Index 1
+// 1 2 1
+// 3 4 0
+
+// Starting at Index 0
+// 0 0 7
+// 1 2 1
+// 3 4 0
+
+
 void solve()
 {
     int n; cin >> n;
     vector<int> v(n); cin >> v;
 
-    map<int, int> prev;
+    map<int, int> prev_ends;    //  {x, y} --> We have '& value' x till index y
     for(int i = n - 1; i >= 0; i--) {
-        map<int, int> cur;
-        for(auto e: prev) {
-            cur[e.ff & v[i]] = max(i, prev[e.ff & v[i]]);
+        map<int, int> new_ends;
+        for(auto e: prev_ends) {
+            // new_ends[e.ff & v[i]] = max({new_ends[e.ff & v[i]], prev_ends[e.ff & v[i]], e.second});  // why not this ???
+            new_ends[e.ff & v[i]] = max(new_ends[e.ff & v[i]], e.second);
         }
-        cur[v[i]] = max(prev[v[i]], i);
-        prev = cur;
+        // new_ends[v[i]] = max({new_ends[v[i]], prev_ends[v[i]], i});
+        new_ends[v[i]] = max(new_ends[v[i]], i);
+        prev_ends = new_ends;
 
-        cout << "Index: " << i << endl;
-        for(auto e: cur) {
-            cout << e.ff << " " << e.ss << endl;
+
+
+        // cout << "Index: " << i << endl;
+        // for(auto e: new_ends) {
+        //     cout << e.ff << " " << e.ss << endl;
+        // }
+        // cout << endl;
+
+
+
+        vector<pair<int, int>> ranges(all(new_ends));
+        reverse(all(ranges));
+        cout << "Starting at Index " << i << endl;
+        f(ed, 0, sz(ranges) - 1) {
+            if(ed == 0) {
+                // [i...ranges[ed].ss] -> ranges[ed].ff
+                cout << i << " " << ranges[ed].ss << " " << ranges[ed].ff << endl;
+            }         
+            else {
+                // [ranges[ed - 1].ss + 1....ranges.[ed].ss] -> ranges[ed].ff
+                cout << ranges[ed - 1].ss + 1 << " " << ranges[ed].ss << " " << ranges[ed].ff << endl;
+            }
         }
-        cout << endl;
+        ln;   
     }
 }
-
-// JUST ONE MISTAKE, AND YOU ARE HAHAHAHHHHHHHHHHAAAAAAAAAAAAAAA!!!
-/* Wo sare problems karo jo lage ki ho jayega but nhi ho pata */
 
 int main()
 {
     fastio();
-    #ifndef ONLINE_JUDGE
-        freopen("io/Error.txt", "w", stderr);
-        // freopen("io/Input.txt", "r", stdin);
-        // freopen("io/Output.txt", "w", stdout);
-    #endif
-
-    // int _t; cin >> _t; while(_t--)
     solve();
     return 0;
 }
+
+
+// Further: Same trick applies for __Gcd() of subarray as there are only log(n) possible gcd() in an arrays... may be]
