@@ -173,7 +173,7 @@ signed main() {
 
 ----------------------------------------------------------------------*/
 
-/*----------------------------recursive bubble sort------------------------------------------
+/*----------------------------⭐recursive bubble sort------------------------------------------
 
                                                     //to be discussed
 
@@ -300,7 +300,7 @@ signed main() {
 
 ----------------------------------------------------------------------*/
 
-/*----------------------------Quick_Sort-----------------------------------------
+/*----------------------------⭐Quick_Sort-----------------------------------------
                               
                                 // watch CB video on having doubt
 
@@ -345,9 +345,9 @@ signed main()
 
 ---------------------------------------------------------------------*/
 
-/*----------------------------inversion count---------------------------------------------
+/*----------------------------⭐⭐inversion count---------------------------------------------
 
-int cnt_cross_inv(vector<int> v, int s, int mid, int e) {
+int cnt_cross_inv(vector<int>& v, int s, int mid, int e) {
 
     int i = s, j = mid + 1, ans = 0;
     vector<int> merge;
@@ -371,7 +371,7 @@ int cnt_cross_inv(vector<int> v, int s, int mid, int e) {
     return ans;
 }
 
-int inv_count(vector<int> v, int s, int e) {
+int inv_count(vector<int>& v, int s, int e) {
 
     if(s == e)
         return 0;
@@ -409,7 +409,7 @@ void ntos(int n) {
     if(n == 0)  return;
 
     ntos(n / 10);
-    cout << v[n % 10] << " ";
+    cout << v[n % 10] << " ";  
 }
 
 
@@ -523,10 +523,19 @@ signed main()
 
 ----------------------------------------------------------------------*/
 
-/*----------------------------ladder_problem---------------------------------------------
+/*----------------------------🎉ladder_problem🎉---------------------------------------------
                             
+// Best Question to go from backtracking(LCCM) -> recursion
+
+// in only recursion -> 
+//     move -> makechanges;
+//             rec(level + 1)
+
+// in bakctracking -> 
+//     move -> makechanges;
+//             rec(level + 1)
+//             revertchanges
                             
-                                //do once again (see CB lectures for doubts)
 int ways(int n, int k){
     if(n == 0)
         return 1;
@@ -556,8 +565,36 @@ signed main()
 
 ----------------------------------------------------------------------*/
 
-/*----------------------------friends_and_bikes------------------------------------------
-                            //learnt how to analyse
+/*----------------------------⭐friends_and_bikes------------------------------------------
+                              //learnt how to analyse
+
+int n, k;
+int rec(int level) {
+    if(level == n) {
+        return 1;
+    }
+
+    int ans = 0;
+    // mkp
+    if(level + 2 <= n)    ans += (n - level - 1) * rec(level + 2);
+
+    // dont mkp
+    ans += rec(level + 1);
+
+    return ans;
+}
+void solve()
+{
+    cin >> n;
+    cout << rec(0);
+}
+int main()
+{
+    solve();
+    return 0;
+}
+
+// //Method 2--------------------------------------------------------------------------
 
 int ways(int n) {
     if(n == 0 ||  n == 1)
@@ -574,14 +611,13 @@ signed main()
     while(t--) {
         int n; cin >> n;
         cout << ways(n) << endl;
-
     }
 
     return 0;
 }
 
 
-----------------------------------------------------------------------*/
+----------------------------------------------------------------------------------------*/
 
 /*----------------------------optimal_binary_strings------------------------------------------
 
@@ -708,7 +744,9 @@ signed main()
 ----------------------------------------------------------------------*/
 
 /*----------------------------generate_valid_brackets ------------------------------------------
-                                // revise it
+
+// Harder version: Generate valid brackets of depth 'k'
+
 void valid_brackets(int n, int open, int close, string& s) {
     if(open == n  &&  close == n) {
         cout << s << endl;
@@ -1350,14 +1388,14 @@ signed main()
 
 ---------------------------------------------------------------------*/
 
-signed main() {
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
+// signed main() {
+//     ios::sync_with_stdio(false);
+//     cin.tie(NULL);
 
-    int t; cin >> t;
-    while(t--) {
-        int n; cin >> n;
-        cout << n + 1 << endl;
-    }
-    return 0;
-}
+//     int t; cin >> t;
+//     while(t--) {
+//         int n; cin >> n;
+//         cout << n + 1 << endl;
+//     }
+//     return 0;
+// }
