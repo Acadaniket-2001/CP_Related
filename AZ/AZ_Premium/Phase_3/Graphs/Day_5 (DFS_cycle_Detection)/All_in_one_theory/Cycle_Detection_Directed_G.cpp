@@ -73,35 +73,37 @@ long long Sqrt(long long x){ long long y=sqrt(x)+5;while(y*y>x)y--;return y;}
 ⭐ T -> Think in reverse         ⭐ P -> Prefix or Suffix ideas    ⭐ B -> Bit Manipulation
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-
-// Problem: Find the count of number of nodes which are part of some simple cycle (cycles with 1 back-edge).
-// See notes for idea
-
 int n, m;
 vector<vi> g;
 vector<int> parent;
-vector<int> color;                                  // using color[ ] as vis[ ] -> 1 -----> !vis;
-                                                    //                             2 -----> still being explored
-                                                    //                             3 -----> completely explored
-vector<int> cnt_cycle;
-vector<int> prefix_order;
-
+vector<int> color;                                   // using color[ ] as vis[ ] -> 1 -----> !vis;
+                                                     //                             2 -----> still being explored
+                                                     //                             3 -----> completely explored
+bool is_cycle = 0; 
+vector<int> any_cycle;
 
 void dfs(int node, int par) {
     color[node] = 2;
     parent[node] = par;
 
     for(auto v: g[node]) {
+
         if(color[v] == 1) {
             // node(2) -> v(1)  ----> forward edge
             dfs(v, node);
         }
         else if(color[v] == 2) {
             // node(2) -> v(2)  ----> back edge
-             
-            cnt_cycle[node]++;
-            cnt_cycle[parent[v]]--;
-
+            if(is_cycle == 0) {
+                int temp = node;
+                while(temp != v) {
+                    any_cycle.pb(temp);
+                    temp = parent[temp];
+                }
+                any_cycle.pb(v);
+                reverse(all(any_cycle));
+            }
+            is_cycle = 1;
         }
         else if(color[v] == 3) {
             // node(2) -> v(3)  ----> cross edge
@@ -109,7 +111,6 @@ void dfs(int node, int par) {
         }
     }
     color[node] = 3; 
-    prefix_order.pb(node);                             // ⭐ storing order of backtracking of nodes
 }
 
 void solve()
@@ -119,49 +120,33 @@ void solve()
     color.assign(n + 1, 1);
     parent.assign(n + 1, 0);
 
-    cnt_cycle.assign(n + 1, 0);
-    prefix_order.clear();
-
+    map<pair<int, int>, int> edgecnt;
     f(i, 0, m - 1) {
         int a, b; cin >> a >> b;
-        g[a].pb(b);                                   // ⭐for directed graphs
+        if(a == b) {
+            // self-loop detected in MULTIGRAPH
+        }
+
+        edgecnt[{a, b}]++;
+        if(edgecnt[{a, b}] > 1) {
+            // multiple-edge-cycle detected in MULTIGRAPH
+        }   
+        else {
+            g[a].pb(b);
+        }
     }
     
     f(i, 1, n) {
         if(color[i] == 1) {
-            dfs(i, 0);                                // ⭐ passing dummy parent as 0 intentionally to help in doing partial sums  
+            dfs(i, 0);                                // ⭐ passing dummy parent as 0 intentionally...  
         }
     }
-
-    // pr(prefix_order);
-
-    for(auto v: prefix_order) {                       // ⭐ building the prefix sum in order of prefix_order[ ]
-        // pr(cnt_cycle);
-        // pr(v);
-        // pr(parent[v]);
-        cnt_cycle[parent[v]] += cnt_cycle[v];
-        // pr(cnt_cycle);
-        // cerr << "----------------------------\n";
-    }
-
-    int cnt_nodes = 0;
-    f(i, 1, n) {
-        cnt_nodes += (cnt_cycle[i] != 0);
-    }
-
-    cout << cnt_nodes << endl;
+    cout << any_cycle;
 }
 
 int main()
 {
     fastio();
-    // #ifndef ONLINE_JUDGE
-    //     freopen("io/Error.txt", "w", stderr);
-    //     freopen("io/Input.txt", "r", stdin);
-    //     freopen("io/Output.txt", "w", stdout);
-    // #endif
-
-    // int _t; cin >> _t; while(_t--)
     solve();
     return 0;
 }

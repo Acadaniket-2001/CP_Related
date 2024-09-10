@@ -77,63 +77,130 @@ void pre() {
 
 }
 
+using state = pair<int, int>;
 int n, m;
-vector<vi> g;
-vector<int> parent;
-vector<int> color;                                   // using color[ ] as vis[ ] -> 1 -----> !vis;
-                                                     //                             2 -----> still being explored
-                                                     //                             3 -----> completely explored
-bool is_cycle = 0; 
-vector<int> any_cycle;
+vector<vector<char>> g;
+vector<state> monsters, en;
+state st;
 
-void dfs(int node, int par) {
-    color[node] = 2;
-    parent[node] = par;
+int dx[] = {-1, 0, 1, 0}; 
+int dy[] = {0, 1, 0, -1}; 
 
-    for(auto v: g[node]) {
-        if(color[v] == 1) {
-            // node(2) -> v(1)  ----> forward edge
-            dfs(v, node);
-        }
-        else if(color[v] == 2) {
-            // node(2) -> v(2)  ----> back edge
-            if(is_cycle == 0) {
-                int temp = node;
-                while(temp != v) {
-                    any_cycle.pb(temp);
-                    temp = parent[temp];
-                }
-                any_cycle.pb(v);
-                reverse(all(any_cycle));
+bool is_valid(int x, int y) {
+    return (x >= 0 and x < n and y >= 0 and y < m and g[x][y] != '#');
+}
+
+vector<vector<int>> dis;
+vector<vector<state>> par;
+void bfs_P() {
+    dis.assign(n, vector<int>(m, -1));
+    par.assign(n, vector<state>(m, {1e9, 1e9}));
+
+    queue<state> q;
+    dis[st.ff][st.ss] = 0;
+    q.push(st);
+
+    while(!q.empty()) {
+        state node = q.front(); q.pop();
+
+        f(i, 0, 3) {
+            int x = node.ff + dx[i];
+            int y = node.ss + dy[i];
+            if(is_valid(x, y) and dis[x][y] == -1) {
+                dis[x][y] = dis[node.ff][node.ss] + 1;
+                par[x][y] = node;
+                q.push({x, y});
             }
-            is_cycle = 1;
-        }
-        else if(color[v] == 3) {
-            // node(2) -> v(3)  ----> cross edge
-            // unimportant
         }
     }
-    color[node] = 3; 
 }
+
+vector<vector<int>> dism;
+void mbfs() {
+    dism.assign(n, vector<int>(m, 1e9));
+
+    queue<state> q;
+    for(auto m :monsters) {
+        dism[m.ff][m.ss] = 0;
+        q.push(m);
+    }
+
+    while(!q.empty()) {
+        state node = q.front(); q.pop();
+
+        f(i, 0, 3) {
+            int x = node.ff + dx[i];
+            int y = node.ss + dy[i];
+            if(is_valid(x, y) and dism[x][y] > dism[node.ff][node.ss] + 1) {
+                dism[x][y] = dism[node.ff][node.ss] + 1;
+                q.push({x, y});
+            }
+        }
+    }
+}
+
+
 
 void solve()
 {
     cin >> n >> m;
-    g.resize(n + 1);
-    color.assign(n + 1, 1);
-    parent.assign(n + 1, 0);
-
-    f(i, 0, m - 1) {
-        int a, b; cin >> a >> b;
-        g[a].pb(b);                                   // ⭐for directed graphs
-    }
-    
-    f(i, 1, n) {
-        if(color[i] == 1) {
-            dfs(i, 0);                                // ⭐ passing dummy parent as 0 intentionally...  
+    g.assign(n, vector<char>(m));
+    f(i, 0, n - 1) {
+        f(j, 0, m - 1) {
+            cin >> g[i][j];
+            if(g[i][j] == 'A') {
+                st = {i, j};
+            }
+            else if(g[i][j] == 'M'){
+                monsters.pb({i, j});
+            }
+            else if(g[i][j] == '.') {
+                if(i == 0 or i == n - 1 or j == 0 or j == m - 1) {
+                    en.pb({i, j});
+                }
+            }
         }
     }
-    cout << any_cycle;
+
+    if(st.ff == 0 or st.ff == n - 1 or st.ss == 0 or st.ss == m - 1) {
+        cout << "YES\n0" << endl;
+        re;
+    }
+
+    bfs_P();
+    mbfs();
+
+    state ans_exit;
+    int ans = INT_MAX;
+    for(auto e: en) {
+        if(dis[e.ff][e.ss] < dism[e.ff][e.ss]) {
+            ans = min(ans, dis[e.ff][e.ss]);
+            if(ans == dis[e.ff][e.ss])  ans_exit = e;
+        }
+    }
+
+    if(ans == INT_MAX) {
+        NO;
+    }
+    else {
+        YES;
+        cout << ans << endl;
+
+        // /*finding path*/
+        // string path = "";
+        // state temp = ans_exit;
+        // while(temp != mkp((int)1e9, (int)1e9)) {
+        //     state parent = par[temp.ff][temp.ss];
+        //     if(parent.ff - temp.ff == 1)    path += 'U';
+        //     else if(parent.ff - temp.ff == -1)    path += 'D';
+        //     else if(parent.ss - temp.ss == 1)    path += 'L';
+        //     else if(parent.ss - temp.ss == -1)    path += 'R';
+        //     temp = parent;
+        // }
+        // reverse(all(path));
+        // cout << path << endl;
+    }
+
 }
 
 int main()
