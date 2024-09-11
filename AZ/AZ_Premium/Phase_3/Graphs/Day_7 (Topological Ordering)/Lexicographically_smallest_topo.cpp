@@ -77,130 +77,58 @@ void pre() {
 
 }
 
-using state = pair<int, int>;
+// ❤️ Use pq in place of q.
+
 int n, m;
-vector<vector<char>> g;
-vector<state> monsters, en;
-state st;
+vector<vector<int>> g;
+vector<int> indeg, topo;
 
-int dx[] = {-1, 0, 1, 0}; 
-int dy[] = {0, 1, 0, -1}; 
+void kahn() {
 
-bool is_valid(int x, int y) {
-    return (x >= 0 and x < n and y >= 0 and y < m and g[x][y] != '#');
-}
+    priority_queue<int> pq;
 
-vector<vector<int>> dis;
-vector<vector<state>> par;
-void bfs_P() {
-    dis.assign(n, vector<int>(m, -1));
-    par.assign(n, vector<state>(m, {1e9, 1e9}));
+    f(i, 1, n) {
+        if(indeg[i] == 0) {
+            pq.push(-i);
+        }
+    }
 
-    queue<state> q;
-    dis[st.ff][st.ss] = 0;
-    q.push(st);
+    while(!pq.empty()) {
+        int node = -pq.top(); pq.pop();
+        topo.pb(node);
 
-    while(!q.empty()) {
-        state node = q.front(); q.pop();
-
-        f(i, 0, 3) {
-            int x = node.ff + dx[i];
-            int y = node.ss + dy[i];
-            if(is_valid(x, y) and dis[x][y] == -1) {
-                dis[x][y] = dis[node.ff][node.ss] + 1;
-                par[x][y] = node;
-                q.push({x, y});
+        for(auto v: g[node]) {
+            indeg[v]--;
+            if(indeg[v] == 0) {
+                pq.push(-v);
             }
         }
     }
 }
 
-vector<vector<int>> dism;
-void mbfs() {
-    dism.assign(n, vector<int>(m, 1e9));
-
-    queue<state> q;
-    for(auto m :monsters) {
-        dism[m.ff][m.ss] = 0;
-        q.push(m);
-    }
-
-    while(!q.empty()) {
-        state node = q.front(); q.pop();
-
-        f(i, 0, 3) {
-            int x = node.ff + dx[i];
-            int y = node.ss + dy[i];
-            if(is_valid(x, y) and dism[x][y] > dism[node.ff][node.ss] + 1) {
-                dism[x][y] = dism[node.ff][node.ss] + 1;
-                q.push({x, y});
-            }
-        }
-    }
-}
-
-
-// ⭐⭐⭐⭐⭐
 void solve()
 {
     cin >> n >> m;
-    g.assign(n, vector<char>(m));
-    f(i, 0, n - 1) {
-        f(j, 0, m - 1) {
-            cin >> g[i][j];
-            if(g[i][j] == 'A') {
-                st = {i, j};
-            }
-            else if(g[i][j] == 'M'){
-                monsters.pb({i, j});
-            }
-            else if(g[i][j] == '.') {
-                if(i == 0 or i == n - 1 or j == 0 or j == m - 1) {
-                    en.pb({i, j});
-                }
-            }
-        }
+    g.resize(n + 1);
+    indeg.assign(n + 1, 0);
+
+    f(i, 0, m - 1) {
+        int a, b; cin >> a >> b;
+        g[a].pb(b);
+        indeg[b]++;
     }
 
-    if(st.ff == 0 or st.ff == n - 1 or st.ss == 0 or st.ss == m - 1) {
-        cout << "YES\n0" << endl;
-        re;
-    }
-
-    bfs_P();
-    mbfs();
-
-    state ans_exit;
-    int ans = INT_MAX;
-    for(auto e: en) {
-        if(dis[e.ff][e.ss] < dism[e.ff][e.ss]) {
-            ans = min(ans, dis[e.ff][e.ss]);
-            if(ans == dis[e.ff][e.ss])  ans_exit = e;
-        }
-    }
-
-    if(ans == INT_MAX) {
-        NO;
+    kahn();
+    if(topo.size() != n) {
+        cout << "Cycle Found => Not a DAG" << endl; 
     }
     else {
-        YES;
-        cout << ans << endl;
-
-        // /*finding path*/
-        // string path = "";
-        // state temp = ans_exit;
-        // while(temp != mkp((int)1e9, (int)1e9)) {
-        //     state parent = par[temp.ff][temp.ss];
-        //     if(parent.ff - temp.ff == 1)    path += 'U';
-        //     else if(parent.ff - temp.ff == -1)    path += 'D';
-        //     else if(parent.ss - temp.ss == 1)    path += 'L';
-        //     else if(parent.ss - temp.ss == -1)    path += 'R';
-        //     temp = parent;
-        // }
-        // reverse(all(path));
-        // cout << path << endl;
+        cout << topo << endl;
     }
-
+    
+    g.clear();
+    indeg.clear();
+    topo.clear();
 }
 
 int main()
@@ -213,7 +141,7 @@ int main()
     // #endif
 
     pre();
-    // int _t; cin >> _t; while(_t--)
+    int _t; cin >> _t; while(_t--)
     solve();
     return 0;
 }
