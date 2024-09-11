@@ -80,9 +80,9 @@ int n, m;
 int dp[100100];
 vector<vector<int>> g;
 
-// Recursive dp[] method : it automatically computes the order of computation.
 
-int rec(int node) {                // rec(node) -> longest path starting at [node]
+// Recursive dp[] method : it automatically computes the order of computation.
+int rec(int node) {                // ⭐ rec(node) -> longest path starting at [node]
     if(dp[node] != -1)
         return dp[node];
     
@@ -104,17 +104,15 @@ void solve1() {
     }
 
     int ans = 1;
-    f(node, 1, n) {
-        ans = max(ans, dp[node]);
+    f(i, 1, n) {
+        ans = max(ans, rec(i));
     }
     cout << ans << endl;
 }
 
 
 // Iterative dp[] method : here order of computation is reverse order of topo. ordering of DAG.
-
 vector<int> vis, topo;
-
 void dfs(int node) {                        //⚠️ find topo. ordering in reverse order, ⚠️ can't detect cycles...
     vis[node] = 1;
     for(auto v: g[node]) {
@@ -143,6 +141,7 @@ void solve2()
         }
     }
 
+    cerr << "rev_";
     pr(topo);
 
     for(auto node: topo) {
@@ -171,7 +170,7 @@ int main()
 
     pre();
     // int _t; cin >> _t; while(_t--)
-    solve1();
-    // solve2();
+    // solve1();
+    solve2();
     return 0;
 }
