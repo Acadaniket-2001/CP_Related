@@ -82,23 +82,23 @@ long ans;
 
 // accu.
 long cur;
-int rem;
+int l;
 
 int dp[10010][10010];
 
 void rec(vector<int> &v, int lvl) {
 
-    pr(lvl, cur, rem);
+    pr(lvl, cur, l);
 
     int n = v.size();
     if(lvl == n) {
         ans = max(cur, ans);
-        dp[rem][lvl] = ans;
+        dp[l][lvl] = ans;
         re;
     }
 
-    if(dp[rem][lvl] != -1) {
-        ans = max(ans, cur + dp[rem][lvl]);
+    if(dp[l][lvl] != -1) {
+        ans = max(ans, cur + dp[l][lvl]);
         return;
     }
 
@@ -106,14 +106,14 @@ void rec(vector<int> &v, int lvl) {
     rec(v, lvl + 1);
 
     // pick
-    if(rem - (lvl + 1) >= 0) {
+    if(l - (lvl + 1) >= 0) {
         cur += v[lvl];
-        rem -= (lvl + 1);
+        l -= (lvl + 1);
 
         rec(v, lvl + 1);
 
         cur -= v[lvl];
-        rem += (lvl + 1);
+        l += (lvl + 1);
     }
 }
 
@@ -122,7 +122,7 @@ int kill(vector<int>&v, int t) {
     ans = 0;
     cur = 0;
 
-    rem = t;
+    l = t;
     memset(dp, -1, sizeof dp);
     rec(v, 0);
 

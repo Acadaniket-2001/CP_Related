@@ -77,85 +77,95 @@ void pre() {
 
 }
 
-using state = pair<int, int>;
-int n;
-vector<string> g;
-vector<vi> vis;
+/*
+without line 140 --> T.C. = O(n^2)     ❌❌❌
+o/p:
+q : [ 1 ]
+poped : 1, q : [ 2 3 4 5 ]
+poped : 2, q : [ 3 4 5 6 ]
+poped : 3, q : [ 4 5 6 6 ]
+poped : 4, q : [ 5 6 6 6 ]
+poped : 5, q : [ 6 6 6 6 ]
+poped : 6, q : [ 6 6 6 7 8 9 10 ]
+poped : 6, q : [ 6 6 7 8 9 10 7 8 9 10 ]
+poped : 6, q : [ 6 7 8 9 10 7 8 9 10 7 8 9 10 ]
+poped : 6, q : [ 7 8 9 10 7 8 9 10 7 8 9 10 7 8 9 10 ]
+poped : 7, q : [ 8 9 10 7 8 9 10 7 8 9 10 7 8 9 10 ]
+poped : 8, q : [ 9 10 7 8 9 10 7 8 9 10 7 8 9 10 ]
+poped : 9, q : [ 10 7 8 9 10 7 8 9 10 7 8 9 10 ]
+poped : 10, q : [ 7 8 9 10 7 8 9 10 7 8 9 10 ]
+poped : 7, q : [ 8 9 10 7 8 9 10 7 8 9 10 ]
+poped : 8, q : [ 9 10 7 8 9 10 7 8 9 10 ]
+poped : 9, q : [ 10 7 8 9 10 7 8 9 10 ]
+poped : 10, q : [ 7 8 9 10 7 8 9 10 ]
+poped : 7, q : [ 8 9 10 7 8 9 10 ]
+poped : 8, q : [ 9 10 7 8 9 10 ]
+poped : 9, q : [ 10 7 8 9 10 ]
+poped : 10, q : [ 7 8 9 10 ]
+poped : 7, q : [ 8 9 10 ]
+poped : 8, q : [ 9 10 ]
+poped : 9, q : [ 10 ]
+poped : 10, q : [ ]
 
-int area;
-int perimeter;
 
-int dx[] = {-1, 0, 1, 0};
-int dy[] = {0, 1, 0, -1};
+with line 140 --> T.C. = O(n + m)      ✅✅✅
+o/p:
+q : [ 1 ]
+poped : 1, q : [ 2 3 4 5 ]
+poped : 2, q : [ 3 4 5 6 ]
+poped : 3, q : [ 4 5 6 6 ]
+poped : 4, q : [ 5 6 6 6 ]
+poped : 5, q : [ 6 6 6 6 ]
+poped : 6, q : [ 6 6 6 7 8 9 10 ]
+poped : 7, q : [ 8 9 10 ]
+poped : 8, q : [ 9 10 ]
+poped : 9, q : [ 10 ]
+poped : 10, q : [ ]
+*/
 
-bool is_valid(int x, int y) {
-    return (x >= 0 and x < n and y >= 0 and y < n);
-}
+int n, m;
+vector<vector<int>> g;
+vi vis;
 
-void cnt_contri(state node) {
-    area++;
-    f(i, 0, 3) {
-        int x = node.ff + dx[i];
-        int y = node.ss + dy[i];
-        if((is_valid(x, y) and g[x][y] == '.') || (!is_valid(x, y)) )    perimeter++;
-    }
-}
+void bfs(int st) {           // however this method is not preferred, always write bfs() as used in prev. course days.
 
-void bfs(state st) {
-
-    queue<state> q;
-
-    cnt_contri(st);
-    vis[st.ff][st.ss] = 1;
+    queue<int> q;
     q.push(st);
 
+    pr(q);
+
     while(!q.empty()) {
-        state node = q.front(); q.pop();   
-        f(i, 0, 3) {
-            int x = node.ff + dx[i];
-            int y = node.ss + dy[i];
-            if(is_valid(x, y) and g[x][y] == '#' and !vis[x][y]) {
-                cnt_contri({x, y});
-                vis[x][y] = 1;
-                q.push({x, y});
-            }  
+        int node = q.front(); q.pop();
+
+        if(vis[node] == 1)  continue;
+        vis[node] = 1;
+
+        for(auto v: g[node]) {
+            if(!vis[v]) {
+                q.push(v);
+            }
         }
+        pr(node, q); 
     }
-    pr(st, area, perimeter);
 }
 
 void solve()
 {
-    cin >> n;  
-    g.resize(n);
-    vis.resize(n, vector<int>(n, 0));
-    
-    f(i, 0, n - 1) {
-        cin >> g[i];
+    cin >> n >> m;
+    g.resize(n + 1);
+    vis.assign(n + 1, 0);
+
+    f(i, 0, m - 1) {
+        int a, b; cin >> a >> b;
+        g[a].pb(b);
+        g[b].pb(a);
     }
 
-    debvmat(g);
-
-    int ans_ar = 0, ans_pe = 0;
-    f(i, 0, n - 1) {
-        f(j, 0, n - 1) {
-            if(g[i][j] == '#' and !vis[i][j]) {
-                area = 0;
-                perimeter = 0;
-                bfs({i, j});
-                
-                if(ans_ar < area) {
-                    ans_ar = area;
-                    ans_pe = perimeter;
-                }
-                else if(ans_ar == area) {
-                    ans_pe = min(ans_pe, perimeter);
-                }
-            }
+    f(i, 1, n) {
+        if(!vis[i]) {
+            bfs(i);
         }
     }
-
-    cout << ans_ar << " " << ans_pe;
 }
 
 int main()
@@ -172,14 +182,3 @@ int main()
     solve();
     return 0;
 }
-
-/*
-6
-# # . . . .
-. . . . # .
-. # . . # .
-. # # # # #
-. . . # # #
-. . . . # #
-
-*/

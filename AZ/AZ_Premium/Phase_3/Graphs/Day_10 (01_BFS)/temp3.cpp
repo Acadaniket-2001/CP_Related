@@ -59,7 +59,7 @@ template <class T>ostream& operator <<(ostream& os, const deque<T> &p){os << "[ 
 #define pr(...){}
 #define debarr(a,n){}
 #define debmat(mat,row,col){}
-#define debvec(vec){}
+#define debvmat(vec){}
 #endif
 //--------------------- //
 long long POW(long long a,long long b){return (long long)(pow(a,b)+0.5);}
@@ -77,85 +77,37 @@ void pre() {
 
 }
 
-using state = pair<int, int>;
-int n;
-vector<string> g;
-vector<vi> vis;
-
-int area;
-int perimeter;
 
 int dx[] = {-1, 0, 1, 0};
 int dy[] = {0, 1, 0, -1};
 
-bool is_valid(int x, int y) {
-    return (x >= 0 and x < n and y >= 0 and y < n);
-}
-
-void cnt_contri(state node) {
-    area++;
-    f(i, 0, 3) {
-        int x = node.ff + dx[i];
-        int y = node.ss + dy[i];
-        if((is_valid(x, y) and g[x][y] == '.') || (!is_valid(x, y)) )    perimeter++;
-    }
-}
-
-void bfs(state st) {
-
-    queue<state> q;
-
-    cnt_contri(st);
-    vis[st.ff][st.ss] = 1;
-    q.push(st);
-
-    while(!q.empty()) {
-        state node = q.front(); q.pop();   
-        f(i, 0, 3) {
-            int x = node.ff + dx[i];
-            int y = node.ss + dy[i];
-            if(is_valid(x, y) and g[x][y] == '#' and !vis[x][y]) {
-                cnt_contri({x, y});
-                vis[x][y] = 1;
-                q.push({x, y});
-            }  
-        }
-    }
-    pr(st, area, perimeter);
-}
-
 void solve()
 {
-    cin >> n;  
-    g.resize(n);
-    vis.resize(n, vector<int>(n, 0));
-    
-    f(i, 0, n - 1) {
-        cin >> g[i];
+    vector<pair<int, int>> v(3);
+
+    pair<int, int> tot = {0, 0};
+    f(i, 0, 2) {
+        cin >> v[i].ff >> v[i].ss;
+        tot.ff += v[i].ff;
+        tot.ss += v[i].ss;
     }
+    pr(tot);
 
-    debvmat(g);
+    int m; cin >> m;
 
-    int ans_ar = 0, ans_pe = 0;
-    f(i, 0, n - 1) {
-        f(j, 0, n - 1) {
-            if(g[i][j] == '#' and !vis[i][j]) {
-                area = 0;
-                perimeter = 0;
-                bfs({i, j});
-                
-                if(ans_ar < area) {
-                    ans_ar = area;
-                    ans_pe = perimeter;
-                }
-                else if(ans_ar == area) {
-                    ans_pe = min(ans_pe, perimeter);
-                }
-            }
+    ll mn = INT_MAX;
+    f(j, 0, 3) {
+        f(i, 0, m) {
+            int nx = dx[j];
+            int ny = dy[j];
+            pair<int, int> nv = {nx * i, ny * i};
+            pair<int, int> res = {tot.ff + nv.ff, tot.ss + nv.ss};
+            ll mag = (res.ff * res.ff) + (res.ss * res.ss); 
+            mn = min(mn, mag);
         }
     }
 
-    cout << ans_ar << " " << ans_pe;
+    cout << mn << endl;
 }
 
 int main()
@@ -168,18 +120,7 @@ int main()
     // #endif
 
     pre();
-    // int _t; cin >> _t; while(_t--)
+    int _t; cin >> _t; while(_t--)
     solve();
     return 0;
 }
-
-/*
-6
-# # . . . .
-. . . . # .
-. # . . # .
-. # # # # #
-. . . # # #
-. . . . # #
-
-*/

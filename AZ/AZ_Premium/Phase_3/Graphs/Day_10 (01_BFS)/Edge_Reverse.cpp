@@ -59,7 +59,7 @@ template <class T>ostream& operator <<(ostream& os, const deque<T> &p){os << "[ 
 #define pr(...){}
 #define debarr(a,n){}
 #define debmat(mat,row,col){}
-#define debvec(vec){}
+#define debvmat(vec){}
 #endif
 //--------------------- //
 long long POW(long long a,long long b){return (long long)(pow(a,b)+0.5);}
@@ -77,85 +77,56 @@ void pre() {
 
 }
 
-using state = pair<int, int>;
-int n;
-vector<string> g;
-vector<vi> vis;
+int n, m;
+vector<vector<pair<int, int>>> g;
+vector<int> dis;
 
-int area;
-int perimeter;
+void bfs_01(int st) {
+    dis.assign(n + 1, 1e9);
 
-int dx[] = {-1, 0, 1, 0};
-int dy[] = {0, 1, 0, -1};
+    deque<int> dq;
+    dis[st] = 0;
+    dq.push_back(st);
 
-bool is_valid(int x, int y) {
-    return (x >= 0 and x < n and y >= 0 and y < n);
-}
+    while(!dq.empty()) {
+        int node = dq.front(); dq.pop_front();
 
-void cnt_contri(state node) {
-    area++;
-    f(i, 0, 3) {
-        int x = node.ff + dx[i];
-        int y = node.ss + dy[i];
-        if((is_valid(x, y) and g[x][y] == '.') || (!is_valid(x, y)) )    perimeter++;
-    }
-}
-
-void bfs(state st) {
-
-    queue<state> q;
-
-    cnt_contri(st);
-    vis[st.ff][st.ss] = 1;
-    q.push(st);
-
-    while(!q.empty()) {
-        state node = q.front(); q.pop();   
-        f(i, 0, 3) {
-            int x = node.ff + dx[i];
-            int y = node.ss + dy[i];
-            if(is_valid(x, y) and g[x][y] == '#' and !vis[x][y]) {
-                cnt_contri({x, y});
-                vis[x][y] = 1;
-                q.push({x, y});
-            }  
-        }
-    }
-    pr(st, area, perimeter);
-}
-
-void solve()
-{
-    cin >> n;  
-    g.resize(n);
-    vis.resize(n, vector<int>(n, 0));
-    
-    f(i, 0, n - 1) {
-        cin >> g[i];
-    }
-
-    debvmat(g);
-
-    int ans_ar = 0, ans_pe = 0;
-    f(i, 0, n - 1) {
-        f(j, 0, n - 1) {
-            if(g[i][j] == '#' and !vis[i][j]) {
-                area = 0;
-                perimeter = 0;
-                bfs({i, j});
-                
-                if(ans_ar < area) {
-                    ans_ar = area;
-                    ans_pe = perimeter;
-                }
-                else if(ans_ar == area) {
-                    ans_pe = min(ans_pe, perimeter);
-                }
+        for(auto v: g[node]) {
+            if(dis[v.ff] > dis[node] + v.ss) {
+                dis[v.ff] = dis[node] + v.ss;
+                if(v.ss == 0)
+                    dq.push_front(v.ff);
+                else 
+                    dq.push_back(v.ff);
             }
         }
     }
 
-    cout << ans_ar << " " << ans_pe;
+    dis.clear();
+}
+
+void solve()
+{
+    cin >> n >> m;
+    g.resize(n + 1);
+
+    f(i, 1, m) {
+        int a, b; cin >> a >> b;
+        g[a].pb({b, 0});
+        g[b].pb({a, 1});
+    }
+    
+    debvmat(g);
+
+    bfs_01(1);
+    if(dis[n] == 1e9) {
+        cout << -1 << endl;
+    }
+    else {
+        cout << dis[n] << endl;
+    }
+
+    g.clear();
 }
 
 int main()
@@ -168,18 +139,7 @@ int main()
     // #endif
 
     pre();
-    // int _t; cin >> _t; while(_t--)
+    int _t; cin >> _t; while(_t--)
     solve();
     return 0;
 }
-
-/*
-6
-# # . . . .
-. . . . # .
-. # . . # .
-. # # # # #
-. . . # # #
-. . . . # #
-
-*/

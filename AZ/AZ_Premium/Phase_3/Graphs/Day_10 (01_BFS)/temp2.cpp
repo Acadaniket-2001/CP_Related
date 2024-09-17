@@ -59,7 +59,7 @@ template <class T>ostream& operator <<(ostream& os, const deque<T> &p){os << "[ 
 #define pr(...){}
 #define debarr(a,n){}
 #define debmat(mat,row,col){}
-#define debvec(vec){}
+#define debvmat(vec){}
 #endif
 //--------------------- //
 long long POW(long long a,long long b){return (long long)(pow(a,b)+0.5);}
@@ -76,86 +76,36 @@ long long Sqrt(long long x){ long long y=sqrt(x)+5;while(y*y>x)y--;return y;}
 void pre() {
 
 }
+// #define INF 1e18
 
 using state = pair<int, int>;
-int n;
-vector<string> g;
-vector<vi> vis;
+// vector<vector<int>> dis;
 
-int area;
-int perimeter;
+// void bfs(state st) {
+//     dis.assign()
+// }
 
-int dx[] = {-1, 0, 1, 0};
-int dy[] = {0, 1, 0, -1};
-
-bool is_valid(int x, int y) {
-    return (x >= 0 and x < n and y >= 0 and y < n);
-}
-
-void cnt_contri(state node) {
-    area++;
-    f(i, 0, 3) {
-        int x = node.ff + dx[i];
-        int y = node.ss + dy[i];
-        if((is_valid(x, y) and g[x][y] == '.') || (!is_valid(x, y)) )    perimeter++;
-    }
-}
-
-void bfs(state st) {
-
-    queue<state> q;
-
-    cnt_contri(st);
-    vis[st.ff][st.ss] = 1;
-    q.push(st);
-
-    while(!q.empty()) {
-        state node = q.front(); q.pop();   
-        f(i, 0, 3) {
-            int x = node.ff + dx[i];
-            int y = node.ss + dy[i];
-            if(is_valid(x, y) and g[x][y] == '#' and !vis[x][y]) {
-                cnt_contri({x, y});
-                vis[x][y] = 1;
-                q.push({x, y});
-            }  
-        }
-    }
-    pr(st, area, perimeter);
+bool is_inside(state a, int x1, int y1, int x2, int y2) {
+    return (a.ff > x1 and a.ff < x2 and a.ss > y1 and a.ss < y2);
 }
 
 void solve()
 {
-    cin >> n;  
-    g.resize(n);
-    vis.resize(n, vector<int>(n, 0));
-    
-    f(i, 0, n - 1) {
-        cin >> g[i];
+    state a, b;
+    int x1, y1, x2, y2;
+    cin >> a.ff >> a.ss >> b.ff >> b.ss;
+    cin >> x1 >> y1 >> x2 >> y2;
+
+    bool a_inside = is_inside(a, x1, y1, x2, y2);
+    bool b_inside = is_inside(b, x1, y1, x2, y2);
+
+    pr(a_inside, b_inside);
+    if(a_inside == b_inside) {
+        cout << abs(a.ff - b.ff) + abs(a.ss - b.ss) << endl;
     }
-
-    debvmat(g);
-
-    int ans_ar = 0, ans_pe = 0;
-    f(i, 0, n - 1) {
-        f(j, 0, n - 1) {
-            if(g[i][j] == '#' and !vis[i][j]) {
-                area = 0;
-                perimeter = 0;
-                bfs({i, j});
-                
-                if(ans_ar < area) {
-                    ans_ar = area;
-                    ans_pe = perimeter;
-                }
-                else if(ans_ar == area) {
-                    ans_pe = min(ans_pe, perimeter);
-                }
-            }
-        }
+    else {
+        cout << -1 << endl;
     }
-
-    cout << ans_ar << " " << ans_pe;
 }
 
 int main()
@@ -166,20 +116,8 @@ int main()
     //     freopen("io/Input.txt", "r", stdin);
     //     freopen("io/Output.txt", "w", stdout);
     // #endif
-
     pre();
-    // int _t; cin >> _t; while(_t--)
+    int _t; cin >> _t; while(_t--)
     solve();
     return 0;
 }
-
-/*
-6
-# # . . . .
-. . . . # .
-. # . . # .
-. # # # # #
-. . . # # #
-. . . . # #
-
-*/

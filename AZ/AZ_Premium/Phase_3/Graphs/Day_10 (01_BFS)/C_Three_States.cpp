@@ -59,7 +59,7 @@ template <class T>ostream& operator <<(ostream& os, const deque<T> &p){os << "[ 
 #define pr(...){}
 #define debarr(a,n){}
 #define debmat(mat,row,col){}
-#define debvec(vec){}
+#define debvmat(vec){}
 #endif
 //--------------------- //
 long long POW(long long a,long long b){return (long long)(pow(a,b)+0.5);}
@@ -77,85 +77,101 @@ void pre() {
 
 }
 
-using state = pair<int, int>;
-int n;
-vector<string> g;
-vector<vi> vis;
+// Problem: https://codeforces.com/contest/590/problem/C
 
-int area;
-int perimeter;
+#define INF 1e9
+
+using state = pair<int, int>;
+int n, m;
+vector<string> g;
+vector<state> one, two, three;
+vector<vector<vector<int>>> dis;
 
 int dx[] = {-1, 0, 1, 0};
 int dy[] = {0, 1, 0, -1};
 
 bool is_valid(int x, int y) {
-    return (x >= 0 and x < n and y >= 0 and y < n);
+    return (x >= 0 and x < n and y >= 0 and y < m);
 }
 
-void cnt_contri(state node) {
-    area++;
-    f(i, 0, 3) {
-        int x = node.ff + dx[i];
-        int y = node.ss + dy[i];
-        if((is_valid(x, y) and g[x][y] == '.') || (!is_valid(x, y)) )    perimeter++;
+bool can_relax(state node, int x, int y, int comp_type) {
+    // {node} --->{x, y}
+    // {x, y} == '.' ==> cost = 1; else cost = 0;
+    int cost = (g[x][y] == '.');
+    return (dis[comp_type][x][y] > dis[comp_type][node.ff][node.ss] + cost);
+}
+
+void mbfs_01(vector<state> st) {
+    int comp_type = 0;
+    if(g[st[0].ff][st[0].ss] == '1')  comp_type = 1;
+    else if(g[st[0].ff][st[0].ss] == '2')  comp_type = 2;
+    else if(g[st[0].ff][st[0].ss] == '3')  comp_type = 3;
+
+    deque<state> dq;
+    for(auto e: st) {
+        dis[comp_type][e.ff][e.ss] = 0;
+        dq.push_back(e);
     }
-}
 
-void bfs(state st) {
+    while(!dq.empty()) {
+        state node = dq.front(); dq.pop_front();
 
-    queue<state> q;
-
-    cnt_contri(st);
-    vis[st.ff][st.ss] = 1;
-    q.push(st);
-
-    while(!q.empty()) {
-        state node = q.front(); q.pop();   
         f(i, 0, 3) {
             int x = node.ff + dx[i];
             int y = node.ss + dy[i];
-            if(is_valid(x, y) and g[x][y] == '#' and !vis[x][y]) {
-                cnt_contri({x, y});
-                vis[x][y] = 1;
-                q.push({x, y});
-            }  
+            if(is_valid(x, y) and g[x][y] != '#' and can_relax(node, x, y, comp_type)) {
+                int cost = (g[x][y] == '.');
+                dis[comp_type][x][y] = dis[comp_type][node.ff][node.ss] + cost;
+                if(cost)
+                    dq.push_back({x, y});
+                else   
+                    dq.push_front({x, y});
+            }
         }
     }
-    pr(st, area, perimeter);
 }
 
 void solve()
 {
-    cin >> n;  
+    cin >> n >> m;
     g.resize(n);
-    vis.resize(n, vector<int>(n, 0));
-    
+    dis.resize(4, vector<vector<int>>(n, vector<int>(m, INF)));
+
     f(i, 0, n - 1) {
         cin >> g[i];
     }
 
-    debvmat(g);
-
-    int ans_ar = 0, ans_pe = 0;
     f(i, 0, n - 1) {
-        f(j, 0, n - 1) {
-            if(g[i][j] == '#' and !vis[i][j]) {
-                area = 0;
-                perimeter = 0;
-                bfs({i, j});
+        f(j, 0, m - 1) {
+            if(g[i][j] == '1')  one.pb({i, j});
+            else if(g[i][j] == '2')  two.pb({i, j});
+            else if(g[i][j] == '3')  three.pb({i, j});
+        }
+    }
+
+    mbfs_01(one);
+    mbfs_01(two);
+    mbfs_01(three);
+
+    ll ans = 1e15;
+    f(i, 0, n - 1) {
+        f(j, 0, m - 1) {
+            if(g[i][j] != '#') {
                 
-                if(ans_ar < area) {
-                    ans_ar = area;
-                    ans_pe = perimeter;
-                }
-                else if(ans_ar == area) {
-                    ans_pe = min(ans_pe, perimeter);
-                }
+                if(dis[1][i][j] == INF or dis[2][i][j] == INF or dis[3][i][j] == INF)   continue;
+
+                ll path_cost = dis[1][i][j] + dis[2][i][j] + dis[3][i][j];
+                pr(i, j, dis[1][i][j], dis[2][i][j], dis[3][i][j]);
+                if( g[i][j] == '.')  path_cost -= 2;
+                ans = min(ans, path_cost); 
             }
         }
     }
 
-    cout << ans_ar << " " << ans_pe;
+    if(ans == 1e15)
+        cout << -1 << endl;
+    else 
+        cout << ans << endl;
 }
 
 int main()
@@ -172,14 +188,3 @@ int main()
     solve();
     return 0;
 }
-
-/*
-6
-# # . . . .
-. . . . # .
-. # . . # .
-. # # # # #
-. . . # # #
-. . . . # #
-
-*/
