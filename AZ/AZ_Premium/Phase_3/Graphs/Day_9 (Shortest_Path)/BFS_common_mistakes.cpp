@@ -127,7 +127,7 @@ int n, m;
 vector<vector<int>> g;
 vi vis;
 
-void bfs(int st) {           // however this method is not preferred, always write bfs() as used in prev. course days.
+void bfs(int st) {           // however this method is not preferred, always write bfs() as used in prev. course days -> See BFS_intro.cpp (Day_4) for easiest and ultimatly correct version.
 
     queue<int> q;
     q.push(st);
@@ -182,3 +182,20 @@ int main()
     solve();
     return 0;
 }
+
+/*
+i/p:
+10 12
+1 2
+1 3
+1 4
+1 5
+2 6
+3 6
+4 6
+5 6
+6 7
+6 8
+6 9
+6 10
+*/

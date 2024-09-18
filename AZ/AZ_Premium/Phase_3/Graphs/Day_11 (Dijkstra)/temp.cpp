@@ -59,7 +59,7 @@ template <class T>ostream& operator <<(ostream& os, const deque<T> &p){os << "[ 
 #define pr(...){}
 #define debarr(a,n){}
 #define debmat(mat,row,col){}
-#define debvec(vec){}
+#define debvmat(vec){}
 #endif
 //--------------------- //
 long long POW(long long a,long long b){return (long long)(pow(a,b)+0.5);}
@@ -73,141 +73,79 @@ long long Sqrt(long long x){ long long y=sqrt(x)+5;while(y*y>x)y--;return y;}
 ⭐ T -> Think in reverse         ⭐ P -> Prefix or Suffix ideas    ⭐ B -> Bit Manipulation
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
+/* Notes:
+    Always use INF = 1e18; --> as the distance of a node can be >1e9 in some cases
+    Mistake1: using dis[ ] as a vis[ ] in Dijk. --->  WA  ---> same node's Shortest dist may be updated multiple times. 
+*/
+
 void pre() {
 
 }
 
-using state = pair<int, int>;
+
+/*
+node : (0, 1), pq : [ (-10, 5) (-20, 4) (-30, 3) (-40, 2) ], dis : [ INF 0 40 30 20 10 INF INF INF INF INF ]
+node : (-10, 5), pq : [ (-14, 6) (-20, 4) (-30, 3) (-40, 2) ], dis : [ INF 0 40 30 20 10 14 INF INF INF INF ]
+node : (-14, 6), pq : [ (-8, 10) (-8, 9) (-8, 8) (-8, 7) (-20, 4) (-30, 3) (-40, 2) ], dis : [ INF 0 40 30 20 10 14 8 8 8 8 ]
+node : (-8, 10), pq : [ (-8, 9) (-8, 8) (-8, 7) (-20, 4) (-30, 3) (-40, 2) ], dis : [ INF 0 40 30 20 10 14 8 8 8 8 ]
+node : (-8, 9), pq : [ (-8, 8) (-8, 7) (-20, 4) (-30, 3) (-40, 2) ], dis : [ INF 0 40 30 20 10 14 8 8 8 8 ]
+node : (-8, 8), pq : [ (-8, 7) (-20, 4) (-30, 3) (-40, 2) ], dis : [ INF 0 40 30 20 10 14 8 8 8 8 ]
+node : (-8, 7), pq : [ (-20, 4) (-30, 3) (-40, 2) ], dis : [ INF 0 40 30 20 10 14 8 8 8 8 ]
+node : (-20, 4), pq : [ (-12, 6) (-30, 3) (-40, 2) ], dis : [ INF 0 40 30 20 10 12 8 8 8 8 ]
+node : (-30, 3), pq : [ (-10, 6) (-40, 2) ], dis : [ INF 0 40 30 20 10 10 8 8 8 8 ]
+node : (-40, 2), pq : [ (-8, 6) ], dis : [ INF 0 40 30 20 10 8 8 8 8 8 ]
+
+*/
+
+// just using pq in Dijkstras() in place of q in BFS()
+# define int ll
 int n, m;
-vector<vector<char>> g;
-vector<state> monsters, en;
-state st;
+vector<vector<pair<int, int>>> g;
+vector<int> dis, vis;
 
-int dx[] = {-1, 0, 1, 0}; 
-int dy[] = {0, 1, 0, -1}; 
+void dijkstras(int st) {
+    dis.assign(n + 1, 1e18);
+    vis.assign(n + 1, 0);
 
-bool is_valid(int x, int y) {
-    return (x >= 0 and x < n and y >= 0 and y < m and g[x][y] != '#');
-}
+    priority_queue<pair<int, int>> pq;     // {cost to reach node, node}
+    dis[st] = 0;
+    pq.push({-0, st});
 
-vector<vector<int>> dis;
-vector<vector<state>> par;
-void bfs_P() {
-    dis.assign(n, vector<int>(m, 1e9));
-    par.assign(n, vector<state>(m, {1e9, 1e9}));
+    while(!pq.empty()) {
+        pair<int, int> node = pq.top(); pq.pop();
 
-    queue<state> q;
-    dis[st.ff][st.ss] = 0;
-    q.push(st);
+        if(vis[node.ss] == 1)   continue;
+        vis[node.ss] = 1;
 
-    while(!q.empty()) {
-        state node = q.front(); q.pop();
-
-        f(i, 0, 3) {
-            int x = node.ff + dx[i];
-            int y = node.ss + dy[i];
-            if(is_valid(x, y) and dis[x][y] == 1e9) {
-                dis[x][y] = dis[node.ff][node.ss] + 1;
-                par[x][y] = node;
-                q.push({x, y});
+        for(auto v: g[node.ss]) {         // going [node] -> [neigh]
+            int neigh = v.ff;
+            int wt = v.ss;
+            if(dis[neigh] > dis[node.ss] + wt) {
+                dis[neigh] = dis[node.ss] + wt;
+                pq.push({-dis[neigh], neigh});
             }
         }
+        pr(node, pq, dis);
     }
 }
 
-vector<vector<int>> dism;
-void mbfs() {
-    dism.assign(n, vector<int>(m, 1e9));
-
-    queue<state> q;
-    for(auto m :monsters) {
-        dism[m.ff][m.ss] = 0;
-        q.push(m);
-    }
-
-    while(!q.empty()) {
-        state node = q.front(); q.pop();
-
-        f(i, 0, 3) {
-            int x = node.ff + dx[i];
-            int y = node.ss + dy[i];
-            if(is_valid(x, y) and dism[x][y] > dism[node.ff][node.ss] + 1) {
-                dism[x][y] = dism[node.ff][node.ss] + 1;
-                q.push({x, y});
-            }
-        }
-    }
-}
-
-
-// ⭐⭐⭐⭐⭐
 void solve()
 {
     cin >> n >> m;
-    g.assign(n, vector<char>(m));
-    f(i, 0, n - 1) {
-        f(j, 0, m - 1) {
-            cin >> g[i][j];
-            if(g[i][j] == 'A') {
-                st = {i, j};
-            }
-            else if(g[i][j] == 'M'){
-                monsters.pb({i, j});
-            }
-            else if(g[i][j] == '.') {
-                if(i == 0 or i == n - 1 or j == 0 or j == m - 1) {
-                    en.pb({i, j});
-                }
-            }
-        }
+    g.resize(n + 1);
+
+    f(i, 1, m) {
+        int a, b, w;    cin >> a >> b >> w;
+        g[a].pb({b, w});
+        // g[b].pb({a, w});
     }
 
-    if(st.ff == 0 or st.ff == n - 1 or st.ss == 0 or st.ss == m - 1) {
-        cout << "YES\n0" << endl;
-        re;
-    }
+    dijkstras(1);
 
-    bfs_P();
-    mbfs();
-
-    state ans_exit;
-    int ans = INT_MAX;
-    for(auto e: en) {
-        if(dis[e.ff][e.ss] < dism[e.ff][e.ss]) {
-            // pr(dis[e.ff][e.ss], dism[e.ff][e.ss]);
-            ans = min(ans, dis[e.ff][e.ss]);
-            if(ans == dis[e.ff][e.ss])  ans_exit = e;
-            // pr(e, ans);
-        }
-    }
-
-    // pr(ans);
-
-    if(ans == INT_MAX) {
-        NO;
-    }
-    else {
-        YES;
-        cout << ans << endl;
-
-        // /*finding path*/
-        // string path = "";
-        // state temp = ans_exit;
-        // while(temp != mkp((int)1e9, (int)1e9)) {
-        //     state parent = par[temp.ff][temp.ss];
-        //     if(parent.ff - temp.ff == 1)    path += 'U';
-        //     else if(parent.ff - temp.ff == -1)    path += 'D';
-        //     else if(parent.ss - temp.ss == 1)    path += 'L';
-        //     else if(parent.ss - temp.ss == -1)    path += 'R';
-        //     temp = parent;
-        // }
-        // reverse(all(path));
-        // cout << path << endl;
-    }
-
+    cout << "dist[]: " << dis; 
 }
 
-int main()
+signed main()
 {
     fastio();
     // #ifndef ONLINE_JUDGE
