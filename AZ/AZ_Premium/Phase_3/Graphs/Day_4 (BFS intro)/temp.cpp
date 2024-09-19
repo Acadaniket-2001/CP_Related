@@ -79,7 +79,8 @@ void pre() {
 
 int n, m;
 vector<vi> g;
-vector<int> dis;
+
+vi dis;
 
 void bfs(int src) {
     dis.assign(n + 1, 1e9);
@@ -90,7 +91,6 @@ void bfs(int src) {
 
     while(!q.empty()) {
         int node = q.front(); q.pop();
-
         for(auto v: g[node]) {
             if(dis[v] > dis[node] + 1) {
                 dis[v] = dis[node] + 1;

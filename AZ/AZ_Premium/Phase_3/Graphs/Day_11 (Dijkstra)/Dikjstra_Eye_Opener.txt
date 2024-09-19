@@ -1,0 +1,85 @@
+Bhaiya, in Dijkstras video you told to do the vis[] optimisation to prevent TLE.
+but in the below example i am getting WA when i am using vis[] optimsation....
+
+Eg: G(V, E) is directed
+10 12
+1 2 40
+1 3 30
+1 4 20
+1 5 10
+2 6 -32 
+3 6 -20
+4 6 -8
+5 6 4
+6 7 -6
+6 8 -6
+6 9 -6
+6 10 -6
+
+o/p without vis[] optimisation: dist[]: [ INF 0 40 30 20 10 8 2 2 2 2 ]
+o/p with vis[] optimisation:    dist[]: [ INF 0 40 30 20 10 8 8 8 8 8 ]
+
+without optimisation wala shi o/p hai, dry run krne se mila...
+
+---------------------Dijkstra. without vis[ ] array optimisation---------------------
+# define int ll
+int n, m;
+vector<vector<pair<int, int>>> g;
+vector<int> dis;
+
+void dijkstra(int st) {
+    dis.assign(n + 1, 1e18);
+
+    priority_queue<pair<int, int>> pq;     // {cost to reach node, node}
+    dis[st] = 0;
+    pq.push({-0, st});
+
+    while(!pq.empty()) {
+        pair<int, int> node = pq.top(); pq.pop();
+
+        for(auto v: g[node.ss]) {         // going [node] -> [neigh]
+            int neigh = v.ff;
+            int wt = v.ss;
+            if(dis[neigh] > dis[node.ss] + wt) {
+                dis[neigh] = dis[node.ss] + wt;
+                pq.push({-dis[neigh], neigh});
+            }
+        }
+        pr(node, pq, dis);
+    }
+}
+
+
+---------------------Dijkstra. with vis[ ] array optimisation------------------------
+int n, m;
+vector<vector<pair<int, int>>> g;
+vector<int> dis, vis;
+
+void dijkstras(int st) {
+    dis.assign(n + 1, 1e18);
+    vis.assign(n + 1, 0);
+
+    priority_queue<pair<int, int>> pq;     // {cost to reach node, node}
+    dis[st] = 0;
+    pq.push({-0, st});
+
+    while(!pq.empty()) {
+        pair<int, int> node = pq.top(); pq.pop();
+
+        if(vis[node.ss] == 1)   continue;
+        vis[node.ss] = 1;
+
+        for(auto v: g[node.ss]) {         // going [node] -> [neigh]
+            int neigh = v.ff;
+            int wt = v.ss;
+            if(dis[neigh] > dis[node.ss] + wt) {
+                dis[neigh] = dis[node.ss] + wt;
+                pq.push({-dis[neigh], neigh});
+            }
+        }
+        pr(node, pq, dis);
+    }
+}
+
+
+// Answer : Dijkstra doesn't work woth -ve weights
