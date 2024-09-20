@@ -77,102 +77,28 @@ void pre() {
 
 }
 
-// ⭐ Always beware whether to use INF = 1e9 / 1e18; --> as the distance of a node can be >1e9 in some cases.
+#define int ll
+#define ii pair<int, int>
 
-/*
-⚠️⚠️⚠️⚠️⚠️ Dijkstra() doesn't work even work in -ve  wts G(V, E) not only in -ve wts cycles.
-Proof: Try running this directed G with -ve wts.
-i/p:
-10 12
-1 2 40
-1 3 30
-1 4 20
-1 5 10
-2 6 -32 
-3 6 -20
-4 6 -8
-5 6 4
-6 7 -6
-6 8 -6
-6 9 -6
-6 10 -6
-*/
-
-/*
-Mistake: not using vis[ ] in Dijk. --->  TLE. 
-i/p:
-10 12
-1 2 2 
-1 3 2
-1 4 2
-1 5 2
-2 6 1 
-3 6 2
-4 6 3
-5 6 4
-6 7 2
-6 8 2
-6 9 2
-6 10 2
-
-Without using vis[ ] line [172-173], the code is logically correct, but will give TLE in onion graph case (see above i/p..) 
-o/p:
-poped : (0, 1), pq : [ (-2, 5) (-2, 4) (-2, 3) (-2, 2) ], dis : [ INF 0 2 2 2 2 INF INF INF INF INF ]
-poped : (-2, 5), pq : [ (-2, 4) (-2, 3) (-2, 2) (-6, 6) ], dis : [ INF 0 2 2 2 2 6 INF INF INF INF ]
-poped : (-2, 4), pq : [ (-2, 3) (-2, 2) (-5, 6) (-6, 6) ], dis : [ INF 0 2 2 2 2 5 INF INF INF INF ]
-poped : (-2, 3), pq : [ (-2, 2) (-4, 6) (-5, 6) (-6, 6) ], dis : [ INF 0 2 2 2 2 4 INF INF INF INF ]
-poped : (-2, 2), pq : [ (-3, 6) (-4, 6) (-5, 6) (-6, 6) ], dis : [ INF 0 2 2 2 2 3 INF INF INF INF ]
-poped : (-3, 6), pq : [ (-4, 6) (-5, 10) (-5, 9) (-5, 8) (-5, 7) (-5, 6) (-6, 6) ], dis : [ INF 0 2 2 2 2 3 5 5 5 5 ]
-poped : (-4, 6), pq : [ (-5, 10) (-5, 9) (-5, 8) (-5, 7) (-5, 6) (-6, 6) ], dis : [ INF 0 2 2 2 2 3 5 5 5 5 ]
-poped : (-5, 10), pq : [ (-5, 9) (-5, 8) (-5, 7) (-5, 6) (-6, 6) ], dis : [ INF 0 2 2 2 2 3 5 5 5 5 ]
-poped : (-5, 9), pq : [ (-5, 8) (-5, 7) (-5, 6) (-6, 6) ], dis : [ INF 0 2 2 2 2 3 5 5 5 5 ]
-poped : (-5, 8), pq : [ (-5, 7) (-5, 6) (-6, 6) ], dis : [ INF 0 2 2 2 2 3 5 5 5 5 ]
-poped : (-5, 7), pq : [ (-5, 6) (-6, 6) ], dis : [ INF 0 2 2 2 2 3 5 5 5 5 ]
-poped : (-5, 6), pq : [ (-6, 6) ], dis : [ INF 0 2 2 2 2 3 5 5 5 5 ]
-poped : (-6, 6), pq : [ ], dis : [ INF 0 2 2 2 2 3 5 5 5 5 ]
-
-
-
-With using vis[ ] line [172-173], the code will not give TLE in onion graph case (see above i/p..) 
-o/p;
-poped : (0, 1), pq : [ (-2, 5) (-2, 4) (-2, 3) (-2, 2) ], dis : [ INF 0 2 2 2 2 INF INF INF INF INF ]
-poped : (-2, 5), pq : [ (-2, 4) (-2, 3) (-2, 2) (-6, 6) ], dis : [ INF 0 2 2 2 2 6 INF INF INF INF ]
-poped : (-2, 4), pq : [ (-2, 3) (-2, 2) (-5, 6) (-6, 6) ], dis : [ INF 0 2 2 2 2 5 INF INF INF INF ]
-poped : (-2, 3), pq : [ (-2, 2) (-4, 6) (-5, 6) (-6, 6) ], dis : [ INF 0 2 2 2 2 4 INF INF INF INF ]
-poped : (-2, 2), pq : [ (-3, 6) (-4, 6) (-5, 6) (-6, 6) ], dis : [ INF 0 2 2 2 2 3 INF INF INF INF ]
-poped : (-3, 6), pq : [ (-4, 6) (-5, 10) (-5, 9) (-5, 8) (-5, 7) (-5, 6) (-6, 6) ], dis : [ INF 0 2 2 2 2 3 5 5 5 5 ]
-poped : (-5, 10), pq : [ (-5, 9) (-5, 8) (-5, 7) (-5, 6) (-6, 6) ], dis : [ INF 0 2 2 2 2 3 5 5 5 5 ]
-poped : (-5, 9), pq : [ (-5, 8) (-5, 7) (-5, 6) (-6, 6) ], dis : [ INF 0 2 2 2 2 3 5 5 5 5 ]
-poped : (-5, 8), pq : [ (-5, 7) (-5, 6) (-6, 6) ], dis : [ INF 0 2 2 2 2 3 5 5 5 5 ]
-poped : (-5, 7), pq : [ (-5, 6) (-6, 6) ], dis : [ INF 0 2 2 2 2 3 5 5 5 5 ]
-*/
-
-/*
-Mistake: marking visited to node(i) when push in priority queue. (See notes AZ Phase_3:Day_9)
-*/
-
-// just use pq in Dijkstra() in place of q in BFS() and add a vis[ ] filter. to avoid TLE  ---> (always follow this code)
-# define int ll                            // ⭐ important for Dijkstra's  algo.
-int n, m;
-vector<vector<pair<int, int>>> g;
+int n, m; 
+vector<vector<ii>> g;
 vector<int> dis, vis;
 
-void dijkstra(int st) {
-    dis.assign(n + 1, 1e18);
+void Dijkstra(int st) {
+    dis.assign(n + 1, 1e18); 
     vis.assign(n + 1, 0);
 
-
-    priority_queue<pair<int, int>> pq;     // {-cost to reach node, node}
+    priority_queue<ii> pq;
     dis[st] = 0;
-    pq.push({-0, st});
+    pq.push({-0, st}); 
 
     while(!pq.empty()) {
-        pair<int, int> node = pq.top(); pq.pop();
+        ii node = pq.top(); pq.pop();
 
         if(vis[node.ss] == 1)   continue;
         vis[node.ss] = 1;
 
-        for(auto v: g[node.ss]) {         // going [node] -> [neigh]
+        for(auto v: g[node.ss]) {
             int neigh = v.ff;
             int wt = v.ss;
             if(dis[neigh] > dis[node.ss] + wt) {
@@ -180,7 +106,6 @@ void dijkstra(int st) {
                 pq.push({-dis[neigh], neigh});
             }
         }
-        // pr(node, pq, dis);
     }
 }
 
@@ -190,14 +115,15 @@ void solve()
     g.resize(n + 1);
 
     f(i, 1, m) {
-        int a, b, w;    cin >> a >> b >> w;
+        int a, b, w; cin >> a >> b >> w;
         g[a].pb({b, w});
-        g[b].pb({a, w});
     }
 
-    dijkstra(1);
+    Dijkstra(1);
 
-    cout << "dist[]: " << dis; 
+    f(i, 1, n) {
+        cout << dis[i] << " ";
+    }
 }
 
 signed main()

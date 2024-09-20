@@ -59,7 +59,7 @@ template <class T>ostream& operator <<(ostream& os, const deque<T> &p){os << "[ 
 #define pr(...){}
 #define debarr(a,n){}
 #define debmat(mat,row,col){}
-#define debvec(vec){}
+#define debvmat(vec){}
 #endif
 //--------------------- //
 long long POW(long long a,long long b){return (long long)(pow(a,b)+0.5);}
@@ -77,24 +77,32 @@ void pre() {
 
 }
 
-int n, m;
-vector<vi> g;
-vector<int> dis;
+#define int ll
+#define ii pair<int, int>
+int n, m; 
+vector<vector<ii>> g;
+vector<int> dis, vis;
 
-void bfs(int src) {
-    dis.assign(n + 1, 1e9);
+void Dijkstra(int st) {
+    dis.assign(n + 1, 1e18);
+    vis.assign(n + 1, 0);
 
-    queue<int> q;
-    dis[src] = 0;
-    q.push(src);
+    priority_queue<ii> pq;
+    dis[st] = 0;
+    pq.push({-0, st});
 
-    while(!q.empty()) {
-        int node = q.front(); q.pop();
+    while(!pq.empty()) {
+        ii node = pq.top(); pq.pop();
 
-        for(auto v: g[node]) {
-            if(dis[v] > dis[node] + 1) {
-                dis[v] = dis[node] + 1;
-                q.push(v);
+        if(vis[node.ss] == 1)   continue;
+        vis[node.ss] = 1;
+
+        for(auto v: g[node.ss]) {
+            int neigh = v.ff;
+            int wt = v.ss;
+            if(dis[neigh] > dis[node.ss] + wt) {
+                dis[neigh] = dis[node.ss] + wt;
+                pq.push({-dis[neigh], neigh});
             }
         }
     }
@@ -103,24 +111,33 @@ void bfs(int src) {
 void solve()
 {
     cin >> n >> m;
-
     g.resize(n + 1);
-    
-    f(i, 0, m - 1) {
-        int a, b; cin >> a >> b;
-        g[a].pb(b);
-        g[b].pb(a);
+
+    f(i, 1, m) {
+        int a, b, w;    cin >> a >> b >> w;
+        g[a].pb({b, w});
+        g[b].pb({a, w});
     }
 
-    bfs(1);
+    int st; cin >> st;
+    Dijkstra(st);
 
-    f(i, 1, n) {
-        cout << i << ": " << dis[i] << endl;
-        // dbs("node", i, vis[i], dis[i]);
+    pr(dis);
+
+    int ans = INT_MIN;
+    f(node, 1, n) {
+        for(auto v: g[node]) {
+            int tx = dis[node];
+            int ty = dis[v.ff];
+            int time_to_burn = 10*max(tx, ty) + ((v.ss - abs(ty - tx)) * 5);
+            ans = max(ans, time_to_burn);
+        }
     }
+
+    cout << ans;
 }
 
-int main()
+signed main()
 {
     fastio();
     // #ifndef ONLINE_JUDGE
