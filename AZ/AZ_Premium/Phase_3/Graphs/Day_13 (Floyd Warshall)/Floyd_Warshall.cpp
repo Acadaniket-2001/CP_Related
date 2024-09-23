@@ -22,8 +22,8 @@ typedef priority_queue<ll> pqmax;     typedef priority_queue<ll,vector<ll>,great
 #define ppb pop_back
 #define eb emplace_back
 #define mkp make_pair
-#define F first
-#define S second
+#define ff first
+#define ss second
 #define set_bits __builtin_popcountll
 #define sz(x) ((int)(x).size())
 #define all(x) (x).begin(), (x).end()
@@ -37,7 +37,7 @@ template <class T>istream& operator >>(istream &is, vector<T> &v) { for(auto &i 
 #ifndef ONLINE_JUDGE
 #define debarr(a,n) cerr<<#a<<" : ";for(int i=0;i<n;i++) cerr<<a[i]<<" "; cerr<<endl;
 #define debmat(mat,row,col) cerr<<#mat<<" :\n";for(int i=0;i<row;i++) {for(int j=0;j<col;j++) cerr<<mat[i][j]<<" ";cerr<<endl;}
-#define debvmat(vec) cerr << #vec << " :\n"; for (auto r: vec) { for (auto c: r) cerr << c << "\t"; cerr << endl; }  // Mine added.
+#define debvmat(vec) cerr << #vec << " :\n"; for (auto r: vec) { for (auto c: r) cerr << c << " "; cerr << endl; }  // Mine added.
 #define pr(...) dbs(#__VA_ARGS__, __VA_ARGS__)
 template <class S, class T>ostream& operator <<(ostream& os, const pair<S, T>& p) {return os << "(" << p.first << ", " << p.second << ")";}
 template <class T>ostream& operator <<(ostream& os, const vector<T>& p) {os << "[ "; for (auto& it : p) os << it << " "; return os << "]";}
@@ -59,7 +59,7 @@ template <class T>ostream& operator <<(ostream& os, const deque<T> &p){os << "[ 
 #define pr(...){}
 #define debarr(a,n){}
 #define debmat(mat,row,col){}
-#define debvec(vec){}
+#define debvmat(vec){}
 #endif
 //--------------------- //
 long long POW(long long a,long long b){return (long long)(pow(a,b)+0.5);}
@@ -73,139 +73,63 @@ long long Sqrt(long long x){ long long y=sqrt(x)+5;while(y*y>x)y--;return y;}
 ⭐ T -> Think in reverse         ⭐ P -> Prefix or Suffix ideas    ⭐ B -> Bit Manipulation
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-/*
-Flow:   WAP to print the shortest dist b/w S -> F
-        optimise vis[][] using dis[][]
-        print dis[][]
-        print path S -> F
+void pre() {
 
-        ..follow_ups..
-        count all shortest paths S -> F
-        Find shortest path if it os allowed to break atmost K walls
-        ...
-*/
-
-/*
-6 6
-S . # . . .
-. . # . . .
-# . # . # .
-. . . . # .
-# # # # . .
-F . . . . .
-
-Problem : 1. Find the shortest path from S -> F
-          2. Print the path from S -> F
-          3. Count the number of shortest path from S -> F (See Day_15)
-*/
-#define INF 100   // just for this problem
-
-
-
-
-int n, m;
-vector<vector<char>> arr;
-using state = pair<int, int>;                                                        // ⭐
-
-// vector<vector<int>> vis;
-vector<vector<int>> dis;                                                             // ⭐ using dis[ ] as vis[ ]  => if dis[i][j] == INF -> (i, j): !vis |||||  only possible in bfs() becoz each node is visited only once in bfs()
-vector<vector<state>> par;                                                           // ⭐ for printing path
-
-bool is_valid(int x, int y) {
-    return (x>=0 and x<n and y>=0 and y<m and arr[x][y] != '#');
 }
+#define INF 1e15                                    // intentionally used 1e15 to avoid iverflow
+#define int ll
 
-int dx[] = {-1, 0, 1, 0};
-int dy[] = {0, 1, 0, -1};                                                            // ⭐ since symmetry about 45° -> shift it by 1/4
+int n, m; 
+vector<vector<int>> g;
+vector<vector<int>> dis;
 
-// int dx[] = {1, 2, 2, 1, -1, -2, -2, -1};
-// int dy[] = {2, 1, -1, -2, -2, -1, 1, 2};
-
-vector<state> neighbours(state node) {
-    vector<state> neighs;
-    f(i, 0, 3) {
-        int x = node.F + dx[i];
-        int y = node.S + dy[i];
-        if(is_valid(x, y)) {
-            neighs.pb({x, y});
-        }
-    }
-    return neighs;
-}
-
-void bfs(state st) {
-    // vis.assign(n, vector<int>(m, 0));                                             // ⭐  -> good practice to resize in bfs()
-    dis.assign(n, vector<int>(m, INF));
-    par.assign(n, vector<state>(m, {-1, -1}));
-
-    queue<state> q;
-
-    // vis[st.F][st.S] = 1;
-    dis[st.F][st.S] = 0;
-    par[st.F][st.S] = {-1, -1};
-    q.push(st);
-    
-    while(!q.empty()) {
-        state node = q.front(); q.pop();
-        for(auto v: neighbours(node)) {
-            // if(!vis[v.F][v.S]) {
-            if(dis[v.F][v.S] == INF) {
-
-                // vis[v.F][v.S] = 1;
-                dis[v.F][v.S] = dis[node.F][node.S] + 1;
-                par[v.F][v.S] = node;
-                q.push(v);
+void Floyd() {
+    dis = g;
+    f(k, 1, n) {
+        f(i, 1, n) {
+            f(j, 1, n) {
+                dis[i][j] = min(dis[i][j], dis[i][k] + dis[k][j]);
             }
         }
     }
-    
-}
-
-void print_path(state node) {                                                        // ⭐
-    vector<state> path;
-
-    state cur = node;
-    while(cur != mkp(-1, -1)) {
-        path.pb(cur);
-        cur = par[cur.F][cur.S];
-    }
-
-    reverse(all(path));
-    for(auto v: path)   cout << v << endl;
-    ln; 
 }
 
 void solve()
 {
     cin >> n >> m;
-    state st, en;
-
-    arr.resize(n);
-    f(i, 0, n - 1) {
-        arr[i].resize(m);                                                            // ⭐
-        f(j, 0, m - 1)  {
-            cin >> arr[i][j];
-            if(arr[i][j] == 'S')    st = {i, j};
-            if(arr[i][j] == 'F')    en = {i, j};
-        }  
+    g.assign(n + 1, vector<int>(n + 1, INF));
+    f(i, 1, n) {
+        g[i][i] = 0;
     }
 
-    bfs(st);
-    if(dis[en.F][en.S] != INF) {
-        cout << dis[en.F][en.S] << endl;
-        print_path(en);
+    f(i, 1, m) {
+        int a, b, w; cin >> a >> b >> w;
+        g[a][b] = min(g[a][b], w);
+        g[b][a] = min(g[b][a], w);        
     }
-    else 
-        cout << "Finish is not reachable !!!" << endl;
 
-    debvmat(dis);
+    Floyd();
+    
+    for(auto r: dis) {
+        for(auto c: r) {
+            if(c == INF)    cout << "INF\t";
+            else cout << c << "\t";
+        }
+        cout << "\n";
+    }
 }
 
-int main()
+signed main()
 {
     fastio();
+    // #ifndef ONLINE_JUDGE
+    //     freopen("io/Error.txt", "w", stderr);
+    //     freopen("io/Input.txt", "r", stdin);
+    //     freopen("io/Output.txt", "w", stdout);
+    // #endif
+
+    pre();
+    // int _t; cin >> _t; while(_t--)
     solve();
     return 0;
 }
-
-// T.C. = O(V + E) = O(n*m + 4*(n*m)) = O(n*m);

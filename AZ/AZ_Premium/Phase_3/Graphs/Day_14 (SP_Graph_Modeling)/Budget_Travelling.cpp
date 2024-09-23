@@ -22,8 +22,8 @@ typedef priority_queue<ll> pqmax;     typedef priority_queue<ll,vector<ll>,great
 #define ppb pop_back
 #define eb emplace_back
 #define mkp make_pair
-#define F first
-#define S second
+#define ff first
+#define ss second
 #define set_bits __builtin_popcountll
 #define sz(x) ((int)(x).size())
 #define all(x) (x).begin(), (x).end()
@@ -37,7 +37,7 @@ template <class T>istream& operator >>(istream &is, vector<T> &v) { for(auto &i 
 #ifndef ONLINE_JUDGE
 #define debarr(a,n) cerr<<#a<<" : ";for(int i=0;i<n;i++) cerr<<a[i]<<" "; cerr<<endl;
 #define debmat(mat,row,col) cerr<<#mat<<" :\n";for(int i=0;i<row;i++) {for(int j=0;j<col;j++) cerr<<mat[i][j]<<" ";cerr<<endl;}
-#define debvmat(vec) cerr << #vec << " :\n"; for (auto r: vec) { for (auto c: r) cerr << c << "\t"; cerr << endl; }  // Mine added.
+#define debvmat(vec) cerr << #vec << " :\n"; for (auto r: vec) { for (auto c: r) cerr << c << " "; cerr << endl; }  // Mine added.
 #define pr(...) dbs(#__VA_ARGS__, __VA_ARGS__)
 template <class S, class T>ostream& operator <<(ostream& os, const pair<S, T>& p) {return os << "(" << p.first << ", " << p.second << ")";}
 template <class T>ostream& operator <<(ostream& os, const vector<T>& p) {os << "[ "; for (auto& it : p) os << it << " "; return os << "]";}
@@ -59,7 +59,7 @@ template <class T>ostream& operator <<(ostream& os, const deque<T> &p){os << "[ 
 #define pr(...){}
 #define debarr(a,n){}
 #define debmat(mat,row,col){}
-#define debvec(vec){}
+#define debvmat(vec){}
 #endif
 //--------------------- //
 long long POW(long long a,long long b){return (long long)(pow(a,b)+0.5);}
@@ -73,139 +73,107 @@ long long Sqrt(long long x){ long long y=sqrt(x)+5;while(y*y>x)y--;return y;}
 ⭐ T -> Think in reverse         ⭐ P -> Prefix or Suffix ideas    ⭐ B -> Bit Manipulation
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-/*
-Flow:   WAP to print the shortest dist b/w S -> F
-        optimise vis[][] using dis[][]
-        print dis[][]
-        print path S -> F
+void pre() {
 
-        ..follow_ups..
-        count all shortest paths S -> F
-        Find shortest path if it os allowed to break atmost K walls
-        ...
-*/
-
-/*
-6 6
-S . # . . .
-. . # . . .
-# . # . # .
-. . . . # .
-# # # # . .
-F . . . . .
-
-Problem : 1. Find the shortest path from S -> F
-          2. Print the path from S -> F
-          3. Count the number of shortest path from S -> F (See Day_15)
-*/
-#define INF 100   // just for this problem
+}
 
 
+// 🎉🎉 Asked in Uber OA
 
+#define INF 1e12
+#define int ll
 
+using state = pair<int, int>;                // {node_id, fuel left}
 int n, m;
-vector<vector<char>> arr;
-using state = pair<int, int>;                                                        // ⭐
+int st, en, cap;    
+vector<vector<pair<int, int>>> g;
+vector<int> petrol;
 
-// vector<vector<int>> vis;
-vector<vector<int>> dis;                                                             // ⭐ using dis[ ] as vis[ ]  => if dis[i][j] == INF -> (i, j): !vis |||||  only possible in bfs() becoz each node is visited only once in bfs()
-vector<vector<state>> par;                                                           // ⭐ for printing path
+vector<vector<int>> dis, vis;                // {node_id, fuel left}
 
-bool is_valid(int x, int y) {
-    return (x>=0 and x<n and y>=0 and y<m and arr[x][y] != '#');
-}
+// ⭐⭐⭐ the new transitions in the graph reduces the |E| in G from O(N*cap^2) in prev. TLE code -> O(N + cap)
+void Dijkstra(state src) {
+    dis.assign(n + 1, vector<int>(cap + 1, INF));   
+    vis.assign(n + 1, vector<int>(cap + 1, 0));   
 
-int dx[] = {-1, 0, 1, 0};
-int dy[] = {0, 1, 0, -1};                                                            // ⭐ since symmetry about 45° -> shift it by 1/4
+    priority_queue<pair<int, state>> pq;     // {-cost to reach node, {node_id, fuel left}}
+    dis[src.ff][src.ss] = 0;
+    pq.push({0, src});
 
-// int dx[] = {1, 2, 2, 1, -1, -2, -2, -1};
-// int dy[] = {2, 1, -1, -2, -2, -1, 1, 2};
+    while(!pq.empty()) {
+        auto nn = pq.top(); pq.pop();
+        int node = nn.ss.ff;
+        int fuel = nn.ss.ss;
 
-vector<state> neighbours(state node) {
-    vector<state> neighs;
-    f(i, 0, 3) {
-        int x = node.F + dx[i];
-        int y = node.S + dy[i];
-        if(is_valid(x, y)) {
-            neighs.pb({x, y});
+        if(vis[node][fuel])     continue;
+        vis[node][fuel] = 1;
+
+        // go to all feasible neighbours without any petrol purchase... if(enough petrol)
+        for(auto v: g[node]) {
+            int neigh = v.ff;
+            int d = v.ss;
+            int p = petrol[node]; 
+
+            // ⭐ pre_condtiton
+            if(fuel >= d) {
+                // relax dijkstra
+                if(dis[neigh][fuel - d] > dis[node][fuel] + 0) {
+                    dis[neigh][fuel - d] = dis[node][fuel] + 0;
+                    pq.push({-dis[neigh][fuel - d], {neigh, fuel - d}});
+                }
+            }
         }
-    }
-    return neighs;
-}
 
-void bfs(state st) {
-    // vis.assign(n, vector<int>(m, 0));                                             // ⭐  -> good practice to resize in bfs()
-    dis.assign(n, vector<int>(m, INF));
-    par.assign(n, vector<state>(m, {-1, -1}));
-
-    queue<state> q;
-
-    // vis[st.F][st.S] = 1;
-    dis[st.F][st.S] = 0;
-    par[st.F][st.S] = {-1, -1};
-    q.push(st);
-    
-    while(!q.empty()) {
-        state node = q.front(); q.pop();
-        for(auto v: neighbours(node)) {
-            // if(!vis[v.F][v.S]) {
-            if(dis[v.F][v.S] == INF) {
-
-                // vis[v.F][v.S] = 1;
-                dis[v.F][v.S] = dis[node.F][node.S] + 1;
-                par[v.F][v.S] = node;
-                q.push(v);
+        // refill: purchase 1 unit of fuel to go to next fuel level at same node
+        // ⭐ pre_condtiton
+        if(fuel + 1 <= cap) {
+            //relax dijkstra
+            if(dis[node][fuel + 1] > dis[node][fuel] + petrol[node]) {
+                dis[node][fuel + 1] = dis[node][fuel] + petrol[node];
+                pq.push({-dis[node][fuel + 1], {node, fuel + 1}});
             }
         }
     }
-    
-}
-
-void print_path(state node) {                                                        // ⭐
-    vector<state> path;
-
-    state cur = node;
-    while(cur != mkp(-1, -1)) {
-        path.pb(cur);
-        cur = par[cur.F][cur.S];
-    }
-
-    reverse(all(path));
-    for(auto v: path)   cout << v << endl;
-    ln; 
 }
 
 void solve()
 {
     cin >> n >> m;
-    state st, en;
+    g.resize(n + 1);
+    petrol.resize(n + 1);
 
-    arr.resize(n);
-    f(i, 0, n - 1) {
-        arr[i].resize(m);                                                            // ⭐
-        f(j, 0, m - 1)  {
-            cin >> arr[i][j];
-            if(arr[i][j] == 'S')    st = {i, j};
-            if(arr[i][j] == 'F')    en = {i, j};
-        }  
+    f(i, 1, m) {
+        int u, v, d; cin >> u >> v >> d;
+        g[u].pb({v, d});
+        g[v].pb({u, d});
     }
 
-    bfs(st);
-    if(dis[en.F][en.S] != INF) {
-        cout << dis[en.F][en.S] << endl;
-        print_path(en);
-    }
-    else 
-        cout << "Finish is not reachable !!!" << endl;
+    f(i, 1, n)  cin >> petrol[i];
 
-    debvmat(dis);
+    cin >> st >> en >> cap;
+
+    Dijkstra({st, 0});
+
+    cout << dis[en][0] << endl;
+
+    // int ans = INT_MAX;
+    // f(i, 0, cap) {
+    //     ans = min(ans, dis[en][i]);
+    // }
+    // cout << ans;
 }
 
-int main()
+signed main()
 {
     fastio();
+    // #ifndef ONLINE_JUDGE
+    //     freopen("io/Error.txt", "w", stderr);
+    //     freopen("io/Input.txt", "r", stdin);
+    //     freopen("io/Output.txt", "w", stdout);
+    // #endif
+
+    pre();
+    // int _t; cin >> _t; while(_t--)
     solve();
     return 0;
 }
-
-// T.C. = O(V + E) = O(n*m + 4*(n*m)) = O(n*m);

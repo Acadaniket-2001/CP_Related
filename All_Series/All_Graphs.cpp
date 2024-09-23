@@ -1080,10 +1080,59 @@ int main() {
 
 ------------------------------------------------------------------------------------*/
 
-/*-----------------------------Diameter of a G(V, E)-----------------------------------------------------------
+// /*-----------------------------Diameter of a G(V, E)-----------------------------------------------------------
 
-// Diameter of a G(V, E) is the length of longest shortest path. 
-Idea: Run normal floyd's algo on G(V, E) and take max if all dist[i][j]
+// Diameter of a G(V, E) is the length of longest shortest path (max_cost SP). 
+// Idea: Run normal floyd's algo on G(V, E) and take max 0f all dist[i][j]: dist[i][j] != INF
 
-------------------------------------------------------------------------------------*/
+#define int ll
+int dist[404][404];       // all g[i][j] = 0, automatically       
+int n, m;
+
+void solve() {
+    cin >> n >> m;
+
+    f(i, 0, n - 1) {
+        f(j, 0, n - 1) {
+            if(i != j)  dist[i][j] = 1e9;
+        }
+    }
+
+    // G(V, E) i/p
+    f(i, 1, m) {
+        int a, b, c; cin >> a >> b >> c;
+        dist[a][b] = min(dist[a][b], c);       // there can be multi-edges
+    }
+
+    // floyd's algo.
+    f(k, 0, n - 1) {
+        f(i, 0, n - 1) {
+            f(j, 0, n - 1) {
+                dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);
+            }
+        }
+    }
+
+    // finding diameter
+    ll dia = INT_MIN;
+    f(i, 0, n - 1) {
+        f(j, 0, n - 1) {
+            if(dist[i][j] != 1e9) {
+                dia = max(dia, dist[i][j]);
+            }
+        }
+    }
+
+    cout << "Diameter: " << dia << endl;
+}
+
+signed main() {
+    fastio();
+    #ifndef ONLINE_JUDGE
+    freopen("io/Error.txt", "w", stderr);
+    #endif
+    // int _t = 1; cin >> _t; while(_t--)
+    solve();
+}
+// ------------------------------------------------------------------------------------*/
 // End of application of Floyd's algorithm :

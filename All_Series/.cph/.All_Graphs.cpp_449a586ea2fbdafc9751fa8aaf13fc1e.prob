@@ -1,0 +1,1 @@
+{"name":"Local: All_Graphs","url":"c:\\1_My_Data\\CP_codes\\CP_Data\\All_Series\\All_Graphs.cpp","tests":[{"id":1726903889832,"input":"4 5\n1 0 4\n0 2 -2\n1 2 3\n3 1 -1\n2 3 2","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\1_My_Data\\CP_codes\\CP_Data\\All_Series\\All_Graphs.cpp","group":"local","local":true}
