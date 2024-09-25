@@ -77,70 +77,70 @@ void pre() {
 
 }
 
-#define INF 1e15
+// It is important to formulate the Graphs such that #nodes and #edges are optimal so that SP algo. 
+// doesn't give TLE.
+
+#define INF 1e18
 #define int ll
+
+int n, a, b;
+vector<vector<pair<int, int>>> g;
+map<int, vector<int>> mp;
+vector<ll> dis, vis;
+
+void Dijkstra(int st) {
+    dis.assign(g.size(), INF);
+    vis.assign(g.size(), 0);
+
+    priority_queue<pair<int, int>> pq;
+    dis[st] = 0;
+    pq.push({-0, st});
+
+    while(!pq.empty()) {
+        auto node = pq.top(); pq.pop();
+        if(vis[node.ss] == 1)   continue;
+        vis[node.ss] = 1;
+
+        for(auto v: g[node.ss]) {
+            int neigh = v.ff;
+            int wt = v.ss;
+            if(dis[neigh] > dis[node.ss] + wt) {
+                dis[neigh] = dis[node.ss] + wt;
+                pq.push({-dis[neigh], neigh});
+            }
+        }
+    }
+}
 
 void solve()
 {
-    ll n; cin >> n;
-    vector<vector<int>> adj, dis;
-
-    adj.assign(n + 1, vector<int>(n + 1));
-    dis.assign(n + 1, vector<int>(n + 1, INF));
+    cin >> n >> a >> b;
 
     f(i, 1, n) {
-        f(j, 1, n) {
-            cin >> adj[i][j];
-        }
+        int x; cin >> x;
+        mp[x].pb(i);
     }
 
-    vi rmv(n); cin >> rmv;
-    vi curr, ans;
-
-    rf(i, n - 1, 0) {
-        int added = rmv[i];
-        
-        curr.pb(added);
-        
-        for(auto e: curr) {
-            dis[e][added] = adj[e][added];
-            dis[added][e] = adj[added][e];
-        }
-
-        for(auto ei : curr) {
-            for(auto ej: curr) {
-                dis[ei][ej] = min(dis[ei][ej], dis[ei][added] + dis[added][ej]);
-                dis[ei][added] = min(dis[ei][added], dis[ei][ej] + dis[ej][added]);
-                dis[added][ej] = min(dis[added][ej], dis[added][ei] + dis[ei][ej]);
-            }
-        }
-
-        ll t = 0;
-        for(auto ei: curr) {
-            for(auto ej: curr) {
-                t += dis[ei][ej];
-            }
-        }
-        ans.pb(t);
-
-        pr(i, rmv[i], curr);
-        // cerr << "dis:\n";
-        // f(i, 1, n) {
-        //     f(j, 1, n) {
-        //         if(dis[i][j] != INF)
-        //             cerr << dis[i][j] <<"\t";
-        //         else 
-        //             cerr << INF <<"\t";
-        //     }
-        //     cerr << "\n";
-        // }
-
+    g.resize(n + mp.size() + 1);
+    f(i, 1, n - 1) {                                                // ⭐
+        g[i].pb({i + 1, b});
+        g[i + 1].pb({i, b});
     }
 
-    reverse(all(ans));
-    f(i, 0, n - 1) {
-        cout << ans[i] << " ";
+    int Dnode = n + 1;
+    for(auto &x: mp) {
+        for(auto y: x.ss) {
+            g[Dnode].pb({y, 0});
+            g[y].pb({Dnode, a});
+        }
+        Dnode++;
     }
+    debvmat(g);
+
+    int st; cin >> st;
+    Dijkstra(st);
+
+    f(i, 1, n)  cout << dis[i] << " ";
 }
 
 signed main()

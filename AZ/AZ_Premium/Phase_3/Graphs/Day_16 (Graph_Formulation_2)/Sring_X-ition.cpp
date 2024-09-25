@@ -77,70 +77,100 @@ void pre() {
 
 }
 
-#define INF 1e15
+/*
+Problem:
+    Given a S and E bit strings. In one move we can flip one it of a string.
+    Find the minimum number of moves to go S -> E. 
+    Given that there some banned strings which should not be formed while conversion process.  
+    0 <= |S|, |E| <= 20
+
+Eg: 
+3
+101 000
+2 
+001 100
+
+o/p: 4
+*/
+
+#define INF 1e9
 #define int ll
+
+int n, st, en;
+vector<bool> banned;
+vector<int> dis, par;
+
+vector<int> neighbours(int node) {
+    vector<int> ans;
+    f(i, 0, n - 1) {
+        int t = node ^ (1 << i);
+        if(!banned[t]) {
+            ans.pb(t);
+        }
+    }
+    return ans;
+}
+
+void bfs(int st) {
+    dis.assign((1 << n), INF);
+    par.assign((1 << n), 0);
+
+    queue<int> q;
+    dis[st] = 0;
+    par[st] = -1;
+    q.push(st);
+
+    while(!q.empty()) {
+        int node = q.front(); q.pop();
+
+        for(auto v: neighbours(node)) {
+            if(dis[v] > dis[node] + 1) {
+                dis[v] = dis[node] + 1;
+                par[v] = node;
+                q.push(v);
+            }
+        }
+    }
+}
+
+int to_num(string s) {
+    int ans = 0;
+    f(i, 0, sz(s) - 1) {
+        if(s[i] == '1') {
+            ans |= (1 << (sz(s) - i - 1));
+        }
+    }
+    return ans;
+}
+
+void print_path(int node) {
+    if(node == -1) {
+        return;
+    }
+    print_path(par[node]);
+    cout << node << " -> ";
+}
 
 void solve()
 {
-    ll n; cin >> n;
-    vector<vector<int>> adj, dis;
+    cin >> n;
+    string s, e; cin >> s >> e;
 
-    adj.assign(n + 1, vector<int>(n + 1));
-    dis.assign(n + 1, vector<int>(n + 1, INF));
-
-    f(i, 1, n) {
-        f(j, 1, n) {
-            cin >> adj[i][j];
-        }
+    st = to_num(s);
+    en = to_num(e);
+    
+    banned.assign((1 << n), 0);
+    int x; cin >> x;
+    f(i, 0, x - 1) {
+        cin >> s;
+        int t = to_num(s);
+        banned[t] = 1;
     }
 
-    vi rmv(n); cin >> rmv;
-    vi curr, ans;
+    bfs(st);
 
-    rf(i, n - 1, 0) {
-        int added = rmv[i];
-        
-        curr.pb(added);
-        
-        for(auto e: curr) {
-            dis[e][added] = adj[e][added];
-            dis[added][e] = adj[added][e];
-        }
-
-        for(auto ei : curr) {
-            for(auto ej: curr) {
-                dis[ei][ej] = min(dis[ei][ej], dis[ei][added] + dis[added][ej]);
-                dis[ei][added] = min(dis[ei][added], dis[ei][ej] + dis[ej][added]);
-                dis[added][ej] = min(dis[added][ej], dis[added][ei] + dis[ei][ej]);
-            }
-        }
-
-        ll t = 0;
-        for(auto ei: curr) {
-            for(auto ej: curr) {
-                t += dis[ei][ej];
-            }
-        }
-        ans.pb(t);
-
-        pr(i, rmv[i], curr);
-        // cerr << "dis:\n";
-        // f(i, 1, n) {
-        //     f(j, 1, n) {
-        //         if(dis[i][j] != INF)
-        //             cerr << dis[i][j] <<"\t";
-        //         else 
-        //             cerr << INF <<"\t";
-        //     }
-        //     cerr << "\n";
-        // }
-
-    }
-
-    reverse(all(ans));
-    f(i, 0, n - 1) {
-        cout << ans[i] << " ";
-    }
+    cout << dis[en] << endl;
+    print_path(en);
 }
 
 signed main()
@@ -157,3 +187,4 @@ signed main()
     solve();
     return 0;
 }
+

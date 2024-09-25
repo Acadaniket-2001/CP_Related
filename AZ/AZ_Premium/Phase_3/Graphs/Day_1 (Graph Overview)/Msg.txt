@@ -1,0 +1,4 @@
+Day_1:
+	Graph terminologies. (Read Notes)
+	https://youtu.be/Pdk8U1r7qvk
+	https://youtu.be/WQ2Tzlxl_Xo
