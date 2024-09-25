@@ -97,21 +97,16 @@ void solve()
     vi rmv(n); cin >> rmv;
     vi curr, ans;
 
+    dis = adj;                    // ⭐ , it is required
+
     rf(i, n - 1, 0) {
         int added = rmv[i];
         
         curr.pb(added);
-        
-        for(auto e: curr) {
-            dis[e][added] = adj[e][added];
-            dis[added][e] = adj[added][e];
-        }
 
-        for(auto ei : curr) {
-            for(auto ej: curr) {
+        f(ei, 1, n) {             // ⭐ for(auto ei: curr) for(auto ej: curr) {...} ===> gives WA as we need to relax all possible edges also those one which are going to added in graph due to upcoming nodes 
+            f(ej, 1, n) {
                 dis[ei][ej] = min(dis[ei][ej], dis[ei][added] + dis[added][ej]);
-                dis[ei][added] = min(dis[ei][added], dis[ei][ej] + dis[ej][added]);
-                dis[added][ej] = min(dis[added][ej], dis[added][ei] + dis[ei][ej]);
             }
         }
 
@@ -122,19 +117,6 @@ void solve()
             }
         }
         ans.pb(t);
-
-        pr(i, rmv[i], curr);
-        // cerr << "dis:\n";
-        // f(i, 1, n) {
-        //     f(j, 1, n) {
-        //         if(dis[i][j] != INF)
-        //             cerr << dis[i][j] <<"\t";
-        //         else 
-        //             cerr << INF <<"\t";
-        //     }
-        //     cerr << "\n";
-        // }
-
     }
 
     reverse(all(ans));

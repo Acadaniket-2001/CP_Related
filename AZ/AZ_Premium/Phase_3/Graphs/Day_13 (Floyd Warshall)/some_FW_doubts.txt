@@ -1,0 +1,63 @@
+
+Can Floyd warshall detect +ve cycle ??
+-> No, see line 22 comment
+----------------------------------------
+if(dist[i][i] < 1e9)
+	yes;
+else
+	no;
+----------------------------------------
+I think it is correct ....
+but
+
+for below Eg: 
+5 5
+0 1 -1
+1 2 -1
+2 3 -1
+3 4 -1
+0 4 -1    // ⚠️
+
+o/p:
+Cheapest Cycle: 999999996  <  1e9          // ⭐ we can't infer that we have positive cycle of cost (999999996)
+-ve Cycle not Present
+i : 0, dist[i][i] : 999999996
+i : 1, dist[i][i] : 999999996
+i : 2, dist[i][i] : 999999996
+i : 3, dist[i][i] : 999999996
+i : 4, dist[i][i] : 999999996
+
+
+Even if no +ve cycle is present, I am getting cheapest cycle < 1e9.
+why it is so ???  --> 
+
+ans: (999999996 < 1e9) this is because, the altough the algo. tried to relax the edges but still couldn't find -ve cycle
+
+-----------------------------------------------------------------------------------
+Doubt 2: 
+	Did not clearly get, how to build the path in Floyd Warshall's algo. ??
+		par[i][j] = par[k][j] ???? part....
+
+    ans : See notes.. diagram
+
+-----------------------------------------------------------------------------------
+Doubt 3: 
+	Why i am getting TLE in budget travelling while implementing my way...(mobile pic.. for approach) ???
+	i tried to implement using formulation framework... 
+
+	but if modelled it the way it was taught, i wasn't getting TLE.... why ??
+	
+	how to find the correct modelling ideas, non_TLE one 😁???
+
+    ans: Practice !!!
+
+-----------------------------------------------------------------------------------
+Doubt 4:
+	does (dis[v] == INF) check works in BFS_01() ??? ---> if not y?
+
+    ans: it only works in BFS() due to uni-weight nature of G(V, E)
+            whrereas, in BFS01()  -> wt = {0, 1};
+            and,      in Dijkstra()  -> wt = [0, INF];
+
+
+

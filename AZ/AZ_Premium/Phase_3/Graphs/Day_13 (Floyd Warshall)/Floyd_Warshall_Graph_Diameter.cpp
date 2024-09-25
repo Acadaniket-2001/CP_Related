@@ -118,13 +118,13 @@ void solve() {
 
     cout << "Diameter: " << dia << endl;
 
-    // f(i, 0, n - 1) {
-    //     f(j, 0, n - 1) {
-    //         if(dist[i][j] == INF)    cerr << "INF\t";
-    //         else cerr << dist[i][j] << "\t";
-    //     }
-    //     cerr << "\n";
-    // }
+    f(i, 0, n - 1) {
+        f(j, 0, n - 1) {
+            if(dist[i][j] == INF)    cerr << "INF\t";
+            else cerr << dist[i][j] << "\t";
+        }
+        cerr << "\n";
+    }
 }
 
 signed main() {
