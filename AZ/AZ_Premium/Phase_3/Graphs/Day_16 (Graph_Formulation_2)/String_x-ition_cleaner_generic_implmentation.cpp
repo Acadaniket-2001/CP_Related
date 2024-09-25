@@ -77,69 +77,91 @@ void pre() {
 
 }
 
-// ⭐ It is important to formulate the Graphs such that #nodes and #edges are optimal so that SP algo. doesn't give TLE.
+/*
+Problem:
+    Given a S and E bit strings. In one move we can flip one bit of a string.
+    Find the minimum number of moves to go S -> E. 
+    Given that there some banned strings which should not be formed while conversion process.  
+    0 <= |S|, |E| <= 20
 
-#define INF 1e18
-#define int ll
+Eg: 
+3
+101 000
+2 
+001 100
 
-int n, a, b;
-vector<vector<pair<int, int>>> g;
-map<int, vector<int>> mp;
-vector<ll> dis, vis;
+o/p: 4
+*/
 
-void Dijkstra(int st) {
-    dis.assign(g.size(), INF);
-    vis.assign(g.size(), 0);
+// ⚠️⚠️⚠️ Gives SIGTERM in VsCode, but works in online GDB...
 
-    priority_queue<pair<int, int>> pq;
+#define INF 1e9
+
+int st, en;
+bool banned[(1 << 20)];
+vector<int> g[(1 << 20)];
+vector<int> dis;
+
+void bfs(int st) {
+    dis.assign((1 << 20), INF);
+
+    queue<int> q;
     dis[st] = 0;
-    pq.push({-0, st});
+    q.push(st);
 
-    while(!pq.empty()) {
-        auto node = pq.top(); pq.pop();
-        if(vis[node.ss] == 1)   continue;
-        vis[node.ss] = 1;
+    while(!q.empty()) {
+        int node = q.front(); q.pop();
 
-        for(auto v: g[node.ss]) {
-            int neigh = v.ff;
-            int wt = v.ss;
-            if(dis[neigh] > dis[node.ss] + wt) {
-                dis[neigh] = dis[node.ss] + wt;
-                pq.push({-dis[neigh], neigh});
+        for(auto v: g[node]) {
+            if(dis[v] > dis[node] + 1) {
+                dis[v] = dis[node] + 1;
+                q.push(v);
             }
         }
     }
 }
 
+int to_num(string s) {
+    int ans = 0;
+    f(i, 0, sz(s) - 1) {
+        if(s[i] == '1') {
+            ans |= (1 << sz(s) - i - 1);
+        }
+    }
+    return ans;
+}
+
+void add_edge(int a, int b) {                 // ❤️❤️❤️
+    if(!banned[a] and !banned[b]) {
+        g[a].pb(b);
+        g[b].pb(a);
+    }
+}
+
 void solve()
 {
-    cin >> n >> a >> b;
+    string s; cin >> s;
 
-    f(i, 1, n) {
-        int x; cin >> x;
-        mp[x].pb(i);
+    st = to_num(s);
+    cin >> s;
+    en = to_num(s);
+    
+    int x; cin >> x;
+    f(i, 0, x - 1) {
+        cin >> s;
+        banned[to_num(s)] = 1;
     }
 
-    g.resize(n + mp.size() + 1);
-    f(i, 1, n - 1) {                                                // ⭐
-        g[i].pb({i + 1, b});
-        g[i + 1].pb({i, b});
+    pr(st, en);
+
+    f(i, 0, (1 << 20) - 1) {
+        f(j, 0, 19) {
+            add_edge(i, i ^ (1 << j));
+        }   
     }
 
-    int Dnode = n + 1;
-    for(auto &x: mp) {
-        for(auto y: x.ss) {
-            g[Dnode].pb({y, 0});
-            g[y].pb({Dnode, a});
-        }
-        Dnode++;
-    }
-    debvmat(g);
-
-    int st; cin >> st;
-    Dijkstra(st);
-
-    f(i, 1, n)  cout << dis[i] << " ";
+    bfs(st);
+    cout << dis[en] << endl;
 }
 
 signed main()
@@ -156,3 +178,10 @@ signed main()
     solve();
     return 0;
 }
+
+/*
+00000000000000000101  00000000000000000000
+2 
+00000000000000000001  00000000000000000100
+*/
+

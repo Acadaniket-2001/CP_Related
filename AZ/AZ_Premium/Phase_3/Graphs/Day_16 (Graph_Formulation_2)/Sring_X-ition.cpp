@@ -94,7 +94,6 @@ o/p: 4
 */
 
 #define INF 1e9
-#define int ll
 
 int n, st, en;
 vector<bool> banned;
@@ -163,8 +162,7 @@ void solve()
     int x; cin >> x;
     f(i, 0, x - 1) {
         cin >> s;
-        int t = to_num(s);
-        banned[t] = 1;
+        banned[to_num(s)] = 1;
     }
 
     bfs(st);
