@@ -73,76 +73,135 @@ long long Sqrt(long long x){ long long y=sqrt(x)+5;while(y*y>x)y--;return y;}
 ⭐ T -> Think in reverse         ⭐ P -> Prefix or Suffix ideas    ⭐ B -> Bit Manipulation
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
+/*
+Problem: Find the number of diameters of a tree.
+*/
+
 void pre() {
 
 }
 
-/*
-#️⃣ One single code for all tree problems.
-Problem: Given a tree of N nodes, find for all nodes of the tree.
-            1. isLeaf ??
-            2. depth
-            3. SubtreeSz
-            4. Parent
-            5. # child
+#define int ll
 
-    ⭐ Practice each one of them independently.
-*/
-
-int n;
+int n; 
 vector<vector<int>> g;
-vector<int> dep;
-vector<int> par;
-vector<bool> isLeaf;
-vector<int> subtreeSz;
-vector<int> numChild;
+vector<int> dep, par;
+int diameter = 0;
+
+int dis;
+int nodes_at_dis;
 
 void dfs(int node, int parent, int depth) {
-    par[node] = parent;
     dep[node] = depth;
+    if(depth == dis)    nodes_at_dis++;                // ⭐ 
+    par[node] = parent;
 
-    numChild[node] = 0;
-    subtreeSz[node] = 1;
     for(auto v: g[node]) {
-        if(v != parent) {                            // ⭐ important step to go depth-wise without using vis[ ] in tree 
-            numChild[node]++;
-            dfs(v, node, depth + 1);                 // ⭐ dfs() task delegation -> after dfs(i), subtreeSz[i] will be correctly updated
-            subtreeSz[node] += subtreeSz[v]; 
+        if(v != parent) {
+            dfs(v, node, depth + 1);
         }
     }
+}
 
-    if(numChild[node] == 0) isLeaf[node] = 1;
+vector<int> find_center() {
+
+    vector<int> ans;
+
+    dfs(1, 0, 0);
+    int maxch = 0;
+    f(i, 2, n) {
+        if(dep[maxch] < dep[i])
+            maxch = i;
+    }
+
+    dfs(maxch, 0, 0);
+    f(i, 1, n) {
+        if(dep[maxch] < dep[i])
+            maxch = i;
+    }
+
+    int en = maxch;
+    while(par[en] != 0) {
+        diameter++;
+        en = par[en];
+    }
+
+    if(!diameter) {
+        ans.pb(1);
+        return ans;
+    }
+
+    int center = maxch;
+    f(i, 1, diameter / 2) {
+        center = par[center];
+    }
+
+    ans.pb(center);
+    if(diameter & 1) {
+        ans.pb(par[center]);
+    }
+    
+    return ans;
+}
+
+int cnt_nodes_at_d(int node, int d, int parent) {
+    dis = d;
+    nodes_at_dis = 0;
+
+    dfs(node, parent, 0);
+    int ans = nodes_at_dis;
+    return ans;
 }
 
 void solve()
 {
     cin >> n;
-
     g.resize(n + 1);
-    dep.resize(n + 1);
-    par.resize(n + 1);
-    isLeaf.resize(n + 1);
-    subtreeSz.resize(n + 1);
-    numChild.resize(n + 1);
-    
+    dep.assign(n + 1, 0);
+    par.assign(n + 1, 0);
+
     f(i, 1, n - 1) {
         int a, b; cin >> a >> b;
         g[a].pb(b);
         g[b].pb(a);
     }
 
-    dfs(1, 0, 0);                                    // ⭐ Always set parent[root] = 0, helps in future
+    vector<int> center = find_center();
+    pr(center);    
 
-    cout << "Leaves: "; 
-    f(i, 1, n)     if(isLeaf[i])   cout << i << " ";
+    vector<int> arr;
+    if(sz(center) == 1) {
+        // #c = odd -> for each child of 'C'. find the number of nodes at a dist = D / 2 - 1;
+        int c = center[0];
+        for(auto v: g[c]) {
+            arr.pb(cnt_nodes_at_d(v, diameter / 2 - 1, c));
+        }   
+    }
+    else {
+        // #c = even -> for each center. find the number of nodes at a dist = floor(D/2);
+        int c1 = center[0];
+        int c2 = center[1];
+        arr.pb(cnt_nodes_at_d(c1, diameter / 2, c2));
+        arr.pb(cnt_nodes_at_d(c2, diameter / 2, c1));
+    }
 
-    pr(dep);
-    pr(par);
-    pr(subtreeSz);
-    pr(numChild);
+    pr(arr);
+    int sum = 0;
+    int sq_sum = 0;
+    for(auto e: arr) {
+        sum += e;
+        sq_sum += e*e;
+    }
+
+    if(n == 1) {
+        cout << 1 << endl;
+        re;
+    }
+
+    cout << ((sum * sum) - sq_sum) / 2;
 }
 
-int main()
+signed main()
 {
     fastio();
     // #ifndef ONLINE_JUDGE
@@ -156,19 +215,3 @@ int main()
     solve();
     return 0;
 }
-
-/*
-root = 1;
-Leaves: 4 5 6 8 9 10 
-dep : [ 0 0 1 1 2 2 2 2 2 3 3 ]
-par : [ 0 0 1 1 2 2 3 3 3 7 7 ]
-subtreeSz : [ 0 10 3 6 1 1 1 3 1 1 1 ]
-numChild : [ 0 2 2 3 0 0 0 2 0 0 0 ]
-
-root = 5;
-Leaves: 4 6 8 9 10 
-dep : [ 0 2 1 3 2 0 4 4 4 5 5 ]
-par : [ 0 2 5 1 2 0 3 3 3 7 7 ]
-subtreeSz : [ 0 7 9 6 1 10 1 3 1 1 1 ]
-numChild : [ 0 1 2 3 0 1 0 2 0 0 0 ]
-*/
