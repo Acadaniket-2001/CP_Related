@@ -77,16 +77,148 @@ void pre() {
 
 }
 
+// method 2 
 
+int n;
+vector<pair<int, pair<int, int>>> edgeList;        // {wt, {u, v}}  
 
+vector<int> par, ranks;
+int find(int x) {
+    if(par[x] == x)     return x;
+    else return par[x] = find(par[x]);
+}
+void merge(int x, int y) {
+    int rootx = find(x);
+    int rooty = find(y);
+
+    if(rootx != rooty) {
+        if(ranks[rootx] <= ranks[rooty]) {
+            ranks[rooty] += ranks[rootx];
+            par[rootx] = rooty;
+        }
+        else {
+            ranks[rootx] += ranks[rooty];
+            par[rooty] = rootx;
+        }
+    }
+}
 
 void solve()
 {
-    ll n; cin >> n;
+    cin >> n;
+    ranks.assign(n + 1, 1);
+    par.assign(n + 1, 0);
+
+    f(i, 1, n)  par[i] = i;
+
+    f(i, 1, n - 1) {
+        int a, b, w;    cin >> a >> b >> w;
+        edgeList.pb({-w, {a, b}});
+    }
+
+    sort(all(edgeList));
+    // pr(edgeList);
+
+    ll ans = 0;
+    for(auto e: edgeList) {
+        int wt = -e.ff, u = e.ss.ff, v = e.ss.ss;
+        int rootx = find(u);
+        int rooty = find(v);
+        ans += wt * (1LL * ranks[rootx] * ranks[rooty]);
+        merge(u, v);
+    }
+
+    cout << ans << endl;
+    edgeList.clear();
+}
 
 
+int main()
+{
+    fastio();
+    // #ifndef ONLINE_JUDGE
+    //     freopen("io/Error.txt", "w", stderr);
+    //     freopen("io/Input.txt", "r", stdin);
+    //     freopen("io/Output.txt", "w", stdout);
+    // #endif
+
+    pre();
+    int _t; cin >> _t; while(_t--)
+    solve();
+    return 0;
+}
 
 
+/*method 1 using template
+
+// n-> #nodes, set_size-> #components
+// rank[i]: stores the size of each component with i as root
+// parent[i]: stores the parent of each node
+// ⚠️ Don't directly use parent[node] to get parent of node instead use find(i), as it may lead to some error. 
+
+struct Dsu {
+    int n, set_size, *parent, *rank;
+    Dsu() {}
+    Dsu(int a) {
+        n = set_size = a;
+        parent = new int[n + 1];
+        rank = new int[n + 1];
+        for(int i = 1; i <= n; ++i) { parent[i] = i, rank[i] = 1; }
+    }
+    int find(int x) {
+        if(parent[x] == x)  return x;
+        else return parent[x] = find(parent[x]);       // path compression
+    }
+    void merge(int x ,int y) {
+        int xroot = find(x), yroot = find(y);
+        if(xroot != yroot) {
+            if(rank[xroot] >= rank[yroot]) {           // rank compression
+                parent[yroot] = xroot;
+                rank[xroot] += rank[yroot];
+            }
+            else {
+                parent[xroot] = yroot;
+                rank[yroot] += rank[xroot];
+            }
+            set_size -= 1;
+        }
+    }
+    void reset() {
+        set_size = n; for(int i = 1; i <= n; ++i) parent[i] = i, rank[i] = 1;
+    }
+    int size() { return set_size; }
+    void print() {for(int i = 1; i <= n; ++i) cout << i << " -> " << parent[i] << endl;}
+};
+
+
+int n;
+vector<pair<int, pair<int, int>>> edgeList;        // {wt, {u, v}}  
+
+void solve()
+{
+    cin >> n;
+    f(i, 1, n - 1) {
+        int a, b, w;    cin >> a >> b >> w;
+        edgeList.pb({-w, {a, b}});
+    }
+
+    sort(all(edgeList));
+
+    Dsu dsu(n);
+    ll ans = 0;
+
+    for(auto e:edgeList) {
+        int wt = -e.ff, u = e.ss.ff, v = e.ss.ss;
+        int rootx = dsu.find(u);
+        int rooty = dsu.find(v);
+
+        ans += wt * (1LL * dsu.rank[rootx] * dsu.rank[rooty]);
+
+        dsu.merge(u, v);
+    }
+
+    cout << ans << endl;
+    edgeList.clear();
 }
 
 int main()
@@ -103,3 +235,5 @@ int main()
     solve();
     return 0;
 }
+*/
+

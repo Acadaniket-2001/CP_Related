@@ -73,6 +73,11 @@ long long Sqrt(long long x){ long long y=sqrt(x)+5;while(y*y>x)y--;return y;}
 ⭐ T -> Think in reverse         ⭐ P -> Prefix or Suffix ideas    ⭐ B -> Bit Manipulation
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
+/*
+⭐ Always use ranks[find(x)] ad not ranks[x];
+⭐ Never directly use par[x] to get the parent of x. rather use find(x)
+*/
+
 int n;
 vector<int> par, ranks;                                  // ranks[x] = #nodes in the subtree with root x.
 

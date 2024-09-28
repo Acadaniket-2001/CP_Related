@@ -77,21 +77,47 @@ void pre() {
 
 }
 
-int n, m, q;
-vector<pair<int, int>> edgeList;
+// 🤩🤩🤩 Raw Union_Find
+vector<int> par, ranks;
+
+int find(int x) {
+    if(par[x] == x) return x;
+    else return par[x] = find(par[x]);
+}
+
+void merge(int x, int y) {
+    int rootx = find(x);
+    int rooty = find(y);
+    if(rootx == rooty)  return;
+
+    if(ranks[rootx] <= ranks[rooty]) {
+        ranks[rooty] += ranks[rootx];
+        par[rootx] = rooty;
+    }
+    else {
+        ranks[rootx] += ranks[rooty];
+        par[rooty] = rootx;
+    }
+}
 
 void solve()
 {
-    cin >> n >> m >> q;
-    f(i, 1, m) {
-        int a, b; cin >> a >> b;
-        edgeList.pb({a, b});
+    int n, q; cin >> n >> q;
+    par.assign(n, 0);
+    ranks.assign(n, 1);
+
+    f(i, 0, n - 1)  par[i] = i;
+
+    while(q--) {
+        int t, x, y; cin >> t >> x >> y;
+        if(t == 0) {
+            merge(x, y);
+        }
+        else {
+            if(find(x) == find(y))    cout << 1 << endl;
+            else    cout << 0 << endl;
+        }
     }
-
-        
-
-
-
 }
 
 int main()
@@ -104,7 +130,7 @@ int main()
     // #endif
 
     pre();
-    int _t; cin >> _t; while(_t--)
+    // int _t; cin >> _t; while(_t--)
     solve();
     return 0;
 }
