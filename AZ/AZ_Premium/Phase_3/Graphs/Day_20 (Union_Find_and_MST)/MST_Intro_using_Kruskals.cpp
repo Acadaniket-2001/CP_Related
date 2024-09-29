@@ -73,89 +73,16 @@ long long Sqrt(long long x){ long long y=sqrt(x)+5;while(y*y>x)y--;return y;}
 ⭐ T -> Think in reverse         ⭐ P -> Prefix or Suffix ideas    ⭐ B -> Bit Manipulation
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-void pre() {
+/*
+    Problem : Given a G(N, M), find the MST and also the min_cost of the MST.
+*/
 
-}
-
-// method 2 - no template 💀💀💀
-
-int n;
-vector<pair<int, pair<int, int>>> edgeList;        // {wt, {u, v}}  
-
-vector<int> par, ranks;
-int find(int x) {
-    if(par[x] == x)     return x;
-    else return par[x] = find(par[x]);
-}
-void merge(int x, int y) {
-    int rootx = find(x);
-    int rooty = find(y);
-
-    if(rootx != rooty) {
-        if(ranks[rootx] <= ranks[rooty]) {
-            ranks[rooty] += ranks[rootx];
-            par[rootx] = rooty;
-        }
-        else {
-            ranks[rootx] += ranks[rooty];
-            par[rooty] = rootx;
-        }
-    }
-}
-
-void solve()
-{
-    cin >> n;
-    ranks.assign(n + 1, 1);
-    par.assign(n + 1, 0);
-
-    f(i, 1, n)  par[i] = i;
-
-    f(i, 1, n - 1) {
-        int a, b, w;    cin >> a >> b >> w;
-        edgeList.pb({-w, {a, b}});
-    }
-
-    sort(all(edgeList));
-    // pr(edgeList);
-
-    ll ans = 0;
-    for(auto e: edgeList) {
-        int wt = -e.ff, u = e.ss.ff, v = e.ss.ss;
-        int rootx = find(u);
-        int rooty = find(v);
-        ans += wt * (1LL * ranks[rootx] * ranks[rooty]);
-        merge(u, v);
-    }
-
-    cout << ans << endl;
-    edgeList.clear();
-}
-
-
-int main()
-{
-    fastio();
-    // #ifndef ONLINE_JUDGE
-    //     freopen("io/Error.txt", "w", stderr);
-    //     freopen("io/Input.txt", "r", stdin);
-    //     freopen("io/Output.txt", "w", stdout);
-    // #endif
-
-    pre();
-    int _t; cin >> _t; while(_t--)
-    solve();
-    return 0;
-}
-
-
-/*method 1 using template
-
-// n-> #nodes, set_size-> #components
-// rank[i]: stores the size of each component with i as root
-// parent[i]: stores the parent of each node
-// ⚠️ Don't directly use parent[node] to get parent of node instead use find(i), as it may lead to some error. 
-
+/*
+n-> #nodes, set_size-> #components
+rank[i]: stores the size of each component with i as root
+parent[i]: stores the parent of each node
+⚠️ Don't directly use parent[node] to get parent of node instead use find(i), as it may lead to some error. 
+*/
 struct Dsu {
     int n, set_size, *parent, *rank;
     Dsu() {}
@@ -190,35 +117,47 @@ struct Dsu {
     void print() {for(int i = 1; i <= n; ++i) cout << i << " -> " << parent[i] << endl;}
 };
 
-
-int n;
-vector<pair<int, pair<int, int>>> edgeList;        // {wt, {u, v}}  
+int n, m;
+vector<pair<int, pair<int, int>>> edgeList;
+vector<vector<pair<int, int>>> mst;
 
 void solve()
 {
-    cin >> n;
-    f(i, 1, n - 1) {
-        int a, b, w;    cin >> a >> b >> w;
-        edgeList.pb({-w, {a, b}});
+    cin >> n >> m;
+    mst.resize(n + 1);
+
+    f(i, 1, m) {
+        int a, b, w; cin >> a >> b >> w;
+        edgeList.pb({w, {a, b}});
     }
+
 
     sort(all(edgeList));
+    // pr(edgeList);
 
     Dsu dsu(n);
-    ll ans = 0;
+    int min_cost = 0, cnt = 0;
+    for(auto e: edgeList) {
+        int u = e.ss.ff, v = e.ss.ss;
+        int wt = e.ff;
 
-    for(auto e:edgeList) {
-        int wt = -e.ff, u = e.ss.ff, v = e.ss.ss;
-        int rootx = dsu.find(u);
-        int rooty = dsu.find(v);
+        if(dsu.find(u) != dsu.find(v)) {                  // => not is the same component -> joining them will form cycle
+            cnt++;
+            min_cost += wt;
+            mst[u].pb({v, wt});
+            mst[v].pb({u, wt});
 
-        ans += wt * (1LL * dsu.rank[rootx] * dsu.rank[rooty]);
-
-        dsu.merge(u, v);
+            dsu.merge(u, v);
+        }
     }
 
-    cout << ans << endl;
-    edgeList.clear();
+    if(cnt != n - 1) {
+        cout << "No MST\n"; 
+    }
+    else {
+        cout << min_cost << endl;
+        debvmat(mst);
+    }
 }
 
 int main()
@@ -230,10 +169,7 @@ int main()
     //     freopen("io/Output.txt", "w", stdout);
     // #endif
 
-    pre();
-    int _t; cin >> _t; while(_t--)
+    // int _t; cin >> _t; while(_t--)
     solve();
     return 0;
 }
-*/
-
