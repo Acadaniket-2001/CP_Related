@@ -73,57 +73,84 @@ long long Sqrt(long long x){ long long y=sqrt(x)+5;while(y*y>x)y--;return y;}
 ⭐ T -> Think in reverse         ⭐ P -> Prefix or Suffix ideas    ⭐ B -> Bit Manipulation
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-void pre() {
+const int N = 1e6 + 10;
+vector<ll> spf(N);
 
-}
+void SPF() {
+    f(i, 2, N - 1) {
+        spf[i] = i;
+    }
 
-ll a, b;
-
-vector<ll> sieve(ll n) {
-    vector<bool> is_prime(n + 1, 1);
-    is_prime[0] = is_prime[1] = 0;
-
-    for(ll i = 2; i * i <= n; i++) {
-        if(is_prime[i]) {
-            for(ll j = i*i; j <= n; j += i) {
-                is_prime[j] = 0;
+    f(i, 2, N - 1) {
+        if(spf[i] == i) {
+            for(ll j = i*i; j < N; j += i) {
+                if(spf[j] == j)     spf[j] = i;
             }
         }
     }
+    // pr(spf);
+}
+void pre() {
+    SPF();
+}
 
-    vector<ll> ans;
-    f(i, 0, n)   if(is_prime[i])   ans.pb(i);
+vector<pair<ll ,ll>> fpf(ll x) {
+    vector<pair<ll ,ll>> ans;
+    while(x != 1) {
+        if(sz(ans) == 0 or ans.back().ff != spf[x]) {
+            ans.pb({spf[x], 1});
+        }
+        else {
+            ans.back().ss++;
+        }
+        x /= spf[x];
+    }
     return ans;
 }
 
-void solve()
-{
-    cin >> a >> b;
-
-    vector<bool> ans(b - a + 1, 1);
-    if(a == 1)  ans[0] = 0;
-
-    vector<ll> primes = sieve(sqrt(b));
-
-    for(auto p: primes) {
-        ll st = Ceil(a, p) * p;
-        for(ll mul = st; mul <= b; mul += p) {
-            if(mul != p) {
-                pr(mul, mul - a);
-                ans[mul - a] = 0;
-            }
+ll find_num(auto & fac) {
+    ll ans = 1;
+    for(auto e: fac) {
+        f(i, 1, e.ss) {
+            ans *= e.ff;
         }
     }
+    return ans;
+}
 
-    ll cnt = 0;
-    for(auto e: ans) {
-        if(e)   cnt++;
-    }
+int n;
+
+void solve()
+{
+    cin >> n;
+    vll v(n);   cin >> v;
+
+    map<ll ,ll> mp;
     
-    cout << cnt << endl;
-    f(i, 0, sz(ans) - 1) {
-        if(ans[i])   cout << i + a << " ";
+    ll ans = 0;
+    f(i, 0, n - 1) {
+        vector<pair<ll, ll>> fac = fpf(v[i]);
+
+        for(auto &f: fac) {
+            f.ss %= 3;
+        }        
+        pr(fac);
+
+        ll normal = find_num(fac);
+
+        for(auto &f: fac) {
+            f.ss = 3 - f.ss;
+            if(f.ss == 3)   f.ss = 0;
+        }        
+
+        ll comp = find_num(fac);
+        pr(v[i], comp);
+
+        ans += mp[comp];
+        mp[normal]++;
     }
+
+    cout << ans;
 }
 
 int main()
@@ -140,7 +167,3 @@ int main()
     solve();
     return 0;
 }
-
-/*
-
-*/
