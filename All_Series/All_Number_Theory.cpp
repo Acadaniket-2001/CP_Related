@@ -160,6 +160,8 @@ vll seg_sieve(ll a, ll b) {
     vll primes = sieve(1, Sqrt(b));
     
     vll is_prime(b - a + 10, 1);
+    if(a == 1)  is_prime[0] = 0;
+
     for(auto x : primes) {
         ll mul = Ceil(a, x) * x;
         for(ll i = mul; i <= b; i += x) {    // looping through all multiples of x b/w [a, b]
@@ -243,6 +245,6 @@ void Phi() {
 int main()
 {
     fastio();
-    
+    dbg(seg_sieve(1, 20));
     return 0;
 }
