@@ -73,203 +73,49 @@ long long Sqrt(long long x){ long long y=sqrt(x)+5;while(y*y>x)y--;return y;}
 ⭐ T -> Think in reverse         ⭐ P -> Prefix or Suffix ideas    ⭐ B -> Bit Manipulation
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
+void pre() {
 
-/*--------------------------------Finding all the divisors---------------------------------
-
-// Finding all the divisors of all numbers belonging to [1 - n] in O(nlog(n))
-// There is one already 1 way of O(n.root(n))...think?
-// but O(n.root(n)) > O(nlog(n))
-
-vector<int> divi[100005];
-void pre_compute() {
-    for(int i = 1; i <= 100000; i++) {
-        for(int j = i; j <= 100000; j += i) {
-            divi[j].pb(i);
-        }
-    }
 }
 
-//  T.C.
-//  (100000 / 1) + (100000 / 2) + (100000 / 3) + (100000 / 4) + ... + (100000 / 100000)
-//  100000 (1/1 + 1/2 + 1/3 + 1/4 + ... + 1/100000) = O(100000.log(100000))
-
-void solve() {
-    f(i, 1, 50) {               // change (50)
-        dbg(divi[i]);           // just run cph
-    }
-}
-
-int main()
-{
-    fastio();
-    pre_compute();
-    int _t; cin >> _t; while(_t--)
-    solve();
-    return 0;
-}
-
----------------------------------------------------------------------------------------------*/
-
-// O(sqrt(N))
-// N <= 10^12 or <= 10^13
-bool is_prime(ll x) {
-    if(x < 2)   return 0;
+vll divisors(ll x) {
+    vll ans;
     for(ll i = 2; i * i <= x; i++) {
-        if(x % i == 0)  return 0;
-    }
-    return 1;
-}
-
-// Finding all Factors/divisors of a number
-// N <= 10^12 or <= 10^13
-// # Divisors(N) = O(sqrt(N))
-vector<ll> Divisors(ll n) {
-    vector<ll> ans;
-    for(ll i = 1; i * i <= n; i++) {
-        if(n % i == 0) {
+        if(x % i == 0) {
             ans.pb(i);
-            if(i != n/i)  ans.pb(n/i);
-        }  
+            if(x/i != i)    ans.pb(x/i);
+        }
     }
-    sort(all(ans));
+    pr(ans);
     return ans;
 }
 
-// Prime_Factorising a number
-// N <= 10^12 or <= 10^13
-// O(sqrt(N))
-vector<pair<ll, ll>> prime_factor(ll n) {
-    vector<pair<ll, ll>> ans;
-    for(ll i = 2; i * i <= n; i++) {
-        if(n % i == 0) {
-            ll cnt = 0;
-            while(n % i == 0) {
-                cnt++;
-                n /= i;
-            }
-            ans.pb({i, cnt});
-        }
-    }
-    if(n > 1)  ans.pb({n, 1});
-    return ans;
-}
 
-// Finding all primes in [1, N]: 
-// O(N.log(log(N)))
-// N <= 10^7
-vector<ll> sieve(ll a, ll b) {
-    vector<bool> is_prime(1000006, 1);
-    is_prime[0] = is_prime[1] = 0;
-    
-    for(int i = 2; i * i <= 1000005; i++) {
-        if(is_prime[i]) {
-            for(ll j = 1LL*i*i; j <= 1000005; j += i)
-                is_prime[j] = 0;
-        }
-    }
+void solve()
+{
+    ll n, d;
+    cin >> n >> d;
 
-    vll ans;
-    f(i, a, b) {
-        if(is_prime[i]) ans.pb(i);
-    }
-    return ans;
-}
+    do {
+        vll div = divisors(n * n);
 
-// Finding primes in [a, b]:
-// 0 <= a <= b <= 10^12 and (b - a) <= 10^6
-vll seg_sieve(ll a, ll b) {
 
-    vll primes = sieve(1, Sqrt(b));
-    
-    vll is_prime(b - a + 10, 1);
-    if(a == 1)  is_prime[0] = 0;
 
-    for(auto x : primes) {
-        ll mul = Ceil(a, x) * x;
-        for(ll i = mul; i <= b; i += x) {    // looping through all multiples of x b/w [a, b]
-            if(i != x)  is_prime[i - a] = 0; // if(...) is needed to handle cases: 1 <= a <= sqrt(b) <= b
-        }
-    }
 
-    vll ans;
-    f(i, a, b) {
-        if(is_prime[i - a]) ans.pb(i);
-    }
-    return ans;
-}
-
-// Fast Prime_Factorising a number
-// To answer (Q <= 10^6) queries of (N <= 10^6)
-// pre_computation -> O(N.log(log(N) ) )
-// O(Q.log(N))
-// ⚠️ Must call SPF() in main() before using fastPrimeFact()..
-const int N = 1e6 + 10;
-vector<ll> spf(N);
-void SPF() {
-    f(i, 2, N - 1)    spf[i] = i;
-
-    f(i, 2, N - 1) {
-        if(spf[i] == i) {
-            for(ll j = 2*i; j < N; j += i)
-                if(spf[j] == j) spf[j] = i;
-        }
-    }
-}
-vector<ll> fastPrimeFact(ll n) {
-    vll ans;
-    while(n != 1) {
-        ans.pb(spf[n]);
-        n /= spf[n];
-    }
-    return ans;
-}
-
-// Sieve Applications: (N < =10^7)
-// Sieve can be used to find the properties of a number in range[1 - N],
-// provided the properties has some relation with factorisation and divisors
-
-// N = (p1^ɑ1) * (p2^ɑ2) * (p3^ɑ3) * ... * (pn^ɑn)
-
-// ⭐ Number of divisors of a number.
-//         #(divisors) = (ɑ1 + 1) * (ɑ2 + 1) * (ɑ3 + 1) * ... * (ɑn + 1)
-
-// ⭐ Sum of divisors of a number.
-//  sum = (1 + p1 + p1^2 +...+ p1^ɑ1) . (1 + p2 + p2^2 +...+ p2^ɑ2)...(1 + pn + pn^2 +...+ pn^ɑn)
-//  Use GP sum formula to compute the sum
-
-// ⭐ Calculating phi(x):
-// phi((x) = Count of numbers a in [1, x] such that gcd(a, x) = 1
-//                 i.e. count of coprime pairs
-// ⚠️ Must call Phi() in main() before using phi[i].
-vll phi(1e6 + 5);
-void Phi() {
-    // sieving out primes
-    vector<bool> is_prime(1e6 + 6, 1);
-    is_prime[0] = is_prime[1] = 0;
-    for(ll i = 2; i * i <= 1e6; i++) {
-        if(is_prime[i]) {
-            for(ll j = 1LL*i*i; j <= 1e6; j += i)
-                is_prime[j] = 0;
-        }
-    }
-    // initialising phi[]
-    f(i, 1, 1e6)    phi[i] = i;
-    // Computing phi[]
-    f(i, 2, 1e6) {
-        if(is_prime[i]) {
-            for(ll j = i; j <= 1e6; j += i) {
-                phi[j] -= phi[j] / i;
-            }
-        }
-    }
+        cin >> n >> d;
+    }while(n != 0 and d != 0);
 }
 
 int main()
 {
     fastio();
-    pr(seg_sieve(1, 20));
+    // #ifndef ONLINE_JUDGE
+    //     freopen("io/Error.txt", "w", stderr);
+    //     freopen("io/Input.txt", "r", stdin);
+    //     freopen("io/Output.txt", "w", stdout);
+    // #endif
 
-    Phi();
-    cout << phi[5] << " " << phi[8];
+    pre();
+    // int _t; cin >> _t; while(_t--)
+    solve();
     return 0;
 }
