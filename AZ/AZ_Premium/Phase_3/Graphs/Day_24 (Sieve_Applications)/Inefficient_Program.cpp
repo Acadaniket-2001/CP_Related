@@ -67,6 +67,36 @@ long long gcd(long long a,long long b){return __gcd(a,b);}
 long long lcm(long long a,long long b){return (a*b)/__gcd(a,b);}
 long long Ceil(long long a,long long b){return (a+b-1)/b;}
 long long Sqrt(long long x){ long long y=sqrt(x)+5;while(y*y>x)y--;return y;}
+
+// to get custom modulo m, pass new modulo as argument
+ll madd(ll a, ll b, ll M = P) {
+    return (a%M + b%M) % M;
+}
+ll msub(ll a, ll b, ll M = P) {
+    return (((a%M - b%M) % M) + M) % M;
+}
+ll mmul(ll a, ll b, ll M = P) {
+    return ((a % M) * (b % M)) % M;
+}
+ll mpow(ll base, ll exp, ll M = P) {
+    ll res = 1;
+    while (exp) {
+    if (exp % 2 == 1){
+        res = (res * base) % M;
+    }
+    exp >>= 1;
+    base = (base * base) % M;
+    }
+    return res;
+}
+ll minv(ll base, ll M = P) { // M must be prime ; (base, M) -> coprime
+    return mpow(base, M - 2);
+}
+ll mdiv(ll a, ll b) {
+    return mmul(a, minv(b));
+}
+
+
 /*---------------------------------> Greedy / Constructive <---------------------------------
 .                                        D T D P G B
 ⭐ D -> Decode the operation     ⭐ D -> Dimensional Setup         ⭐ G -> Greedy / Sorting
@@ -79,42 +109,56 @@ void pre() {
 
 ll bin_pow(ll a, ll b, ll mod = P) {
     if(!b)  return 1;
-    ll temp = bin_pow(a, b/2, mod);
+    ll temp = bin_pow(a, b>>1, mod);
     ll ans = temp * temp % mod;
     if(b & 1)   ans = ans * a % mod;
     return ans;
 }
 
-ll fun(ll n, ll m) {
-    ll nm = n % m;  
-    nm %= P;          
+ll fun(ll r, ll m) {
+    // ( m * (m - 1) / 2 ) * (r / m) + (rm(rm + 1) / 2)
 
-    n %= P;
-    m %= P;
+    ll rm = r % m;
+    ll inv_2 = bin_pow(2, P - 2, P);
+    ll inv_m = bin_pow(m, P - 2, P);
 
-    ll inv_2 = bin_pow(2%P, P - 2, P);
+    ll a = ((m%P) * ((m%P - 1)%P)) %P;
+    a = (a * inv_2) %P;
 
-    ll a = (n * (m - 1 + P)%P) % P;
-    a = (a * inv_2)%P;
+    ll b = ((r%P) * inv_m) %P;
 
-    ll b =  (nm * (nm + 1)%P) % P;
-    b = (b * inv_2)%P;
+    ll c = ( (rm%P) * ((rm%P + 1) %P) ) %P;
+    c = (c * inv_2) %P;
 
-    ll ans = (a + b) % P;
-    ans = (ans + P) % P;
+    ll ans = (a * b) %P;
+    ans = (ans + c) %P;
+
+    ans = (ans + P) %P;
 
     return ans;
 }
+
+ll fu1(ll r, ll m) {
+    ll rm = r % P;
+
+    ll a = mmul(mdiv(mmul(m, m-1), 2), mdiv(r, m));
+    ll b = mdiv(mmul(rm, madd(rm, 1)), 2);
+    ll ans = madd(a, b);
+
+    return ans;
+}
+
 
 void solve()
 {
     ll l, r, m; cin >> l >> r >> m;
 
-    ll R = fun(r, m);
-    ll L = fun(l - 1, m);
+    ll R = fu1(r, m);
+    ll L = fu1(l - 1, m);
 
-    ll ans = (R - L + P) % P;
+    ll ans = msub(R, L);
 
+    ans = (ans + P) % P;
     cout << ans << endl;
 }
 
