@@ -1,0 +1,9 @@
+/*
+state === dp(level, queens[])
+
+    since, queens[] is never going to be same any 2 resursive calls
+    => states are never going to overlap...
+    => Even if we add cache layer to the recursive code, it is not going to be used ever
+    => We do not add cache layer to N_queens problem....
+    => Hence, it remains as a backtracking problem and not a DP problem...
+*/

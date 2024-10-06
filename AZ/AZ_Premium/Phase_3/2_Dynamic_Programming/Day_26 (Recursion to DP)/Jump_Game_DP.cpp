@@ -79,9 +79,11 @@ void pre() {
 
 
 int n, k;
+int dp[100100];                                // ⭐1
 
-int rec(int lvl) {       // #ways to go to N from stair lvl
+int rec(int lvl) {                             // returns the #ways to N if we are at lvl stair
     // level ->  curr lvl stair
+    
     // pruning case
     if(lvl > n)
         return 0;
@@ -89,22 +91,29 @@ int rec(int lvl) {       // #ways to go to N from stair lvl
     // base case
     if(lvl == n)    return 1;
 
+    // cache check
+    if(dp[lvl] != -1)                          // ⭐3
+        return dp[lvl];
+
     // compute
     int ans = 0;
+    // looping over choices
     f(i, 1, k) {
+        // check if choice is valid or not
         if(lvl + i <= n) {
             ans += rec(lvl + i);
         }
     }
 
     // return
-    return ans;
+    return dp[lvl] = ans;                      // ⭐4
 }
 
 
 void solve()
 {
     cin >> n >> k;
+    memset(dp, -1, sizeof dp);                 // ⭐2
     cout << rec(1);
 }
 
