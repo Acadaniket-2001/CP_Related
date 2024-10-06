@@ -84,7 +84,6 @@ int dp[101][1001][101];
 int rec(int i, int x, int item_left) { 
     // what is the max_value that we can get in [i...n - 1] when wt_left is weight left to be taken
     // and item_left is the no. of items left to be taken
-    
     // pruning
 
     // basecase
@@ -130,3 +129,12 @@ int main()
     solve();
     return 0;
 }
+
+/*
+4
+1 5 2 3
+2 3 3 2
+10 2
+
+o/p: 6 = (v[1] + v[2])
+*/
