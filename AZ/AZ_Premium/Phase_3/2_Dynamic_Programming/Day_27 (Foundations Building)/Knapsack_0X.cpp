@@ -95,7 +95,7 @@ int rec(int i, int x) { // O(N * W)
     int ans = rec(i + 1, x);
     if(x - w[i] >= 0) {
         // ans = max(ans, v[i] + rec(i + 1, x - w[i]));                  // 01_Knapsack
-        ans = max(ans, v[i] + rec(i, x - w[i]));                         // 0X_Knapsack
+        ans = max(ans, v[i] + rec(i, x - w[i]));                         // 0X_Knapsack --> using INF supply trick
     }
 
     // save and return

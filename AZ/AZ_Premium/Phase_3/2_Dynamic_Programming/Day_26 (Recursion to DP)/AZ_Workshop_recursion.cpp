@@ -131,12 +131,11 @@ void solve()
     cin >> n;
     f(i, 0, n - 1)
         cin >> t[i] >> s[i];
-    
     cin >> x >> k;
-
+    
     memset(taken, 0, sizeof taken);
-    cout << rec(0);
 
+    cout << rec(0);
 }
 
 int main()
@@ -153,3 +152,15 @@ int main()
     solve();
     return 0;
 }
+
+/*
+4
+1 2 
+5 3
+2 3 
+3 2
+
+10 2
+
+o/p: 6 (s[1] + s[2])
+*/

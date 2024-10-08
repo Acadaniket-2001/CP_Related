@@ -77,14 +77,17 @@ long long Sqrt(long long x){ long long y=sqrt(x)+5;while(y*y>x)y--;return y;}
 int n;
 int w[3003];
 int v[3003];
-int W, k;
+int W, K;
 
 int dp[101][1001][101];
-// O(N * W * k)
+// O(N * W * K)
 int rec(int i, int x, int item_left) { 
     // max_value that we can get in [i...n - 1] when x is weight left to be taken
     // and item_left is the no. of items left to be taken at max.
+
     // pruning
+    if(i > n)                                                               // ⭐
+        return 0;
 
     // basecase
     if(i == n)
@@ -96,12 +99,40 @@ int rec(int i, int x, int item_left) {
 
     // transtiton  ->> LCCM
     int ans = rec(i + 1, x, item_left);
-    if(x - w[i] >= 0 and item_left > 0) {                                               // ⭐
-        ans = max(ans, v[i] + rec(i + 1, x - w[i], item_left - 1));                  
+    if(x - w[i] >= 0 and item_left > 0) {                                             
+        ans = max(ans, v[i] + rec(i + 2, x - w[i], item_left - 1));         // ⭐         
     }
 
     // save and return
     return dp[i][x][item_left] = ans;
+}
+
+// method2: Changing X-ition----------------------------------------------------------------------------------------------
+
+int dp1[101][1001][101][2];
+// O(N * W * K * 2)
+int rec1(int i, int x, int item_left, int last_taken) { 
+    // max_value that we can get in [i...n - 1] when x is weight left to be taken,
+    // item_left is the #items left to be taken at max and last_taken is whether last item was taken or not.
+
+    // pruning
+
+    // basecase
+    if(i == n)
+        return 0;
+
+    // cache check
+    if(dp1[i][x][item_left][last_taken] != -1)
+        return dp1[i][x][item_left][last_taken];
+
+    // transtiton  ->> LCCM
+    int ans = rec1(i + 1, x, item_left, 0);
+    if(x - w[i] >= 0 and item_left > 0 and !last_taken) {                                             
+        ans = max(ans, v[i] + rec1(i + 1, x - w[i], item_left - 1, 1));     // ⭐         
+    }
+
+    // save and return
+    return dp1[i][x][item_left][last_taken] = ans;
 }
 
 void solve()
@@ -109,11 +140,13 @@ void solve()
     cin >> n;
     f(i, 0, n - 1)  cin >> w[i];
     f(i, 0, n - 1)  cin >> v[i];
-    cin >> W >> k;
+    cin >> W >> K;
 
     memset(dp, -1, sizeof dp);
+    cout << rec(0, W, K) << endl;      // by changing transition
 
-    cout << rec(0, W, k) << endl;
+    // memset(dp1, -1, sizeof dp1);
+    // cout << rec1(0, W, K, 0) << endl;  // by changing state
 }
 
 int main()
@@ -136,5 +169,5 @@ int main()
 2 3 3 2
 10 2
 
-o/p: 6 = (v[1] + v[2])
+o/p: 5
 */

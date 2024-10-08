@@ -1,3 +1,4 @@
+/* fun({Questions Solved}) = Me */
 #include<bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp> 
 #include <ext/pb_ds/tree_policy.hpp>
@@ -73,47 +74,74 @@ long long Sqrt(long long x){ long long y=sqrt(x)+5;while(y*y>x)y--;return y;}
 ⭐ T -> Think in reverse         ⭐ P -> Prefix or Suffix ideas    ⭐ B -> Bit Manipulation
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-// static things -> global
-int n;
-int w[3003];
-int v[3003];
-int W, k;
+/*
+Flow: 
+    -> solve subset sum target problem.
+    -> solving it for Q Queries (Q <= 10^4)
+    -> print the subsets 
+*/
 
-int dp[101][1001][101];
-// O(N * W * k)
-int rec(int i, int x, int item_left) { 
-    // max_value that we can get in [i...n - 1] when x is weight left to be taken
-    // and item_left is the no. of items left to be taken at max.
-    // pruning
+int n, X;
+int v[101];
 
-    // basecase
-    if(i == n)
+int dp[101][100100];
+bool rec(int i, int target) {                               // O(DP = N.T)
+    // prun
+    if(target < 0)                                          // pruning and chk() while X-ition are same: latter one is safer 
         return 0;
 
-    // cache check
-    if(dp[i][x][item_left] != -1)
-        return dp[i][x][item_left];
+    // base
+    if(i == n)
+        return (target == 0);
 
-    // transtiton  ->> LCCM
-    int ans = rec(i + 1, x, item_left);
-    if(x - w[i] >= 0 and item_left > 0) {                                               // ⭐
-        ans = max(ans, v[i] + rec(i + 1, x - w[i], item_left - 1));                  
+    // cache
+    if(dp[i][target] != -1)
+        return dp[i][target];
+
+    // Xtiti
+    bool ans = rec(i + 1, target);
+    if(target - v[i] >= 0)
+        ans |= rec(i + 1, target - v[i]);
+
+    // save and ret
+    return dp[i][target] = ans;
+}
+
+vector<int> solution;
+void generate(int i, int target) {
+    if(i == n)
+        return;
+
+    int donttake = rec(i + 1, target);
+    if(donttake) {
+        generate(i + 1, target);
+        re;
     }
 
-    // save and return
-    return dp[i][x][item_left] = ans;
+    int take = rec(i + 1, target - v[i]);
+    if(take) {
+        solution.pb(i);
+        generate(i + 1, target - v[i]);
+        re;
+    }
 }
 
 void solve()
 {
     cin >> n;
-    f(i, 0, n - 1)  cin >> w[i];
     f(i, 0, n - 1)  cin >> v[i];
-    cin >> W >> k;
 
-    memset(dp, -1, sizeof dp);
+    memset(dp, -1, sizeof dp);                                     // ⭐ O(#S) + O(DP = N.T)
 
-    cout << rec(0, W, k) << endl;
+    int q; cin >> q; while(q--) {
+        cin >> X;
+
+        cout << rec(0, X) << " ";                                  // O(1): Caching across queries
+        generate(0, X);
+        cout << endl << sz(solution) << " " << solution << endl;
+        
+        solution.clear();
+    }
 }
 
 int main()
@@ -129,12 +157,3 @@ int main()
     solve();
     return 0;
 }
-
-/*
-4
-1 5 2 3
-2 3 3 2
-10 2
-
-o/p: 6 = (v[1] + v[2])
-*/

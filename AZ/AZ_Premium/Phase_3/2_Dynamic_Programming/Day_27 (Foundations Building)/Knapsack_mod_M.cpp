@@ -73,22 +73,34 @@ long long Sqrt(long long x){ long long y=sqrt(x)+5;while(y*y>x)y--;return y;}
 ⭐ T -> Think in reverse         ⭐ P -> Prefix or Suffix ideas    ⭐ B -> Bit Manipulation
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
+#define INF 1e9
+
 // static things -> global
 int n;
 int w[3003];
 int v[3003];
-int W, k;
+int W, K, M;
 
 int dp[101][1001][101];
-// O(N * W * k)
+// O(N * W * K)
 int rec(int i, int x, int item_left) { 
     // max_value that we can get in [i...n - 1] when x is weight left to be taken
     // and item_left is the no. of items left to be taken at max.
+
     // pruning
 
     // basecase
-    if(i == n)
-        return 0;
+    if(i == n) {
+        int sum_of_taken = W - x;
+        if(sum_of_taken % M == 0) {
+            // valid
+            return 0;
+        }
+        else {
+            // invlid -> INF penalty
+            return -INF;
+        }
+    }
 
     // cache check
     if(dp[i][x][item_left] != -1)
@@ -96,8 +108,8 @@ int rec(int i, int x, int item_left) {
 
     // transtiton  ->> LCCM
     int ans = rec(i + 1, x, item_left);
-    if(x - w[i] >= 0 and item_left > 0) {                                               // ⭐
-        ans = max(ans, v[i] + rec(i + 1, x - w[i], item_left - 1));                  
+    if(x - w[i] >= 0 and item_left > 0) {
+        ans = max(ans, rec(i + 1, x - w[i], item_left - 1) + v[i]);
     }
 
     // save and return
@@ -109,11 +121,11 @@ void solve()
     cin >> n;
     f(i, 0, n - 1)  cin >> w[i];
     f(i, 0, n - 1)  cin >> v[i];
-    cin >> W >> k;
+    cin >> W >> K >> M;
 
     memset(dp, -1, sizeof dp);
 
-    cout << rec(0, W, k) << endl;
+    cout << rec(0, W, K) << endl;
 }
 
 int main()
@@ -134,7 +146,7 @@ int main()
 4
 1 5 2 3
 2 3 3 2
-10 2
+10 2 4
 
-o/p: 6 = (v[1] + v[2])
+o/p: 5 = (v[1] + v[3])
 */

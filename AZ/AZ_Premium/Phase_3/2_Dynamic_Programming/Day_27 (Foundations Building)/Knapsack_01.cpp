@@ -81,7 +81,9 @@ Flow:
 
     Tweaks:
     -> what if we can take an item any number of times...
-    -> what if we can at max only k items can be taken...
+    -> what if we can take atmost k items...
+    -> what if we can take atmost k items and sum of weights of items taken % M == 0.
+    -> what if we can take atmost atmost k items and if we took ith item, we can't take (i+1)th item.
 
 
 Problem:
