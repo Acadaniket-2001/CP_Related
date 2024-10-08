@@ -1,4 +1,3 @@
-/* fun({Questions Solved}) = Me */
 #include<bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp> 
 #include <ext/pb_ds/tree_policy.hpp>
@@ -74,81 +73,55 @@ long long Sqrt(long long x){ long long y=sqrt(x)+5;while(y*y>x)y--;return y;}
 ⭐ T -> Think in reverse         ⭐ P -> Prefix or Suffix ideas    ⭐ B -> Bit Manipulation
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-/*
-Flow: 
-    First read Day_28 notes...
-    
-    -> solve subset sum target problem.
-    -> solving it for Q Queries (Q <= 10^4)
-    -> print the subsets 
-*/
+void pre() {
 
-int n, X;
-int v[101];
-
-int dp[101][100100];
-bool rec(int i, int target) {                               // O(DP = N.T)
-    // prun
-    if(target < 0)                                          // pruning and chk() while X-ition are same: latter one is safer 
-        return 0;
-
-    // base
-    if(i == n)
-        return (target == 0);
-
-    // cache
-    if(dp[i][target] != -1)
-        return dp[i][target];
-
-    // Xtiti
-    bool ans = rec(i + 1, target);
-    if(target - v[i] >= 0)
-        ans |= rec(i + 1, target - v[i]);
-
-    // save and ret
-    return dp[i][target] = ans;
 }
 
-vector<int> solution;
-void generate(int i, int target) {
-    pr(i, target);
+/*
+problem : https://atcoder.jp/contests/dp/tasks/dp_d
+*/
 
+#define INF 1e15
+#define int ll
+
+int n, W;
+int w[105];
+int v[105];
+
+int dp[105][100100];
+int rec(int i, int wt_left) {
+    // pruning 
+    if(wt_left < 0)
+        return -INF;
+
+    // base case
     if(i == n)
-        return;
+        return 0;
 
-    int donttake = rec(i + 1, target);
-    if(donttake) {
-        generate(i + 1, target);
-        re;
-    }
+    // cache check
+    if(dp[i][wt_left] != -1)
+        return dp[i][wt_left];
 
-    int take = rec(i + 1, target - v[i]);
-    if(take) {
-        solution.pb(i);
-        generate(i + 1, target - v[i]);
-        re;
-    }
+    //Xition
+    int ans = rec(i + 1, wt_left);
+    if(wt_left >= w[i])
+        ans = max(ans, v[i] + rec(i + 1, wt_left - w[i]));
+
+    // save and return 
+    return dp[i][wt_left] = ans;
 }
 
 void solve()
 {
-    cin >> n;
-    f(i, 0, n - 1)  cin >> v[i];
+    cin >> n >> W;
+    f(i, 0, n - 1)  cin >> w[i] >> v[i];
 
-    memset(dp, -1, sizeof dp);                                     // ⭐ O(#S) + O(DP = N.T)
+    memset(dp, -1, sizeof dp);
 
-    int q; cin >> q; while(q--) {                                  // O(Q)
-        cin >> X;
-
-        cout << rec(0, X) << " ";                                  // O(1): Caching across queries
-        generate(0, X);
-        cout << endl << sz(solution) << " " << solution << endl;
-        
-        solution.clear();
-    }
+    cout << rec(0, W);
 }
 
-int main()
+signed main()
 {
     fastio();
     // #ifndef ONLINE_JUDGE
@@ -157,6 +130,7 @@ int main()
     //     freopen("io/Output.txt", "w", stdout);
     // #endif
 
+    pre();
     // int _t; cin >> _t; while(_t--)
     solve();
     return 0;
