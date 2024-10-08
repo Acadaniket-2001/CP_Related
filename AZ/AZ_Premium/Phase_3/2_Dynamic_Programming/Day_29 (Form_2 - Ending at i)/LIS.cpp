@@ -1,4 +1,3 @@
-/* fun({Questions Solved}) = Me */
 #include<bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp> 
 #include <ext/pb_ds/tree_policy.hpp>
@@ -74,78 +73,57 @@ long long Sqrt(long long x){ long long y=sqrt(x)+5;while(y*y>x)y--;return y;}
 ⭐ T -> Think in reverse         ⭐ P -> Prefix or Suffix ideas    ⭐ B -> Bit Manipulation
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-/*
-Flow: 
-    First read Day_28 notes...
-    
-    -> solve subset sum target problem.
-    -> solving it for Q Queries (Q <= 10^4)
-    -> print the subsets 
-*/
+void pre() {
 
-int n, X;
-int v[101];
-
-int dp[101][100100];
-bool rec(int i, int target) {                               // O(DP = N.T)
-    // prun
-    if(target < 0)                                          // pruning and chk() while X-ition are same: latter one is safer 
-        return 0;
-
-    // base
-    if(i == n)
-        return (target == 0);
-
-    // cache
-    if(dp[i][target] != -1)
-        return dp[i][target];
-
-    // Xtiti
-    bool ans = rec(i + 1, target);
-    if(target - v[i] >= 0)
-        ans |= rec(i + 1, target - v[i]);
-
-    // save and ret
-    return dp[i][target] = ans;
 }
 
-vector<int> solution;
-void generate(int i, int target) {
-    pr(i, target);
+/*
+Problem: Find the length of LIS of an array.
 
-    if(i == n)
-        return;
+i/p:
+10
+3 2 5 4 5 7 8 1 11 9
+o/p:
+6
 
-    int donttake = rec(i + 1, target);
-    if(donttake) {
-        generate(i + 1, target);
-        re;
+*/
+
+int n;
+int arr[10010];
+
+int dp[10010];
+int rec(int level) {
+    // pruning
+
+    // base case
+    
+    // cache check
+    if(dp[level] != -1)
+        return dp[level];
+
+    // Xition
+    int ans = 1;
+    for(int prev_taken = 0; prev_taken < level; prev_taken++) {
+        if(arr[prev_taken] < arr[level])
+            ans = max(ans, 1 + rec(prev_taken));
     }
 
-    int take = rec(i + 1, target - v[i]);
-    if(take) {
-        solution.pb(i);
-        generate(i + 1, target - v[i]);
-        re;
-    }
+    // save and return
+    return dp[level] = ans;
 }
 
 void solve()
 {
     cin >> n;
-    f(i, 0, n - 1)  cin >> v[i];
+    f(i, 0, n - 1)  cin >> arr[i];
 
-    memset(dp, -1, sizeof dp);                                     // ⭐ O(#S) + O(DP = N.T)
-
-    int q; cin >> q; while(q--) {                                  // O(Q)
-        cin >> X;
-
-        cout << rec(0, X) << " ";                                  // O(1): Caching across queries
-        generate(0, X);
-        cout << endl << sz(solution) << " " << solution << endl;
-        
-        solution.clear();
+    memset(dp, -1, sizeof dp);                                        // 🧠 Read AZ_Doubt.txt in Day_29
+    int mx = 0;
+    f(i, 0, n - 1) {
+        mx = max(mx, rec(i));
     }
+
+    cout << mx;
 }
 
 int main()
@@ -157,6 +135,7 @@ int main()
     //     freopen("io/Output.txt", "w", stdout);
     // #endif
 
+    pre();
     // int _t; cin >> _t; while(_t--)
     solve();
     return 0;

@@ -1,0 +1,56 @@
+
+😖 Even if we are using 'i' which is changing per query in rec() in code of LIS....
+
+why we don't we need to refresh dp[] after each query... ????
+am i getting something wrong...
+---------------------------------------------------------------------------------------------------------------------
+
+int arr[10010];
+int dp[10010];
+int rec(int level) {
+    // pruning
+
+    // base case
+    
+    // cache check
+    if(dp[level] != -1)
+        return dp[level];
+
+    // Xition
+    int ans = 1;
+    for(int prev_taken = 0; prev_taken < level; prev_taken++) {
+        if(arr[prev_taken] < arr[level])                            //⭐ (i -> level) used
+            ans = max(ans, 1 + rec(prev_taken));
+    }
+
+    // save and return
+    return dp[level] = ans;
+}
+
+void solve()
+{
+    cin >> n;
+    f(i, 0, n - 1)  cin >> arr[i];
+
+    memset(dp, -1, sizeof dp);
+    int mx = 0;
+    f(i, 0, n - 1) {
+        mx = max(mx, rec(i));           //⭐ i changing per query
+    }
+
+    cout << mx;
+}
+---------------------------------------------------------------------------------------------------------------------
+
+Ans: Anything which changes per Query except recursion parameter and dp[]....
+    if used inside rec() then we need to memset....
+
+    Here, though 'i' is changing per query but it is a recursion parameter
+    so, we don't need to memset after each query.
+
+    Eg: If arr[] would have been changing per Query which is also not rec() parameter
+        =>  so, we would need to memset after each query.
+
+    🧠🧠🧠 Think logically if arr[] hi change ho gya to LIS to change hoga hi na .... to memset per Query to lgega 
+
+---------------------------------------------------------------------------------------------------------------------
