@@ -1,0 +1,12 @@
+Form 2: 
+    Identifiers:Ending at i
+                Subsequences / subarrary / substring / subsets
+                Partitioning of arr[]
+                 
+    Application_1: Ending at i --> LIS.cpp
+    Application_2: Partitioning --> Minimise_Sum_of_Min.cpp
+                   Palindrome_Partition problem ---> (Live Sesion)
+    Application_3: #distinct subsequences (unique idea) --> Count_Distinct_Subseq.cpp (Day_30)
+
+
+    
