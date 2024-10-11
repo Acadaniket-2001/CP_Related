@@ -73,22 +73,42 @@ long long Sqrt(long long x){ long long y=sqrt(x)+5;while(y*y>x)y--;return y;}
 ⭐ T -> Think in reverse         ⭐ P -> Prefix or Suffix ideas    ⭐ B -> Bit Manipulation
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-void pre() {
-
-}
-
-
-
-
+/* Special Form_3 problem */
 void solve()
 {
     string s; cin >> s;
     int n = sz(s);
 
-    
+    int prefix[n + 1];
+    int dp[n + 1];                               // ⭐ dp[i] = #distinct subsequences ending at i.
+    int lastt[26];
+    memset(lastt, -1, sizeof lastt);
 
+    dp[0] = 1; 
+    prefix[0] = 1;
 
+    f(i, 1, n) {                                 // ⭐ iterating over dp[]; dp[i] = #distinct subseq. ending at s[i - 1] 
+        // add after all characters
+        dp[i] = prefix[i - 1];
 
+        int idx = lastt[s[i - 1] - 'a'];
+        if(idx != -1) {
+            // remove all duplicates
+            dp[i] -= prefix[(idx + 1) - 1];
+        }
+
+        // update this as the last index where this character is present
+        lastt[s[i - 1] - 'a'] = i - 1;
+
+        // keep building the prefix sum
+        prefix[i] = prefix[i - 1] + dp[i];
+    }
+
+    debarr(prefix, n + 1);
+    debarr(dp, n + 1);
+
+    // -1 to remove "" at dp[0]
+    cout << prefix[n] - 1 << endl;
 }
 
 int main()
@@ -100,8 +120,20 @@ int main()
     //     freopen("io/Output.txt", "w", stdout);
     // #endif
 
-    pre();
     int _t; cin >> _t; while(_t--)
     solve();
     return 0;
 }
+
+/*
+4
+aba
+abc
+abac
+abaab
+
+6
+7
+13
+17
+*/
