@@ -77,57 +77,47 @@ void pre() {
 
 }
 
-#define INF 1e18
-#define int ll
+/*
+ProblemL Find the Length of LCS of strings a and b.
+*/
 
 int n, m;
-int g[202][202];
+string a, b;
 
+int dp[1001][1001];
 int rec(int i, int j) {
-    // pruning 
-    if(i < 0 or j < 0)
-        return -INF;
+    // pruning
 
     // base case
-    if(i == 0 and j == 0) {
-        if(g[i][j] >= 0)    return 0;
-        else return abs(g[i][j]);
-    }
+    if(i == n or j == m)
+        return 0;
 
     // cache chk
-
-    // Xition
-    int ans = INF; 
-    if(i - 1 >= 0) {
-        int temp = rec(i - 1, j) + g[i][j];
-        if(temp >= 0)
-            ans = min(ans, 0LL);
-        else
-            ans = min(ans, abs(temp));
-    }   
+    if(dp[i][j] != -1)
+        return dp[i][j];
     
-    if(j - 1 >= 0) {
-        int temp = rec(i, j - 1) + g[i][j];
-        if(temp >= 0)
-            ans = min(ans, 0LL);
-        else
-            ans = min(ans, abs(temp));
-    }   
+    // Xition
+    int ans = 0;
+    ans = max(ans, rec(i + 1, j));
+    ans = max(ans, rec(i, j + 1));
+    if(a[i] == b[j])
+        ans = max(ans, 1 + rec(i + 1, j + 1));
+
     // save and return
-    return ans;
+    return dp[i][j] = ans;
 }
 
 void solve()
 {
-    cin >> n >> m;
-    f(i, 0, n - 1) f(j, 0, m - 1) {
-        cin >> g[i][j];
-    }
-    if(!rec(n - 1, m - 1))  cout << 1 << endl;
-    else cout << rec(n - 1, m - 1) << endl;
+    cin >> a >> b;
+    n = sz(a), m = sz(b);
+    
+    memset(dp, -1, sizeof dp);
+
+    cout << rec(0, 0) << endl;
 }
 
-signed main()
+int main()
 {
     fastio();
     // #ifndef ONLINE_JUDGE

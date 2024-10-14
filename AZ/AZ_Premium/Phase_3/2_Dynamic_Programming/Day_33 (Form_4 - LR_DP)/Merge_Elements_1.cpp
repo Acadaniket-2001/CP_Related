@@ -77,57 +77,48 @@ void pre() {
 
 }
 
-#define INF 1e18
-#define int ll
+#define INF 1e9
 
-int n, m;
-int g[202][202];
+int n;
+int arr[505];
 
-int rec(int i, int j) {
-    // pruning 
-    if(i < 0 or j < 0)
-        return -INF;
+int dp[505][505];
+int rec(int l, int r) {
+    // pruning
 
     // base case
-    if(i == 0 and j == 0) {
-        if(g[i][j] >= 0)    return 0;
-        else return abs(g[i][j]);
-    }
+    if(l == r)
+        return 0;
 
     // cache chk
+    if(dp[l][r] != -1)
+        return dp[l][r];
 
-    // Xition
-    int ans = INF; 
-    if(i - 1 >= 0) {
-        int temp = rec(i - 1, j) + g[i][j];
-        if(temp >= 0)
-            ans = min(ans, 0LL);
-        else
-            ans = min(ans, abs(temp));
-    }   
-    
-    if(j - 1 >= 0) {
-        int temp = rec(i, j - 1) + g[i][j];
-        if(temp >= 0)
-            ans = min(ans, 0LL);
-        else
-            ans = min(ans, abs(temp));
-    }   
-    // save and return
-    return ans;
+    // Compute
+    int tot = 0;
+    f(i, l, r)  tot += arr[i];
+
+    int ans = INF, sum = 0;
+    f(mid, l, r - 1) {
+        sum += arr[mid];
+        ans = min(ans, rec(l, mid) + rec(mid + 1, r) + (sum % 100) * ((tot - sum)%100));
+    }
+
+    // save and return 
+    return dp[l][r] = ans;
 }
 
 void solve()
 {
-    cin >> n >> m;
-    f(i, 0, n - 1) f(j, 0, m - 1) {
-        cin >> g[i][j];
-    }
-    if(!rec(n - 1, m - 1))  cout << 1 << endl;
-    else cout << rec(n - 1, m - 1) << endl;
+    cin >> n;
+    f(i, 0, n - 1)  cin >> arr[i];
+
+    memset(dp, -1, sizeof dp);
+
+    cout << rec(0, n - 1);
 }
 
-signed main()
+int main()
 {
     fastio();
     // #ifndef ONLINE_JUDGE
@@ -137,7 +128,7 @@ signed main()
     // #endif
 
     pre();
-    int _t; cin >> _t; while(_t--)
+    // int _t; cin >> _t; while(_t--)
     solve();
     return 0;
 }

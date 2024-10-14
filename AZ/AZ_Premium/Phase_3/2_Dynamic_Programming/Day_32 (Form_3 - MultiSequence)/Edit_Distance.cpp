@@ -77,57 +77,70 @@ void pre() {
 
 }
 
-#define INF 1e18
-#define int ll
+#define INF 1e9
 
 int n, m;
-int g[202][202];
+string a, b;
 
+int dp[505][505];
 int rec(int i, int j) {
-    // pruning 
-    if(i < 0 or j < 0)
-        return -INF;
+    // pruning
 
     // base case
-    if(i == 0 and j == 0) {
-        if(g[i][j] >= 0)    return 0;
-        else return abs(g[i][j]);
-    }
+    if(i >= n or j >= m)
+        return (n - i) + (m - j);             
 
-    // cache chk
+    // Cache chk
+    if(dp[i][j] != -1)
+        return dp[i][j];
 
     // Xition
-    int ans = INF; 
-    if(i - 1 >= 0) {
-        int temp = rec(i - 1, j) + g[i][j];
-        if(temp >= 0)
-            ans = min(ans, 0LL);
-        else
-            ans = min(ans, abs(temp));
-    }   
-    
-    if(j - 1 >= 0) {
-        int temp = rec(i, j - 1) + g[i][j];
-        if(temp >= 0)
-            ans = min(ans, 0LL);
-        else
-            ans = min(ans, abs(temp));
-    }   
+    int ans = INF;
+    if(a[i] != b[j]) {
+        ans = min(ans, 1 + rec(i + 1, j));
+        ans = min(ans, 1 + rec(i, j + 1));
+        ans = min(ans, 1 + rec(i + 1, j + 1));
+    }
+    else {
+        ans = min(ans, rec(i + 1, j + 1));
+    }
+
     // save and return
-    return ans;
+    return dp[i][j] = ans;
+}
+
+int rec1(int i, int j) {
+    // pruning
+
+    // base case
+    if(i >= n or j >= m)
+        return (n - i) + (m - j);             
+
+    // Cache chk
+    if(dp[i][j] != -1)
+        return dp[i][j];
+
+    // Xition
+    // 🧠 even if (a[i] == b[j]) and if we insert, delete or replace: this is always worst than matching a[i] == b[j] with no opr, and calling rec(i+1, j+1) 
+    int ans = 1 + min({rec1(i, j + 1), rec1(i + 1, j), rec1(i + 1, j + 1)});            
+    if(a[i] == b[j])    ans = min(ans, rec1(i + 1, j + 1));
+
+    // save and return
+    return dp[i][j] = ans;
 }
 
 void solve()
 {
-    cin >> n >> m;
-    f(i, 0, n - 1) f(j, 0, m - 1) {
-        cin >> g[i][j];
-    }
-    if(!rec(n - 1, m - 1))  cout << 1 << endl;
-    else cout << rec(n - 1, m - 1) << endl;
+    cin >> a >> b;
+    n = a.size(), m = b.size();
+
+    memset(dp, -1, sizeof dp);
+
+    // cout << rec(0, 0);
+    cout << rec1(0, 0);
 }
 
-signed main()
+int main()
 {
     fastio();
     // #ifndef ONLINE_JUDGE
@@ -137,7 +150,7 @@ signed main()
     // #endif
 
     pre();
-    int _t; cin >> _t; while(_t--)
+    // int _t; cin >> _t; while(_t--)
     solve();
     return 0;
 }

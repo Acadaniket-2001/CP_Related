@@ -77,57 +77,50 @@ void pre() {
 
 }
 
-#define INF 1e18
-#define int ll
-
 int n, m;
-int g[202][202];
+string a, b;
 
+
+// By form 2
+int dp[1001][1001];
 int rec(int i, int j) {
-    // pruning 
-    if(i < 0 or j < 0)
-        return -INF;
+    // pruning
+    if(i < 0 or j < 0)  
+        return 0;
 
     // base case
-    if(i == 0 and j == 0) {
-        if(g[i][j] >= 0)    return 0;
-        else return abs(g[i][j]);
-    }
+    if(i == 0 and j == 0)
+        return (a[i] == b[j]);
 
     // cache chk
+    if(dp[i][j] != -1)
+        return dp[i][j];
 
     // Xition
-    int ans = INF; 
-    if(i - 1 >= 0) {
-        int temp = rec(i - 1, j) + g[i][j];
-        if(temp >= 0)
-            ans = min(ans, 0LL);
-        else
-            ans = min(ans, abs(temp));
-    }   
-    
-    if(j - 1 >= 0) {
-        int temp = rec(i, j - 1) + g[i][j];
-        if(temp >= 0)
-            ans = min(ans, 0LL);
-        else
-            ans = min(ans, abs(temp));
-    }   
+    int ans = 0;
+    if(a[i] == b[j])    ans = max(ans, 1 + rec(i - 1, j - 1));
+
     // save and return
-    return ans;
+    return dp[i][j] = ans;
 }
 
 void solve()
 {
-    cin >> n >> m;
-    f(i, 0, n - 1) f(j, 0, m - 1) {
-        cin >> g[i][j];
+    cin >> a >> b;
+    n = a.size(), m = b.size();
+
+    memset(dp, -1, sizeof dp);
+
+    int ans = 0;
+    f(i, 0, n - 1) {
+        f(j, 0, m - 1) {
+            ans = max(ans, rec(i, j));
+        }
     }
-    if(!rec(n - 1, m - 1))  cout << 1 << endl;
-    else cout << rec(n - 1, m - 1) << endl;
+    cout << ans << endl;
 }
 
-signed main()
+int main()
 {
     fastio();
     // #ifndef ONLINE_JUDGE

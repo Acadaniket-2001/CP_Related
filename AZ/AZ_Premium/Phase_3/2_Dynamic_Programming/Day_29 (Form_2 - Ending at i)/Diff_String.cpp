@@ -77,57 +77,105 @@ void pre() {
 
 }
 
-#define INF 1e18
-#define int ll
+#define INF 1e9
 
 int n, m;
-int g[202][202];
+string x, y;
 
+vector<vector<int>> dp;
 int rec(int i, int j) {
-    // pruning 
-    if(i < 0 or j < 0)
-        return -INF;
+    // pruning
 
     // base case
-    if(i == 0 and j == 0) {
-        if(g[i][j] >= 0)    return 0;
-        else return abs(g[i][j]);
-    }
+    // if(i == n and j == m)
+    //     return 0;
+    // else if (i == n)
+    //     return (m - j);                               // adding +y[j...m-1]
+    // else if (j == m)
+    //     return (n - i);                               // adding -x[i...n-1]
+
+	// base case (OR)
+	if(i == n or j == m)
+		return (n - i) + (m - j);                       // ❤️❤️❤️ nice trick to handle multiple possibilities : (i<n, j=m) (i=n, j<m) (i=n, j=m)
 
     // cache chk
+    if(dp[i][j] != -1)
+        return dp[i][j];
 
     // Xition
-    int ans = INF; 
-    if(i - 1 >= 0) {
-        int temp = rec(i - 1, j) + g[i][j];
-        if(temp >= 0)
-            ans = min(ans, 0LL);
-        else
-            ans = min(ans, abs(temp));
-    }   
-    
-    if(j - 1 >= 0) {
-        int temp = rec(i, j - 1) + g[i][j];
-        if(temp >= 0)
-            ans = min(ans, 0LL);
-        else
-            ans = min(ans, abs(temp));
-    }   
+    int ans = INF;
+    ans = min(ans, 1 + rec(i + 1, j));                // adding -x[i]
+    ans = min(ans, 1 + rec(i, j + 1));                // adding +y[j]
+    if(x[i] == y[j])
+        ans = min(ans, 1 + rec(i + 1, j + 1));        // adding x[i]
+        
     // save and return
-    return ans;
+    return dp[i][j] = ans;
 }
+
+void generate(int i, int j) {
+    if(i == n and j == m)
+        return;
+    else if(i == n) {
+        f(k, j, m - 1)  cout << '+' << y[j] << " ";
+        re;
+    }
+    else if(j == m) {
+        f(k, i, n - 1)  cout << '-' << x[i] << " ";
+        re;
+    }
+
+	// // M1
+    // int ans = INF;
+    // ans = min(ans, 1 + rec(i + 1, j));                // adding -x[i]
+    // ans = min(ans, 1 + rec(i, j + 1));                // adding +y[j]
+    // if(x[i] == y[j])
+    //     ans = min(ans, 1 + rec(i + 1, j + 1));        // adding x[i]
+
+    // if(ans == 1 + rec(i, j + 1)) {
+    //     cout << '+' << y[j] << " ";
+    //     generate(i, j + 1);
+    // }
+    // else if(ans == 1 + rec(i + 1, j)) {
+    //     cout << '-' << x[i] << " ";
+    //     generate(i + 1, j);
+    // }
+    // else {
+    //     cout << x[i] << " ";
+    //     generate(i + 1, j + 1);
+    // }
+
+	// M2
+	if(rec(i, j) == 1 + rec(i, j + 1)) {
+        cout << '+' << y[j] << " ";
+        generate(i, j + 1);
+	}
+	else if (rec(i, j) == 1 + rec(i + 1, j)) {
+        cout << '-' << x[i] << " ";
+        generate(i + 1, j);
+	}
+	else {
+        cout << x[i] << " ";
+        generate(i + 1, j + 1);
+	}
+}
+
+// 💡 See Code in copy for printing using back pointers...
 
 void solve()
 {
-    cin >> n >> m;
-    f(i, 0, n - 1) f(j, 0, m - 1) {
-        cin >> g[i][j];
-    }
-    if(!rec(n - 1, m - 1))  cout << 1 << endl;
-    else cout << rec(n - 1, m - 1) << endl;
+    cin >> x >> y;
+    n = x.size(), m = y.size();
+
+    dp.assign(n, vector<int>(m, -1));
+
+    cout << rec(0, 0)<< endl;
+
+    generate(0, 0);
+    ln;
 }
 
-signed main()
+int main()
 {
     fastio();
     // #ifndef ONLINE_JUDGE

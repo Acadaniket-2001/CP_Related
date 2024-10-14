@@ -77,57 +77,80 @@ void pre() {
 
 }
 
-#define INF 1e18
-#define int ll
-
+/*
+Problem: https://atcoder.jp/contests/dp/tasks/dp_f
+*/
 int n, m;
-int g[202][202];
+string a, b;
 
+int dp[3003][3003];
 int rec(int i, int j) {
     // pruning 
-    if(i < 0 or j < 0)
-        return -INF;
-
+    
     // base case
-    if(i == 0 and j == 0) {
-        if(g[i][j] >= 0)    return 0;
-        else return abs(g[i][j]);
-    }
-
+    if(i == n or j == m)
+        return 0;
+        
     // cache chk
+    if(dp[i][j] != -1)
+        return dp[i][j];
 
     // Xition
-    int ans = INF; 
-    if(i - 1 >= 0) {
-        int temp = rec(i - 1, j) + g[i][j];
-        if(temp >= 0)
-            ans = min(ans, 0LL);
-        else
-            ans = min(ans, abs(temp));
-    }   
+    int ans = 0;
+    ans = max(ans, rec(i + 1, j));
+    ans = max(ans, rec(i, j + 1));
+    if(a[i] == b[j])
+        ans = max(ans, 1 + rec(i + 1, j + 1));
     
-    if(j - 1 >= 0) {
-        int temp = rec(i, j - 1) + g[i][j];
-        if(temp >= 0)
-            ans = min(ans, 0LL);
-        else
-            ans = min(ans, abs(temp));
-    }   
-    // save and return
-    return ans;
+    // save  and return 
+    return dp[i][j] = ans;
+}
+
+string solution;
+void generate(int i, int j) {
+    if(i == n or j == m)
+        return;
+
+    // // M1
+    // int ans = 0;
+    // ans = max(ans, rec(i + 1, j));
+    // ans = max(ans, rec(i, j + 1));
+    // if(a[i] == b[j])
+    //     ans = max(ans, 1 + rec(i + 1, j + 1));
+
+    // if(ans == rec(i + 1, j))
+    //     generate(i + 1, j);
+    // else if(ans == rec(i, j + 1))
+    //     generate(i, j + 1);
+    // else {
+    //     solution.pb(a[i]);
+    //     generate(i + 1, j + 1);
+    // }
+
+    // M2
+    if(rec(i, j) == rec(i + 1, j))
+        generate(i + 1, j);
+    else if (rec(i, j) == rec(i, j + 1))
+        generate(i, j + 1);
+    else {
+        solution.pb(a[i]);
+        generate(i + 1, j + 1);
+    }
+
 }
 
 void solve()
 {
-    cin >> n >> m;
-    f(i, 0, n - 1) f(j, 0, m - 1) {
-        cin >> g[i][j];
-    }
-    if(!rec(n - 1, m - 1))  cout << 1 << endl;
-    else cout << rec(n - 1, m - 1) << endl;
+    cin >> a >> b;
+    n = a.size(), m = b.size();
+
+    memset(dp, -1, sizeof dp);
+
+    generate(0, 0);
+    cout << solution;
 }
 
-signed main()
+int main()
 {
     fastio();
     // #ifndef ONLINE_JUDGE
@@ -137,7 +160,7 @@ signed main()
     // #endif
 
     pre();
-    int _t; cin >> _t; while(_t--)
+    // int _t; cin >> _t; while(_t--)
     solve();
     return 0;
 }

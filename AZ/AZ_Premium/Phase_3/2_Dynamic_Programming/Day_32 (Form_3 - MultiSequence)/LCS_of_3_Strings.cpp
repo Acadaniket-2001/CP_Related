@@ -77,57 +77,51 @@ void pre() {
 
 }
 
-#define INF 1e18
-#define int ll
+int n1, n2, n3;
+string a, b, c;
 
-int n, m;
-int g[202][202];
-
-int rec(int i, int j) {
-    // pruning 
-    if(i < 0 or j < 0)
-        return -INF;
+int dp[105][105][105];
+int rec(int i, int j, int k) {
+    // pruning
 
     // base case
-    if(i == 0 and j == 0) {
-        if(g[i][j] >= 0)    return 0;
-        else return abs(g[i][j]);
-    }
+    if(i == n1 or j == n2 or k == n3)
+        return 0;
 
     // cache chk
-
-    // Xition
-    int ans = INF; 
-    if(i - 1 >= 0) {
-        int temp = rec(i - 1, j) + g[i][j];
-        if(temp >= 0)
-            ans = min(ans, 0LL);
-        else
-            ans = min(ans, abs(temp));
-    }   
+    if(dp[i][j][k] != -1)
+        return dp[i][j][k];
     
-    if(j - 1 >= 0) {
-        int temp = rec(i, j - 1) + g[i][j];
-        if(temp >= 0)
-            ans = min(ans, 0LL);
-        else
-            ans = min(ans, abs(temp));
-    }   
+    // Xition
+    int ans = 0;
+    if(a[i] == b[j] and b[j] == c[k])
+        ans = max(ans, rec(i + 1, j + 1, k + 1) + 1);
+    else {
+        ans = max(ans, rec(i + 1, j, k));
+        ans = max(ans, rec(i, j + 1, k));
+        ans = max(ans, rec(i, j, k + 1));
+        // ans = max(ans, rec(i + 1, j + 1, k));     // ⭐ Extra repeated Xitions: Above 3 Xition can lead to these states
+        // ans = max(ans, rec(i + 1, j, k + 1));
+        // ans = max(ans, rec(i, j + 1, k + 1));
+    }
+    
     // save and return
-    return ans;
+    return dp[i][j][k] = ans;
 }
 
 void solve()
 {
-    cin >> n >> m;
-    f(i, 0, n - 1) f(j, 0, m - 1) {
-        cin >> g[i][j];
-    }
-    if(!rec(n - 1, m - 1))  cout << 1 << endl;
-    else cout << rec(n - 1, m - 1) << endl;
+    cin >> a >> b >> c;
+    n1 = sz(a);
+    n2 = sz(b);
+    n3 = sz(c);
+
+    memset(dp, -1 , sizeof dp);
+
+    cout << rec(0,0,0) << endl;
 }
 
-signed main()
+int main()
 {
     fastio();
     // #ifndef ONLINE_JUDGE
