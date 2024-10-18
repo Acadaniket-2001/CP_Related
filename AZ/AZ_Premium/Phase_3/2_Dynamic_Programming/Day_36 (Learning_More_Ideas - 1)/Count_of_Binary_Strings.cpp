@@ -101,7 +101,6 @@ int rec(int i, int prev3) {
     }
 
     // save and return 
-    // return ans;
     return dp[i][prev3] = ans;
 }
 

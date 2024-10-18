@@ -73,46 +73,53 @@ long long Sqrt(long long x){ long long y=sqrt(x)+5;while(y*y>x)y--;return y;}
 ⭐ T -> Think in reverse         ⭐ P -> Prefix or Suffix ideas    ⭐ B -> Bit Manipulation
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-void pre() {
+/*
+Classical Game: Wythoff's Game
+*/
 
+int X, Y;
+
+int dp[101][101];
+int rec(int x, int y) {        // O(N^3)
+    // pruning 
+    if(x < 0 or y < 0)  return 0;
+
+    // base case
+    if(x == 0 and y == 0)   return 0;
+
+    // cache chk
+    if(dp[x][y] != -1)
+        return dp[x][y];
+
+    // Xition
+    int ans = 0;
+    f(z, 1, x)    if(rec(x - z, y) == 0)  ans = 1;
+    f(z, 1, y)    if(rec(x, y - z) == 0)  ans = 1;
+    f(z, 1, min(x, y))    if(rec(x - z, y - z) == 0)  ans = 1;
+
+    // save and return
+    return dp[x][y] = ans;
 }
-
-
-
 
 void solve()
 {
-    int n; 
-    string s;
-    cin >> n >> s;
-    int prefix[n + 1];
-    int dp[n + 1];
+    // cin >> X >> Y;
 
-    dp[0] = 1;
-    prefix[0] = 1;
-    int last[26];
-    memset(last, -1, sizeof last);
+    // memset(dp, -1, sizeof dp);
 
-    for(int i = 1; i <= n; i++) {      // i -> prefix index = s index + 1
-        dp[i] = prefix[i - 1];
-        if(last[s[i - 1] - 'a'] != -1)
-            dp[i] -= prefix[last[s[i - 1] - 'a']];
-        
-        prefix[i] = prefix[i - 1] + dp[i];
-        last[s[i - 1] - 'a'] = i - 1;
+    // cout << rec(X, Y) << endl;
+
+
+    f(i, 1, 50) {
+        f(j, 1, 50) {
+            memset(dp, -1, sizeof dp);
+            if(rec(i, j) == 0) {
+                // cout << i << ", " << j << " : " << rec(i, j) << endl;
+                cout << i << ", " << j << " : " << i + j << endl;
+
+            }
+        }
     }
-
-    cout << prefix[n] - 1 << endl; 
-
-
-
-
-
-    // string s1 = "";
-    // f(i, 0, 50) {
-    //     s1 += (rand()%26) + 'a';
-    // }
-    // cout << s1;
 }
 
 int main()
@@ -124,8 +131,58 @@ int main()
     //     freopen("io/Output.txt", "w", stdout);
     // #endif
 
-    pre();
     // int _t; cin >> _t; while(_t--)
     solve();
     return 0;
 }
+
+
+/*
+X Y
+3 1   -> 1 (Winning state)
+2 1   -> 0 (loosing state)
+
+
+
+
+X, Y : (X + Y)   ====> all are loosing states
+1, 2 : 3
+2, 1 : 3
+3, 5 : 8
+4, 7 : 11
+5, 3 : 8
+6, 10 : 16
+7, 4 : 11
+8, 13 : 21
+9, 15 : 24
+10, 6 : 16
+11, 18 : 29
+12, 20 : 32
+13, 8 : 21
+14, 23 : 37
+15, 9 : 24
+16, 26 : 42
+17, 28 : 45
+18, 11 : 29
+19, 31 : 50
+20, 12 : 32
+21, 34 : 55
+22, 36 : 58
+23, 14 : 37
+24, 39 : 63
+25, 41 : 66
+26, 16 : 42
+27, 44 : 71
+28, 17 : 45
+29, 47 : 76
+30, 49 : 79
+31, 19 : 50
+34, 21 : 55
+36, 22 : 58
+39, 24 : 63
+41, 25 : 66
+44, 27 : 71
+47, 29 : 76
+49, 30 : 79
+
+*/
