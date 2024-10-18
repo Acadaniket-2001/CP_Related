@@ -73,59 +73,10 @@ long long Sqrt(long long x){ long long y=sqrt(x)+5;while(y*y>x)y--;return y;}
 ⭐ T -> Think in reverse         ⭐ P -> Prefix or Suffix ideas    ⭐ B -> Bit Manipulation
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-void pre() {
-
-}
-
-#define INF 1e16
-#define int ll
-
-int n;
-int arr[100100];
-string s, x = "hard";
-
-int dp[100100][5];
-int rec(int i, int match) {
-    // pruning
-    if(match == 4)  return INF;
-    
-    // base case
-    if(i == n)  return 0;        // to see
-
-    // cache chk
-    if(dp[i][match] != -1)
-        return dp[i][match];
-
-    // Xtiton
-    int ans = INF;
-    if(s[i] == x[match])    ans = min({ans, arr[i] + rec(i + 1, match), rec(i + 1, match + 1)});
-    else    ans = min(ans, rec(i + 1, match));
-
-    // save and return
-    return dp[i][match] = ans;
-}
-
-void solve()
-{
-    cin >> n >> s;
-    f(i, 0, n - 1)  cin >> arr[i];
-
-    memset(dp, -1, sizeof dp);
-
-    cout << rec(0, 0) << endl;
-}
-
-signed main()
-{
-    fastio();
-    // #ifndef ONLINE_JUDGE
-    //     freopen("io/Error.txt", "w", stderr);
-    //     freopen("io/Input.txt", "r", stdin);
-    //     freopen("io/Output.txt", "w", stdout);
-    // #endif
-
-    pre();
-    int _t; cin >> _t; while(_t--)
-    solve();
+int main() {
+    int prev3 = 5; 
+    // prev3 = ((prev3 | (1 << 3))) >> 1;
+    prev3 = ((prev3 & ~(1 << 3)) >> 1);
+    cout << prev3;
     return 0;
 }

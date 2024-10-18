@@ -77,45 +77,45 @@ void pre() {
 
 }
 
-#define INF 1e16
-#define int ll
-
 int n;
-int arr[100100];
-string s, x = "hard";
 
-int dp[100100][5];
-int rec(int i, int match) {
-    // pruning
-    if(match == 4)  return INF;
-    
+int dp[1001001][8];
+int rec(int i, int prev3) {
+    // pruning 
+
     // base case
-    if(i == n)  return 0;        // to see
+    if(i == -1)     return 1;
 
     // cache chk
-    if(dp[i][match] != -1)
-        return dp[i][match];
+    if(dp[i][prev3] != -1)
+        return dp[i][prev3];
 
-    // Xtiton
-    int ans = INF;
-    if(s[i] == x[match])    ans = min({ans, arr[i] + rec(i + 1, match), rec(i + 1, match + 1)});
-    else    ans = min(ans, rec(i + 1, match));
+    // Xition
+    int ans = 0;
+    if(i <= n - 4 and prev3 == 4) {  // .._]100
+        ans += rec(i - 1, 6);
+    }
+    else {  // != 4 => say, _101                         // why else if(i <= n - 4) {.... is giving WA
+        ans += rec(i - 1, ((prev3 | (1 << 3))) >> 1);
+        ans += rec(i - 1, ((prev3 & ~(1 << 3)) >> 1));
+    }
 
-    // save and return
-    return dp[i][match] = ans;
+    // save and return 
+    // return ans;
+    return dp[i][prev3] = ans;
 }
 
 void solve()
 {
-    cin >> n >> s;
-    f(i, 0, n - 1)  cin >> arr[i];
-
+    int q; cin >> q;
     memset(dp, -1, sizeof dp);
-
-    cout << rec(0, 0) << endl;
+    while(q--) {
+        cin >> n;
+        cout << rec(n - 1, 0) << endl;
+    }
 }
 
-signed main()
+int main()
 {
     fastio();
     // #ifndef ONLINE_JUDGE
@@ -125,7 +125,7 @@ signed main()
     // #endif
 
     pre();
-    int _t; cin >> _t; while(_t--)
+    // int _t; cin >> _t; while(_t--)
     solve();
     return 0;
 }
